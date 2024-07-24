@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1090236390686",
+    "project_id": "cryptobase-admin",
+    "storage_bucket": "cryptobase-admin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090236390686:android:d9bbe9668730a6f389fd0f",
+        "android_client_info": {
+          "package_name": "com.example.cryptobase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-l2fF9A0j6HqjCvqEL2iXjNPi3EUQqdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
