@@ -146,7 +146,7 @@ class _EmailLoginState extends State<EmailLogin> {
                 ),
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 39),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
