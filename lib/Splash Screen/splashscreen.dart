@@ -1,5 +1,7 @@
+import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:cryptobase/Login%20Page/getstarted.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +15,8 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth _auth=FirebaseAuth.instance;
+    final user=_auth.currentUser;
     return EasySplashScreen(
       logo: Image(image: AssetImage('assets/images/crypto_image-removebg-preview.png')),
       title: Text(
@@ -28,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
       loadingText: Text("Loading...",style: GoogleFonts.poppins(
         color: Colors.white
       ),),
-      navigator: GetStarted(),
+      navigator: user!=null?WelcomeScreen():GetStarted(),
       durationInSeconds: 5,
     );
   }
