@@ -40,6 +40,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.4
   flutter_svg_provider: ^1.0.7
+  google_login: ^1.0.3
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:
