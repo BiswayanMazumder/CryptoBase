@@ -12,7 +12,7 @@ class _EmailLoginState extends State<EmailLogin> {
   void changepage(){
     setState(() {
       islogin=!islogin;
-      print(islogin);
+      // print(islogin);
     });
   }
   @override
