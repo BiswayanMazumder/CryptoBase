@@ -1,3 +1,4 @@
+import 'package:cryptobase/Money%20Options/currencypage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class WelcomeScreen extends StatefulWidget {
@@ -22,10 +23,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           fontWeight: FontWeight.bold,
           fontSize: 17
         ),),
-        actions: const[
+        actions: [
            Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Icon(Icons.currency_rupee_sharp,color: Colors.white,),
+            padding:  EdgeInsets.only(right: 10),
+            child: InkWell(
+                onTap: (){
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => CurrencyPage(),) );
+                },
+                child: Icon(Icons.currency_rupee_sharp,color: Colors.white,)),
           )
         ],
         leading: const InkWell(
@@ -166,9 +171,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ],
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 35,
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
