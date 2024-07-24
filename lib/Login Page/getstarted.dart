@@ -159,29 +159,66 @@ class _GetStartedState extends State<GetStarted> {
             const SizedBox(
               height: 40,
             ),
-            if(currentIndex!=2)
-              InkWell(
-                onTap: () {
-                  moveForward();
-                },
-                child: const CircleAvatar(
-                  backgroundColor: CupertinoColors.systemBlue,
-                  radius: 30,
-                  child: Icon(Icons.arrow_forward_rounded, color: Colors.white,),
-                ),
-              ),
-            if(currentIndex==2)
-              Container(
-                child: ElevatedButton(onPressed: (){}, 
-                    style: const ButtonStyle(
-                      elevation: MaterialStatePropertyAll(5),
-                      shadowColor: MaterialStatePropertyAll(Colors.black),
-                      backgroundColor: MaterialStatePropertyAll(CupertinoColors.systemBlue)
+            // if(currentIndex!=2)
+            //   InkWell(
+            //     onTap: () {
+            //       moveForward();
+            //     },
+            //     child: const CircleAvatar(
+            //       backgroundColor: CupertinoColors.systemBlue,
+            //       radius: 30,
+            //       child: Icon(Icons.arrow_forward_rounded, color: Colors.white,),
+            //     ),
+            //   ),
+            if(currentIndex!=6)
+              Column(
+                children: [
+                  Container(
+                    child: ElevatedButton(onPressed: (){},
+                        style: const ButtonStyle(
+                            elevation: MaterialStatePropertyAll(5),
+                            shadowColor: MaterialStatePropertyAll(Colors.black),
+                            backgroundColor: MaterialStatePropertyAll(CupertinoColors.systemBlue)
+                        ),
+                        child:  Text('Continue with Google',style:  GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600
+                        ),)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: ElevatedButton(onPressed: (){},
+                        style: const ButtonStyle(
+                            elevation: MaterialStatePropertyAll(5),
+                            shadowColor: MaterialStatePropertyAll(Colors.black),
+                            backgroundColor: MaterialStatePropertyAll(CupertinoColors.systemBlue)
+                        ),
+                        child:  Text('Continue with Apple',style:  GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600
+                        ),)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white,width:0.5,),
+                      borderRadius: BorderRadius.circular(50)
                     ),
-                    child:  Text('Get Started Now',style:  GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600
-                    ),)),
+                    child: ElevatedButton(onPressed: (){},
+                        style: const ButtonStyle(
+                            elevation: MaterialStatePropertyAll(0),
+                            backgroundColor: MaterialStatePropertyAll(Colors.transparent)
+                        ),
+                        child:  Text('Continue with Email',style:  GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600
+                        ),)),
+                  )
+                ],
               )
           ],
         ),
