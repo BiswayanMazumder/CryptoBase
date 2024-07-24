@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class EmailLogin extends StatefulWidget {
@@ -14,6 +15,10 @@ class _EmailLoginState extends State<EmailLogin> {
       islogin=!islogin;
       // print(islogin);
     });
+  }
+  bool showpw=false;
+  void hidepw(){
+    showpw=!showpw;
   }
   @override
   Widget build(BuildContext context) {
@@ -92,6 +97,9 @@ class _EmailLoginState extends State<EmailLogin> {
                   border: Border.all(color: Colors.blueGrey,width: 0.9)
                 ),
                 child: TextField(
+                  style: GoogleFonts.poppins(
+                      color: Colors.white
+                  ),
                   decoration: InputDecoration(
                     hintText: '  Email',
                     hintStyle: GoogleFonts.poppins(
@@ -113,8 +121,21 @@ class _EmailLoginState extends State<EmailLogin> {
                     border: Border.all(color: Colors.blueGrey,width: 0.9)
                 ),
                 child: TextField(
+                  obscureText: showpw?false:true,
+                  style: GoogleFonts.poppins(
+                    color: Colors.white
+                  ),
                   decoration: InputDecoration(
                       hintText: '  Password',
+                      suffixIcon: InkWell(
+                        onTap: (){
+                          setState(() {
+                            showpw=!showpw;
+                          });
+                          // print(showpw);
+                        },
+                        child: showpw?Icon(CupertinoIcons.eye,color: Colors.blue,):Icon(CupertinoIcons.eye_slash,color: Colors.white,),
+                      ),
                       hintStyle: GoogleFonts.poppins(
                         color: Colors.white,
                         fontWeight: FontWeight.w300,
