@@ -202,18 +202,18 @@ class _GetStartedState extends State<GetStarted> {
             const SizedBox(
               height: 40,
             ),
-            // if(currentIndex!=2)
-            //   InkWell(
-            //     onTap: () {
-            //       moveForward();
-            //     },
-            //     child: const CircleAvatar(
-            //       backgroundColor: CupertinoColors.systemBlue,
-            //       radius: 30,
-            //       child: Icon(Icons.arrow_forward_rounded, color: Colors.white,),
-            //     ),
-            //   ),
-            if(currentIndex!=6)
+            if(currentIndex!=2)
+              InkWell(
+                onTap: () {
+                  moveForward();
+                },
+                child: const CircleAvatar(
+                  backgroundColor: CupertinoColors.systemBlue,
+                  radius: 30,
+                  child: Icon(Icons.arrow_forward_rounded, color: Colors.white,),
+                ),
+              ),
+            if(currentIndex==2)
               Column(
                 children: [
                   Container(

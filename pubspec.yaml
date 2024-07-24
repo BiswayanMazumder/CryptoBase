@@ -42,6 +42,7 @@ dependencies:
   flutter_svg_provider: ^1.0.7
   google_login: ^1.0.3
   google_sign_in: ^6.2.1
+  easy_splash_screen: ^1.0.4
 
 dev_dependencies:
   flutter_test:

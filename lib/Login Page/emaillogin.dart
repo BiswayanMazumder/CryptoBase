@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,9 @@ class EmailLogin extends StatefulWidget {
 }
 
 class _EmailLoginState extends State<EmailLogin> {
+  FirebaseAuth _auth=FirebaseAuth.instance;
+  TextEditingController _emailController=TextEditingController();
+  TextEditingController _passwordController=TextEditingController();
   bool islogin=true;
   void changepage(){
     setState(() {
@@ -97,6 +101,7 @@ class _EmailLoginState extends State<EmailLogin> {
                   border: Border.all(color: Colors.blueGrey,width: 0.9)
                 ),
                 child: TextField(
+                  controller: _emailController,
                   style: GoogleFonts.poppins(
                       color: Colors.white
                   ),
@@ -125,6 +130,7 @@ class _EmailLoginState extends State<EmailLogin> {
                   style: GoogleFonts.poppins(
                     color: Colors.white
                   ),
+                  controller: _passwordController,
                   decoration: InputDecoration(
                       hintText: '  Password',
                       suffixIcon: InkWell(
