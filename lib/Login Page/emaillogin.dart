@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,10 @@ class _EmailLoginState extends State<EmailLogin> {
   String loginerrormessage='';
   Future<void> login ()async{
     try{
-      _auth.signInWithEmailAndPassword(email: _emailController.text,
+      // print(_emailController.text);
+      await _auth.signInWithEmailAndPassword(email: _emailController.text,
           password: _passwordController.text);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
     }catch(e){
       print(e);
       setState(() {
@@ -37,13 +40,18 @@ class _EmailLoginState extends State<EmailLogin> {
   Future<void> signup() async{
     final user=_auth.currentUser;
     try{
-      _auth.createUserWithEmailAndPassword(email: _emailController.text,
-          password: _passwordController.text);
-      _firestore.collection('User Details').doc(user!.uid).set({
-        'Email':_emailController.text,
-        'Name':_nameController.text,
-        'Date Of Registration':FieldValue.serverTimestamp()
-      });
+      if(_nameController.text!=null && _emailController.text!=null && _passwordController.text!=null){
+        await _auth.createUserWithEmailAndPassword(email: _emailController.text,
+            password: _passwordController.text);
+        await _firestore.collection('User Details').doc(user!.uid).set({
+          'Email':_emailController.text,
+          'Name':_nameController.text,
+          'Date Of Registration':FieldValue.serverTimestamp()
+        });
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+      }else{
+
+      }
     }catch(e){
 
     }
@@ -146,7 +154,34 @@ class _EmailLoginState extends State<EmailLogin> {
                 ),
               ),
             ),
-            const SizedBox(height: 39),
+            const SizedBox(height: 20),
+            if(!isLogin)
+              Column(
+                children: [
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blueGrey, width: 0.9),
+                      ),
+                      child: TextField(
+
+                        style: GoogleFonts.poppins(color: Colors.white),
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          hintText: '  Name',
+                          hintStyle: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -174,7 +209,7 @@ class _EmailLoginState extends State<EmailLogin> {
             _errorMessage?Text('Please enter a valid email address',style: GoogleFonts.poppins(
                 color: Colors.red,
                 fontWeight: FontWeight.w600
-            ),):Text(''),
+            ),):Container(),
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
