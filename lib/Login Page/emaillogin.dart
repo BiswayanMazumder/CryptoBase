@@ -133,6 +133,25 @@ class _EmailLoginState extends State<EmailLogin> {
                 ),
               ],
             ):const Text(''),
+
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.all(Radius.circular(5))
+                ),
+                child: Center(
+                  child: islogin?Text('LOGIN',style: GoogleFonts.poppins(color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),):Text('SIGN UP',style: GoogleFonts.poppins(color: Colors.white,
+                      fontWeight: FontWeight.bold
+                  ),),
+                )
+              ),
+            )
           ],
         ),
       ),
