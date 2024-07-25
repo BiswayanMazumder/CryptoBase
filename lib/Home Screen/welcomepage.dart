@@ -432,6 +432,270 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text('New Listing',style: GoogleFonts.poppins(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: Colors.grey.shade900,
+                    child: Text('3',style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15
+                    ),),
+                  )
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text('Market launches in the last 15 days',style: GoogleFonts.poppins(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12
+                  ),),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 150, // Set the height of the ListView
+              child: ListView.builder(
+                itemCount: 3,
+                scrollDirection: Axis.horizontal,
+                physics: AlwaysScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  index+=8;
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Container(
+                      height: 200,
+                      width:300,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF1c2835),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20,top: 10),
+                                child: Text(
+                                  name[index],
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.poppins(
+
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20,right: 20),
+                                child: Image(image: NetworkImage(images[index]),height: 50,width: 80,),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20,top: 10),
+                                child: Text(
+                                  '\₹${price[index]}',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20,top: 15),
+                                child: Text(
+                                  '${percentage_24h[index]}%',
+                                  style: GoogleFonts.poppins(
+                                    color: percentage_24h[index]>=0?Colors.green:Colors.red,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.only(top: 15),
+                                child: percentage_24h[index]>=0?Icon(Icons.arrow_drop_up,color: Colors.green,):
+                                Icon(Icons.arrow_drop_down,color: Colors.red,),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text('Market',style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18
+              ),),
+            )]),
+            const SizedBox(
+              height: 20,
+            ),
+        Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Container(
+            // height: 750,
+            decoration: const BoxDecoration(
+              color: Color(0xFF1c2835),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding:  EdgeInsets.only(left: 20, top: 20,right: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Trending Pairs',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Text(
+                          'Price',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '24h change%',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  )
+                ),
+                SizedBox(height: 10),
+                ListView.builder(
+                  shrinkWrap: true, // Ensure ListView takes only the space it needs
+                  itemCount: 8, // Replace with your itemCount
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              Text(
+                                '${name[index]}',
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.poppins(
+
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const Spacer(),
+                              Padding(padding: EdgeInsets.only(right: 20),
+                              child: Text(
+                                '\₹${price[index]}',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                ),
+                              ),),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20),
+                                child: Container(
+                                  height: 50,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                    color: percentage_24h[index]>=0?Colors.green:Colors.red,
+                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child:  Center(
+                                    child: Text(
+                                      '${percentage_24h[index].toStringAsFixed(2)}%',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  )
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 50,
+                )
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(
+              height: 20,
+            ),
+
           ],
         ),
       ),
