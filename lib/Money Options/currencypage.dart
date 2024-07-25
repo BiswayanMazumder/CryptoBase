@@ -1,3 +1,4 @@
+import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,8 +37,6 @@ class _CurrencyPageState extends State<CurrencyPage> {
     'NGN',
     'SAR',
     'EUR',
-    'TRY',
-    'WRX'
   ];
   int index_clicked=2;
   void readfetcheddata()async{
@@ -112,7 +111,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
               itemCount: currency.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(left: 20,top: 20), // Adjust vertical padding as needed
+                  padding: const EdgeInsets.only(left: 20,top: 42), // Adjust vertical padding as needed
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,6 +121,8 @@ class _CurrencyPageState extends State<CurrencyPage> {
                           final SharedPreferences prefs = await SharedPreferences.getInstance();
                           changeindex(index);
                           await prefs.setInt('selected_currency', index_clicked);
+                          await prefs.setString('selected_currency_name', currency[index]);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
                         },
                         child: Row(
                           children: [
@@ -146,6 +147,46 @@ class _CurrencyPageState extends State<CurrencyPage> {
                   )
                 );
               },
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            color: const Color(0xFF1c2835),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap:()async{
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
+                          changeindex(2);
+                          setState(() {
+                            index_clicked=2;
+                          });
+                          await prefs.setInt('selected_currency', 2);
+                          await prefs.setString('selected_currency_name','INR');
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+                      },
+                        child: Text(
+                          'Reset',
+                          style: GoogleFonts.poppins(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],
