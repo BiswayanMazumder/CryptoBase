@@ -19,7 +19,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
           isselected[i] = false;
         }
       }
-      index_clicked = currentindex; // Update the index_clicked
+      index_clicked = currentindex;
     });
   }
 
