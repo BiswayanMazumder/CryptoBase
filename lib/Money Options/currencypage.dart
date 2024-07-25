@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class CurrencyPage extends StatefulWidget {
   const CurrencyPage({Key? key}) : super(key: key);
 
@@ -9,8 +9,9 @@ class CurrencyPage extends StatefulWidget {
 }
 
 class _CurrencyPageState extends State<CurrencyPage> {
-  int index_clicked=2;
-  void changeindex(int currentindex) {
+
+  void changeindex(int currentindex) async{
+
     setState(() {
       for (int i = 0; i < isselected.length; i++) {
         if (i == currentindex) {
@@ -38,7 +39,24 @@ class _CurrencyPageState extends State<CurrencyPage> {
     'TRY',
     'WRX'
   ];
-
+  int index_clicked=2;
+  void readfetcheddata()async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final int? counter = prefs.getInt('selected_currency');
+    // print(counter);
+    if(counter!=null){
+      setState(() {
+        index_clicked=counter;
+        changeindex(counter);
+      });
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readfetcheddata();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,10 +118,10 @@ class _CurrencyPageState extends State<CurrencyPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       InkWell(
-                        onTap:(){
+                        onTap:()async{
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
                           changeindex(index);
-                          // print(index_clicked);
-
+                          await prefs.setInt('selected_currency', index_clicked);
                         },
                         child: Row(
                           children: [
