@@ -321,10 +321,40 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(
               height: 10,
             ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text('Most Active',style: GoogleFonts.poppins(
+                    color: Colors.green,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18
+                  ),),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text('Based on traded values and price variations',style: GoogleFonts.poppins(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12
+                  ),),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               height: 150, // Set the height of the ListView
               child: ListView.builder(
-                itemCount: name.length,
+                itemCount: 8,
                 scrollDirection: Axis.horizontal,
                 physics: AlwaysScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
