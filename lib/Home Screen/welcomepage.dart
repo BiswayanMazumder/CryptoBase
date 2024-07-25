@@ -78,7 +78,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         images=image;
       });
     }
-    print(name);
+    // print(name);
   }
 
   @override
