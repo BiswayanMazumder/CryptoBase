@@ -17,7 +17,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   String currency = '';
   Icon currencyicon = Icon(Icons.currency_rupee, color: Colors.white);
-
+  bool datafetched=false;
   Future<void> readfetcheddata() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? counter = prefs.getString('selected_currency_name');
@@ -76,6 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         price=prices;
         percentage_24h=perc_change;
         images=image;
+        datafetched=true;
       });
     }
     // print(name);
@@ -173,7 +174,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       TextSpan(text: 'Simplify your taxes\nwith '),
                                       TextSpan(
                                         text: 'TaxNodes',
-                                        style: TextStyle(color: Colors.yellow),
+                                        style: GoogleFonts.poppins(color: Colors.yellow),
                                       ),
                                       TextSpan(text: '!'),
                                     ],
@@ -240,7 +241,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       TextSpan(text: 'Simplify your gyaan\nwith '),
                                       TextSpan(
                                         text: 'CryptoNews',
-                                        style: TextStyle(color: Colors.yellow),
+                                        style: GoogleFonts.poppins(color: Colors.yellow),
                                       ),
                                       TextSpan(text: '!'),
                                     ],
@@ -351,7 +352,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            Container(
+            datafetched?Container(
               height: 150, // Set the height of the ListView
               child: ListView.builder(
                 itemCount: 8,
@@ -420,8 +421,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 ),
                               ),
                               Padding(padding: EdgeInsets.only(top: 15),
-                              child: percentage_24h[index]>=0?Icon(Icons.arrow_drop_up,color: Colors.green,):
-                              Icon(Icons.arrow_drop_down,color: Colors.red,),
+                                child: percentage_24h[index]>=0?Icon(Icons.arrow_drop_up,color: Colors.green,):
+                                Icon(Icons.arrow_drop_down,color: Colors.red,),
                               )
                             ],
                           ),
@@ -431,6 +432,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   );
                 },
               ),
+            ):const CircularProgressIndicator(
+              color: Colors.white,
             ),
             const SizedBox(
               height: 20,
@@ -477,7 +480,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            Container(
+            datafetched?Container(
               height: 150, // Set the height of the ListView
               child: ListView.builder(
                 itemCount: 3,
@@ -558,6 +561,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   );
                 },
               ),
+            ):CircularProgressIndicator(
+              color: Colors.white,
             ),
         const SizedBox(
           height: 20,
@@ -586,13 +591,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                 Padding(
                   padding:  EdgeInsets.only(left: 20, top: 20,right: 20),
                   child: Row(
                     children: [
                       Text(
                         'Trending Pairs',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.grey,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -603,7 +608,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         padding: EdgeInsets.only(right: 20),
                         child: Text(
                           'Price',
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Colors.grey,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -612,7 +617,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       Text(
                         '24h change%',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.grey,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -622,7 +627,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   )
                 ),
                 SizedBox(height: 10),
-                ListView.builder(
+                datafetched?ListView.builder(
                   shrinkWrap: true, // Ensure ListView takes only the space it needs
                   itemCount: 8, // Replace with your itemCount
                   itemBuilder: (context, index) {
@@ -649,33 +654,33 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                               const Spacer(),
                               Padding(padding: EdgeInsets.only(right: 20),
-                              child: Text(
-                                '\₹${price[index]}',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                              ),),
+                                child: Text(
+                                  '\₹${price[index]}',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                ),),
                               Padding(
                                 padding: const EdgeInsets.only(right: 20),
                                 child: Container(
-                                  height: 50,
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                    color: percentage_24h[index]>=0?Colors.green:Colors.red,
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                  child:  Center(
-                                    child: Text(
-                                      '${percentage_24h[index].toStringAsFixed(2)}%',
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15,
-                                      ),
+                                    height: 50,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                      color: percentage_24h[index]>=0?Colors.green:Colors.red,
+                                      borderRadius: BorderRadius.all(Radius.circular(10)),
                                     ),
-                                  )
+                                    child:  Center(
+                                      child: Text(
+                                        '${percentage_24h[index].toStringAsFixed(2)}%',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    )
                                 ),
                               )
                             ],
@@ -684,6 +689,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ],
                     );
                   },
+                ):Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(
                   height: 50,
