@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:cryptobase/Money%20Options/currencypage.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   ];
   List<dynamic> price = [];
   List <dynamic> percentage_24h=[];
+  List <dynamic> symbols=[];
+  List <dynamic> pops=[];
+  List <dynamic> high_24h=[];
+  List <dynamic> low_24h=[];
+  List <dynamic> total_volume=[];
   Future<void> fetchapidetails() async {
     // Implement your API fetching logic here
     //fetching name
@@ -70,12 +76,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       List<dynamic> image=coins.map((coin) => coin['image']).toList();
       List<dynamic> prices=coins.map((coin) => coin['current_price']).toList();
       List<dynamic> perc_change=coins.map((coin) => coin['price_change_percentage_24h']).toList();
+      List<dynamic> symbol=coins.map((coin) => coin["symbol"]).toList();
+      List<dynamic> popularity=coins.map((coin) => coin['market_cap_rank']).toList();
+      List<dynamic> volume=coins.map((coin) => coin["total_volume"]).toList();
+      List<dynamic> High24h=coins.map((coin) => coin['high_24h']).toList();
+      List<dynamic> Low24h=coins.map((coin) => coin['low_24h']).toList();
       // Now you can use 'names' as needed
       setState(() {
         name = names;
         price=prices;
         percentage_24h=perc_change;
         images=image;
+        symbols=symbol;
+        pops=popularity;
+        total_volume=volume;
+        high_24h=High24h;
+        low_24h=Low24h;
         datafetched=true;
       });
     }
@@ -361,72 +377,89 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Container(
-                      height: 200,
-                      width:300,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF1c2835),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20,top: 10),
-                                child: Text(
-                                  name[index],
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.poppins(
+                    child: InkWell(
+                      onTap: ()async{
+                        // print(name[index]);
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
+                        prefs.setString('Crypto_Selected', name[index]);
+                        prefs.setDouble('Crypto_24h', percentage_24h[index]);
+                        // prefs.setInt('Crypto_Price',price[index]);
+                        prefs.setString('Crypto_Symbol', symbols[index]);
+                        prefs.setInt('Crypto_Popu', pops[index]);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Currency_Details(
+                          price: price[index].toString(),
+                          high24h: high_24h[index].toString(),
+                          low_24: low_24h[index].toString(),
+                          volume: total_volume[index].toString(),
+                        ),));
+                      },
+                      child: Container(
+                        height: 200,
+                        width:300,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF1c2835),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20,top: 10),
+                                  child: Text(
+                                    name[index],
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.poppins(
 
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20,right: 20),
-                                child: Image(image: NetworkImage(images[index]),height: 50,width: 80,),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20,top: 10),
-                                child: Text(
-                                  '\₹${price[index]}',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
+                                const Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20,right: 20),
+                                  child: Image(image: NetworkImage(images[index]),height: 50,width: 80,),
+                                )
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20,top: 10),
+                                  child: Text(
+                                    '\₹${price[index]}',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20,top: 15),
-                                child: Text(
-                                  '${percentage_24h[index]}%',
-                                  style: GoogleFonts.poppins(
-                                    color: percentage_24h[index]>=0?Colors.green:Colors.red,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18,
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20,top: 15),
+                                  child: Text(
+                                    '${percentage_24h[index]}%',
+                                    style: GoogleFonts.poppins(
+                                      color: percentage_24h[index]>=0?Colors.green:Colors.red,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(padding: EdgeInsets.only(top: 15),
-                                child: percentage_24h[index]>=0?Icon(Icons.arrow_drop_up,color: Colors.green,):
-                                Icon(Icons.arrow_drop_down,color: Colors.red,),
-                              )
-                            ],
-                          ),
-                        ],
+                                Padding(padding: EdgeInsets.only(top: 15),
+                                  child: percentage_24h[index]>=0?Icon(Icons.arrow_drop_up,color: Colors.green,):
+                                  Icon(Icons.arrow_drop_down,color: Colors.red,),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -490,72 +523,88 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   index+=8;
                   return Padding(
                     padding: const EdgeInsets.only(left: 20),
-                    child: Container(
-                      height: 200,
-                      width:300,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF1c2835),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20,top: 10),
-                                child: Text(
-                                  name[index],
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.poppins(
+                    child: InkWell(
+                      onTap: ()async{
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
+                        prefs.setString('Crypto_Selected', name[index]);
+                        prefs.setDouble('Crypto_24h', percentage_24h[index]);
+                        // prefs.setInt('Crypto_Price',price[index]);
+                        prefs.setString('Crypto_Symbol', symbols[index]);
+                        prefs.setInt('Crypto_Popu', pops[index]);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Currency_Details(
+                          price: price[index].toString(),
+                          high24h: high_24h[index].toString(),
+                          low_24: low_24h[index].toString(),
+                          volume: total_volume[index].toString(),
+                        ),));
+                      },
+                      child: Container(
+                        height: 200,
+                        width:300,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF1c2835),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20,top: 10),
+                                  child: Text(
+                                    name[index],
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.poppins(
 
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20,right: 20),
-                                child: Image(image: NetworkImage(images[index]),height: 50,width: 80,),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20,top: 10),
-                                child: Text(
-                                  '\₹${price[index]}',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
+                                const Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20,right: 20),
+                                  child: Image(image: NetworkImage(images[index]),height: 50,width: 80,),
+                                )
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20,top: 10),
+                                  child: Text(
+                                    '\₹${price[index]}',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20,top: 15),
-                                child: Text(
-                                  '${percentage_24h[index]}%',
-                                  style: GoogleFonts.poppins(
-                                    color: percentage_24h[index]>=0?Colors.green:Colors.red,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18,
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20,top: 15),
+                                  child: Text(
+                                    '${percentage_24h[index]}%',
+                                    style: GoogleFonts.poppins(
+                                      color: percentage_24h[index]>=0?Colors.green:Colors.red,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(padding: EdgeInsets.only(top: 15),
-                                child: percentage_24h[index]>=0?Icon(Icons.arrow_drop_up,color: Colors.green,):
-                                Icon(Icons.arrow_drop_down,color: Colors.red,),
-                              )
-                            ],
-                          ),
-                        ],
+                                Padding(padding: EdgeInsets.only(top: 15),
+                                  child: percentage_24h[index]>=0?Icon(Icons.arrow_drop_up,color: Colors.green,):
+                                  Icon(Icons.arrow_drop_down,color: Colors.red,),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -576,7 +625,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   fontWeight: FontWeight.w600,
                   fontSize: 18
               ),),
-            )]),
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(right: 35),
+              child: InkWell(
+                child: Text('See all',style: GoogleFonts.poppins(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15
+                ),),
+              )
+            ),
+          ]),
             const SizedBox(
               height: 20,
             ),
