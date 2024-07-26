@@ -27,6 +27,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         currency = counter;
       });
     }
+    else{
+      prefs.setString('selected_currency_name', 'INR');
+    }
   }
 
   void setcurrencyicon() async {
