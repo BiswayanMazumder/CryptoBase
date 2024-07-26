@@ -1,13 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Money%20Options/currencypage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class Currency_Details extends StatefulWidget {
   final String price;
   final String low_24;
   final String high24h;
   final String volume;
-  const Currency_Details({Key? key, required this.price,required this.high24h,required this.low_24,required this.volume});
+  final List pricehistory;
+  const Currency_Details(
+      {Key? key,
+      required this.price,
+      required this.high24h,
+      required this.low_24,
+      required this.volume,
+      required this.pricehistory});
 
   @override
   State<Currency_Details> createState() => _Currency_DetailsState();
@@ -15,26 +25,30 @@ class Currency_Details extends StatefulWidget {
 
 class _Currency_DetailsState extends State<Currency_Details> {
   String currency = '';
-  String? cryptoname='';
+  String? cryptoname = '';
+  bool isliked = false;
   int? Cryptoprice;
   double? percentage_24h;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Icon currencyicon = Icon(Icons.currency_rupee, color: Colors.white);
-  bool datafetched=false;
+  bool datafetched = false;
   Future<void> readfetcheddata() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? counter = prefs.getString('selected_currency_name');
     final String? CryptoName = prefs.getString('Crypto_Symbol');
-    final double? percchange=prefs.getDouble('Crypto_24h');
-    final int? cryptoprice=prefs.getInt('Crypto_Price');
+    final double? percchange = prefs.getDouble('Crypto_24h');
+    final int? cryptoprice = prefs.getInt('Crypto_Price');
     if (counter != null) {
       setState(() {
-        cryptoname=CryptoName;
+        cryptoname = CryptoName;
         currency = counter;
-        percentage_24h=percchange;
-        Cryptoprice=cryptoprice;
+        percentage_24h = percchange;
+        Cryptoprice = cryptoprice;
       });
     }
   }
+
   void setcurrencyicon() async {
     await readfetcheddata();
     setState(() {
@@ -58,12 +72,32 @@ class _Currency_DetailsState extends State<Currency_Details> {
         currencyicon = Icon(Icons.currency_pound, color: Colors.white);
     });
   }
+  List _timestamp=[];
+  bool isloaded=false;
+  Future<void> _generateTimestamps() async {
+    await Future.delayed(Duration(seconds: 1));
+    final List<String> timestamps = [];
+    final now = DateTime.now();
+
+    for (int i = 0; i < 1500; i++) {
+      final timestamp = now.subtract(Duration(seconds: i)).toLocal();
+      final formattedTimestamp = '${timestamp.hour}:${timestamp.minute}:${timestamp.second}';
+      timestamps.add(formattedTimestamp);
+    }
+
+    setState(() {
+      _timestamp = timestamps;
+      isloaded=true;
+    });
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setcurrencyicon();
+    _generateTimestamps();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +108,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
             Container(
               height: 150,
               width: double.infinity,
-              decoration: const BoxDecoration(
-
-              ),
+              decoration: const BoxDecoration(),
               child: Column(
                 children: [
                   const SizedBox(
@@ -87,55 +119,80 @@ class _Currency_DetailsState extends State<Currency_Details> {
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.pop(context);
                           },
-                          child:const Icon(
+                          child: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
                           ),
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(left: 10),
-                      child: Container(
-                        height: 40,
-                        width: 100,
-                        decoration:const BoxDecoration(
-                          color: Color(0xFFF232F3F),
-                          borderRadius: BorderRadius.all(Radius.circular(10))
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Text('${cryptoname.toString().toUpperCase()} / ${currency}',style:
-                              GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w500,
-                              fontSize: 12
-                              ),),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: InkWell(
+                          onTap: () {
+                            print(widget.pricehistory.length);
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 100,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFF232F3F),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    '${cryptoname.toString().toUpperCase()} / ${currency}',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ],
                             ),
-
-                          ],
+                          ),
                         ),
                       ),
-                      ),
-                      InkWell(
-                        child: Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: Icon(Icons.star_border_purple500_sharp,color: Colors.yellow,)),
-                      ),
+                      // InkWell(
+                      //   onTap: ()async{
+                      //     setState(() {
+                      //       isliked=!isliked;
+                      //     });
+                      //     final user=_auth.currentUser;
+                      //     if(isliked)
+                      //       await _firestore.collection('Liked Currencies').doc(user!.uid).set({
+                      //         'Crypto Liked':cryptoname,
+                      //         'Date of Adding':FieldValue.serverTimestamp()
+                      //       });
+                      //     if(!isliked)
+                      //       await _firestore.collection('Liked Currencies').doc(user!.uid).delete();
+                      //   },
+                      //   child: Padding(
+                      //       padding: EdgeInsets.only(left: 1),
+                      //       child: isliked?Icon(Icons.star,color: Colors.yellow,):
+                      //   Icon(Icons.star_border_purple500_sharp,color: Colors.yellow,)),
+                      // ),
                       const Spacer(),
                       Padding(
-                        padding:  EdgeInsets.only(right: 20),
+                        padding: EdgeInsets.only(right: 20),
                         child: Column(
                           children: [
                             Container(
                                 height: 40,
                                 width: 70,
                                 decoration: BoxDecoration(
-                                  color: percentage_24h!>=0?Colors.green:Colors.red,
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  color: percentage_24h! >= 0
+                                      ? Colors.green
+                                      : Colors.red,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                 ),
-                                child:  Center(
+                                child: Center(
                                   child: Text(
                                     '${percentage_24h?.toStringAsFixed(2)}%',
                                     style: GoogleFonts.poppins(
@@ -144,8 +201,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                       fontSize: 15,
                                     ),
                                   ),
-                                )
-                            ),
+                                )),
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
@@ -166,27 +222,33 @@ class _Currency_DetailsState extends State<Currency_Details> {
                     padding: const EdgeInsets.only(left: 20),
                     child: Row(
                       children: [
-                        Text('Vol: ${widget.volume}',style: GoogleFonts.poppins(
-                          color: Colors.grey,
-                            fontSize: 12,
-                          fontWeight: FontWeight.w600
-                        ),),
+                        Text(
+                          'Vol: ${(int.parse((widget.volume)) / 1000000000).toStringAsFixed(2)}B',
+                          style: GoogleFonts.poppins(
+                              color: Colors.grey,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600),
+                        ),
                         const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: Text('High: ${(widget.high24h)}',style: GoogleFonts.poppins(
-                              color: Colors.grey,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600
-                          ),),
+                          child: Text(
+                            'High: ₹${(widget.high24h)}',
+                            style: GoogleFonts.poppins(
+                                color: Colors.grey,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
-                          child: Text('Low: ${widget.low_24}',style: GoogleFonts.poppins(
-                              color: Colors.grey,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600
-                          ),),
+                          child: Text(
+                            'Low: ₹${widget.low_24}',
+                            style: GoogleFonts.poppins(
+                                color: Colors.grey,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
                       ],
                     ),
@@ -195,9 +257,117 @@ class _Currency_DetailsState extends State<Currency_Details> {
               ),
             ),
             Container(
-              height: 550,
+              // height: 550,
               width: MediaQuery.sizeOf(context).width,
-              decoration: const BoxDecoration(color: const Color(0xFF1c2835),),
+              decoration: const BoxDecoration(
+                color: const Color(0xFF1c2835),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 20),
+                        child: Text(
+                          'Time',
+                          style: GoogleFonts.poppins(
+                              color: Colors.grey, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Text(
+                          'Price',
+                          style: GoogleFonts.poppins(
+                              color: Colors.grey, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, right: 20),
+                        child: Text(
+                          'Volume',
+                          style: GoogleFonts.poppins(
+                              color: Colors.grey, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  if(isloaded)
+                    for (int i = 0; i < 200; i++)
+                      SingleChildScrollView(
+                        child: Column(
+
+                          children: [
+                            Container(
+                              height: 50,
+                              width: MediaQuery.sizeOf(context).width,
+                              color: widget.pricehistory[i] >
+                                  widget.pricehistory[i + 1]
+                                  ? Colors.green.withOpacity(0.3)
+                                  : Colors.red.withOpacity(0.3),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: Text(
+                                      _timestamp[i],
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(),
+                                        child: Text(
+                                          widget.pricehistory[i].toStringAsFixed(2),
+                                          style: GoogleFonts.poppins(
+                                              color:widget.pricehistory[i] >
+                                                  widget.pricehistory[i + 1]? Colors.green:Colors.red,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      Padding(padding: EdgeInsets.only(left: 5),
+                                        child: widget.pricehistory[i] >
+                                            widget.pricehistory[i + 1]?Icon(Icons.arrow_upward,color: Colors.green,):
+                                        Icon(Icons.arrow_downward,color: Colors.red,),
+                                      )
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: Text(
+                                      '${(int.parse((widget.volume)) / 1000000000).toStringAsFixed(2)}B',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                  if(!isloaded)
+                    SizedBox(
+                      height: 50,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                ],
+              ),
             )
           ],
         ),

@@ -64,38 +64,47 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   List <dynamic> high_24h=[];
   List <dynamic> low_24h=[];
   List <dynamic> total_volume=[];
+  List<dynamic>pricehistory=[];
   Future<void> fetchapidetails() async {
-    // Implement your API fetching logic here
-    //fetching name
-    final response=await https.get(Uri.parse(Environment.API_ENDPOINT));
-    if(response.statusCode==200){
+    final response = await https.get(Uri.parse(Environment.API_ENDPOINT));
+    if (response.statusCode == 200) {
       List<dynamic> coins = json.decode(response.body);
 
       // Extract names from each coin object
       List<dynamic> names = coins.map((coin) => coin['name']).toList();
-      List<dynamic> image=coins.map((coin) => coin['image']).toList();
-      List<dynamic> prices=coins.map((coin) => coin['current_price']).toList();
-      List<dynamic> perc_change=coins.map((coin) => coin['price_change_percentage_24h']).toList();
-      List<dynamic> symbol=coins.map((coin) => coin["symbol"]).toList();
-      List<dynamic> popularity=coins.map((coin) => coin['market_cap_rank']).toList();
-      List<dynamic> volume=coins.map((coin) => coin["total_volume"]).toList();
-      List<dynamic> High24h=coins.map((coin) => coin['high_24h']).toList();
-      List<dynamic> Low24h=coins.map((coin) => coin['low_24h']).toList();
-      // Now you can use 'names' as needed
+      List<dynamic> image = coins.map((coin) => coin['image']).toList();
+      List<dynamic> prices = coins.map((coin) => coin['current_price']).toList();
+      List<dynamic> perc_change = coins.map((coin) => coin['price_change_percentage_24h']).toList();
+      List<dynamic> symbol = coins.map((coin) => coin["symbol"]).toList();
+      List<dynamic> popularity = coins.map((coin) => coin['market_cap_rank']).toList();
+      List<dynamic> volume = coins.map((coin) => coin["total_volume"]).toList();
+      List<dynamic> High24h = coins.map((coin) => coin['high_24h']).toList();
+      List<dynamic> Low24h = coins.map((coin) => coin['low_24h']).toList();
+
+      // Extract and flatten the price data from the sparkline_in_7d for each coin
+      List<double> pricesFlattened = [];
+      for (var coin in coins) {
+        pricesFlattened.addAll(List<double>.from(coin['sparkline_in_7d']['price']));
+      }
+
+      // Update the state with the fetched data
       setState(() {
         name = names;
-        price=prices;
-        percentage_24h=perc_change;
-        images=image;
-        symbols=symbol;
-        pops=popularity;
-        total_volume=volume;
-        high_24h=High24h;
-        low_24h=Low24h;
-        datafetched=true;
+        price = prices;
+        percentage_24h = perc_change;
+        images = image;
+        symbols = symbol;
+        pops = popularity;
+        total_volume = volume;
+        high_24h = High24h;
+        low_24h = Low24h;
+        pricehistory = pricesFlattened;
+        datafetched = true;
       });
+    } else {
+      print('Failed to fetch data');
     }
-    // print(name);
+    print(pricehistory);
   }
 
   @override
@@ -389,6 +398,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Currency_Details(
                           price: price[index].toString(),
                           high24h: high_24h[index].toString(),
+                          pricehistory: pricehistory,
                           low_24: low_24h[index].toString(),
                           volume: total_volume[index].toString(),
                         ),));
@@ -536,6 +546,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           high24h: high_24h[index].toString(),
                           low_24: low_24h[index].toString(),
                           volume: total_volume[index].toString(),
+                          pricehistory: pricehistory,
                         ),));
                       },
                       child: Container(
