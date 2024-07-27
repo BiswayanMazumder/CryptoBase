@@ -10,14 +10,14 @@ class Currency_Details extends StatefulWidget {
   final String low_24;
   final String high24h;
   final String volume;
-  final List pricehistory;
+  final List<dynamic> pricehistory; // Ensure the type is dynamic
   const Currency_Details(
       {Key? key,
-      required this.price,
-      required this.high24h,
-      required this.low_24,
-      required this.volume,
-      required this.pricehistory});
+        required this.price,
+        required this.high24h,
+        required this.low_24,
+        required this.volume,
+        required this.pricehistory});
 
   @override
   State<Currency_Details> createState() => _Currency_DetailsState();
@@ -39,6 +39,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
     final String? CryptoName = prefs.getString('Crypto_Symbol');
     final double? percchange = prefs.getDouble('Crypto_24h');
     final int? cryptoprice = prefs.getInt('Crypto_Price');
+    // print(widget.pricehistory);
     if (counter != null) {
       setState(() {
         cryptoname = CryptoName;
@@ -79,7 +80,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
     final List<String> timestamps = [];
     final now = DateTime.now();
 
-    for (int i = 0; i < 1500; i++) {
+    for (int i = 0; i < 20 ;i++) {
       final timestamp = now.subtract(Duration(seconds: i)).toLocal();
       final formattedTimestamp = '${timestamp.hour}:${timestamp.minute}:${timestamp.second}';
       timestamps.add(formattedTimestamp);
@@ -132,7 +133,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                         padding: EdgeInsets.only(left: 10),
                         child: InkWell(
                           onTap: () {
-                            print(widget.pricehistory.length);
+                            // print(widget.pricehistory.length);
                           },
                           child: Container(
                             height: 40,
@@ -140,7 +141,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                             decoration: const BoxDecoration(
                                 color: Color(0xFFF232F3F),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(10))),
+                                BorderRadius.all(Radius.circular(10))),
                             child: Row(
                               children: [
                                 Padding(
@@ -158,25 +159,6 @@ class _Currency_DetailsState extends State<Currency_Details> {
                           ),
                         ),
                       ),
-                      // InkWell(
-                      //   onTap: ()async{
-                      //     setState(() {
-                      //       isliked=!isliked;
-                      //     });
-                      //     final user=_auth.currentUser;
-                      //     if(isliked)
-                      //       await _firestore.collection('Liked Currencies').doc(user!.uid).set({
-                      //         'Crypto Liked':cryptoname,
-                      //         'Date of Adding':FieldValue.serverTimestamp()
-                      //       });
-                      //     if(!isliked)
-                      //       await _firestore.collection('Liked Currencies').doc(user!.uid).delete();
-                      //   },
-                      //   child: Padding(
-                      //       padding: EdgeInsets.only(left: 1),
-                      //       child: isliked?Icon(Icons.star,color: Colors.yellow,):
-                      //   Icon(Icons.star_border_purple500_sharp,color: Colors.yellow,)),
-                      // ),
                       const Spacer(),
                       Padding(
                         padding: EdgeInsets.only(right: 20),
@@ -190,7 +172,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                       ? Colors.green
                                       : Colors.red,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(10)),
                                 ),
                                 child: Center(
                                   child: Text(
@@ -257,7 +239,6 @@ class _Currency_DetailsState extends State<Currency_Details> {
               ),
             ),
             Container(
-              // height: 550,
               width: MediaQuery.sizeOf(context).width,
               decoration: const BoxDecoration(
                 color: const Color(0xFF1c2835),
@@ -296,17 +277,15 @@ class _Currency_DetailsState extends State<Currency_Details> {
                   const SizedBox(
                     height: 20,
                   ),
-                  if(isloaded)
-                    for (int i = 0; i < 200; i++)
+                  if (isloaded)
+                    for (int i = 0; i < 20; i++) // Iterate up to pricehistory.length - 1
                       SingleChildScrollView(
                         child: Column(
-
                           children: [
                             Container(
                               height: 50,
                               width: MediaQuery.sizeOf(context).width,
-                              color: widget.pricehistory[i] >
-                                  widget.pricehistory[i + 1]
+                              color: (widget.pricehistory[i] is num && widget.pricehistory[i + 1] is num) && (widget.pricehistory[i] > widget.pricehistory[i + 1])
                                   ? Colors.green.withOpacity(0.3)
                                   : Colors.red.withOpacity(0.3),
                               child: Row(
@@ -327,17 +306,19 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                       Padding(
                                         padding: const EdgeInsets.only(),
                                         child: Text(
-                                          widget.pricehistory[i].toStringAsFixed(2),
+                                          widget.pricehistory[i].toString(),
                                           style: GoogleFonts.poppins(
-                                              color:widget.pricehistory[i] >
-                                                  widget.pricehistory[i + 1]? Colors.green:Colors.red,
+                                              color: (widget.pricehistory[i] is num && widget.pricehistory[i + 1] is num && widget.pricehistory[i] > widget.pricehistory[i + 1])
+                                                  ? Colors.green
+                                                  : Colors.red,
                                               fontWeight: FontWeight.w500),
                                         ),
                                       ),
-                                      Padding(padding: EdgeInsets.only(left: 5),
-                                        child: widget.pricehistory[i] >
-                                            widget.pricehistory[i + 1]?Icon(Icons.arrow_upward,color: Colors.green,):
-                                        Icon(Icons.arrow_downward,color: Colors.red,),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 5),
+                                        child: (widget.pricehistory[i] is num && widget.pricehistory[i + 1] is num && widget.pricehistory[i] > widget.pricehistory[i + 1])
+                                            ? Icon(Icons.arrow_upward, color: Colors.green)
+                                            : Icon(Icons.arrow_downward, color: Colors.red),
                                       )
                                     ],
                                   ),
@@ -357,7 +338,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                           ],
                         ),
                       ),
-                  if(!isloaded)
+                  if (!isloaded)
                     SizedBox(
                       height: 50,
                       child: Center(

@@ -83,12 +83,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       List<dynamic> volume = coins.map((coin) => coin["total_volume"]).toList();
       List<dynamic> High24h = coins.map((coin) => coin['high_24h']).toList();
       List<dynamic> Low24h = coins.map((coin) => coin['low_24h']).toList();
-
-      // Extract and flatten the price data from the sparkline_in_7d for each coin
-      List<double> pricesFlattened = [];
-      for (var coin in coins) {
-        pricesFlattened.addAll(List<double>.from(coin['sparkline_in_7d']['price']));
-      }
+      List<dynamic> pricesFlattened = coins.map((coin) => coin['sparkline_in_7d']['price']).toList();
 
       // Update the state with the fetched data
       setState(() {
@@ -107,7 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     } else {
       print('Failed to fetch data');
     }
-    print(pricehistory);
+    // print(pricehistory[5]);
   }
 
   @override
@@ -401,7 +396,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Currency_Details(
                           price: price[index].toString(),
                           high24h: high_24h[index].toString(),
-                          pricehistory: pricehistory,
+                          pricehistory: pricehistory[index],
                           low_24: low_24h[index].toString(),
                           volume: total_volume[index].toString(),
                         ),));
@@ -549,7 +544,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           high24h: high_24h[index].toString(),
                           low_24: low_24h[index].toString(),
                           volume: total_volume[index].toString(),
-                          pricehistory: pricehistory,
+                          pricehistory: pricehistory[index],
                         ),));
                       },
                       child: Container(
