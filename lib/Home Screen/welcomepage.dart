@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:cryptobase/Money%20Options/currencypage.dart';
+import 'package:cryptobase/News%20Pages/news_homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -255,71 +256,76 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                     SizedBox(width: 20), // Adding space between boxes
-                    Container(
-                      height: 190,
-                      width: MediaQuery.sizeOf(context).width - 70,
-                      decoration: BoxDecoration(
-                        color: Colors.green.shade700,
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  'Confused about\ncrypto?',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => News_HomePage(),));
+                      },
+                      child: Container(
+                        height: 190,
+                        width: MediaQuery.sizeOf(context).width - 70,
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade700,
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    'Confused about\nbusiness?',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                RichText(
-                                  text: TextSpan(
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: 'Simplify your gyaan\nwith '),
+                                        TextSpan(
+                                          text: 'News',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.yellow),
+                                        ),
+                                        TextSpan(text: '!'),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Click to get news!',
                                     style: GoogleFonts.poppins(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 15,
                                     ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: 'Simplify your gyaan\nwith '),
-                                      TextSpan(
-                                        text: 'CryptoNews',
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.yellow),
-                                      ),
-                                      TextSpan(text: '!'),
-                                    ],
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Click to get news!',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Image(
-                              image: NetworkImage(
-                                'https://firebasestorage.googleapis.com/v0/b/c'
-                                'ryptobase-admin.appspot.com/o/Home%20Screen%20Card%20Images%2Fimages-rem'
-                                'ovebg-preview.png?alt=media&token=7a41982e-dd9e-416f-80ee-3d1d91a23c0c',
+                                ],
                               ),
-                              width: 160,
-                            )
-                          ],
+                              const Image(
+                                image: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/c'
+                                  'ryptobase-admin.appspot.com/o/Home%20Screen%20Card%20Images%2Fimages-rem'
+                                  'ovebg-preview.png?alt=media&token=7a41982e-dd9e-416f-80ee-3d1d91a23c0c',
+                                ),
+                                width: 160,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

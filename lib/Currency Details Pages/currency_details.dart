@@ -149,7 +149,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
           isfavourite=false;
         });
       }
-      print(getlikedcurrency);
+      // print(getlikedcurrency);
     }catch(e){
       print(e);
     }
