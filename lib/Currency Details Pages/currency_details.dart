@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Money%20Options/currencypage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,11 @@ class Currency_Details extends StatefulWidget {
   final String low_24;
   final String high24h;
   final String volume;
+  final String market_cap;
+  final String circulating_supply;
+  final String max_supply;
+  final String total_supply;
+  final String popularity;
   final List<dynamic> pricehistory; // Ensure the type is dynamic
   const Currency_Details(
       {Key? key,
@@ -17,7 +23,13 @@ class Currency_Details extends StatefulWidget {
         required this.high24h,
         required this.low_24,
         required this.volume,
-        required this.pricehistory});
+        required this.pricehistory,
+        required this.total_supply,
+        required this.max_supply,
+        required this.market_cap,
+        required this.popularity,
+        required this.circulating_supply
+      });
 
   @override
   State<Currency_Details> createState() => _Currency_DetailsState();
@@ -91,12 +103,64 @@ class _Currency_DetailsState extends State<Currency_Details> {
       isloaded=true;
     });
   }
+  bool isfavourite=false;
+  Future<void> favouriteactions()async{
+    await readfetcheddata();
+    setState(() {
+      isfavourite=!isfavourite;
+    });
+    final user=_auth.currentUser;
+    if(isfavourite){
+      await _firestore.collection('Favourite Currencies').doc(user!.uid).set(
+          {
+            'Currency':FieldValue.arrayUnion([
+              cryptoname.toString().toUpperCase(),
+            ])
+          }, SetOptions(merge: true));
+    }
+    if(!isfavourite){
+      await _firestore.collection('Favourite Currencies').doc(user!.uid).update({
+        'Currency':FieldValue.arrayRemove(
+          [
+            cryptoname.toString().toUpperCase()
+          ]
+        )
+      });
+    }
+  }
+  List<dynamic> getlikedcurrency=[];
+  Future<void> fetchlikedcurrencies()async{
+    final user=_auth.currentUser;
+    await readfetcheddata();
+    try{
+      final docsnap=await _firestore.collection('Favourite Currencies').doc(user!.uid).get();
+      if(docsnap.exists){
+        setState(() {
+          getlikedcurrency=docsnap.data()?['Currency'];
+        });
+      }
+      if(getlikedcurrency.contains(cryptoname.toString().toUpperCase())){
+        setState(() {
+          isfavourite=true;
+        });
+      }
+      else{
+        setState(() {
+          isfavourite=false;
+        });
+      }
+      print(getlikedcurrency);
+    }catch(e){
+      print(e);
+    }
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setcurrencyicon();
     _generateTimestamps();
+    fetchlikedcurrencies();
   }
 
   @override
@@ -158,6 +222,13 @@ class _Currency_DetailsState extends State<Currency_Details> {
                             ),
                           ),
                         ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          favouriteactions();
+                        },
+                        child: Icon(isfavourite?CupertinoIcons.star_fill:CupertinoIcons.star,
+                          color: Colors.yellow,size: 15,),
                       ),
                       const Spacer(),
                       Padding(
@@ -346,7 +417,128 @@ class _Currency_DetailsState extends State<Currency_Details> {
                           color: Colors.white,
                         ),
                       ),
-                    )
+                    ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  isloaded?Padding(
+                    padding: const EdgeInsets.only(right:1),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20,top: 20,bottom: 20),
+                          child: Text('STATS',style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w500,),),
+                        ),
+                        InkWell(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 2,left: 5),
+                            child: Icon(CupertinoIcons.info,color: Colors.grey,size: 15,),
+                          ),
+                        )
+                      ],
+                    ),
+                  ):Container(),
+                  isloaded?Padding(
+                    padding: const EdgeInsets.only(left: 20,right: 20),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: const Color(0xFF232f3f)
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
+                            child: Row(
+                              children: [
+                                Text('Market Cap',style: GoogleFonts.poppins(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                                const Spacer(),
+                                Text('₹${(int.parse(widget.market_cap)/1000000000).toStringAsFixed(2)}B',style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
+                            child: Row(
+                              children: [
+                                Text('Circulating Supply',style: GoogleFonts.poppins(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                                const Spacer(),
+                                Text('₹${widget.circulating_supply}',style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
+                            child: Row(
+                              children: [
+                                Text('Max Supply',style: GoogleFonts.poppins(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                                const Spacer(),
+                                Text('₹${widget.max_supply}B',style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
+                            child: Row(
+                              children: [
+                                Text('Total Supply',style: GoogleFonts.poppins(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                                const Spacer(),
+                                Text('₹${widget.total_supply}B',style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500
+                                ),),
+
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
+                            child: Row(
+                              children: [
+                                Text('Popularity',style: GoogleFonts.poppins(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                                const Spacer(),
+                                Text('#${widget.popularity}',style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500
+                                ),),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ):Container(),
+                  const SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             )
