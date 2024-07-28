@@ -428,7 +428,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               // prefs.setInt('Crypto_Price',price[index]);
                               prefs.setString('Crypto_Symbol', symbols[index]);
                               prefs.setInt('Crypto_Popu', pops[index]);
-                              Vibration.vibrate(duration: 1000);
+                              // Vibration.vibrate(duration: 1000);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
