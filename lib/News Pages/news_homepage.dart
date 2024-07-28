@@ -1,9 +1,10 @@
 import 'dart:convert';
-
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as https;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 class News_HomePage extends StatefulWidget {
   const News_HomePage({Key? key}) : super(key: key);
 
@@ -85,19 +86,29 @@ class _News_HomePageState extends State<News_HomePage> {
                         padding: const EdgeInsets.only(bottom: 20),
                         child: Image(image: NetworkImage(urltoimage[i])),
                       ),
-                    Text(title[i],style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18
-                    ),),
+                    InkWell(
+                      onTap: ()async{
+                        await launchUrl(Uri.parse(URL[i]));
+                      },
+                      child: Text(title[i],style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18
+                      ),),
+                    ),
                     if(author[i]!=null)
                       Row(
                         children: [
-                          Text(author[i],style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 15
-                          ),),
+                          InkWell(
+                            onTap: ()async{
+                              await launchUrl(Uri.parse(URL[i]));
+                            },
+                            child: Text(author[i],style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15
+                            ),),
+                          ),
                         ],
                       ),
                   ],
@@ -105,8 +116,8 @@ class _News_HomePageState extends State<News_HomePage> {
               )
           ],
         ):Padding(
-          padding:  EdgeInsets.only(top: MediaQuery.sizeOf(context).width/2),
-          child: Column(
+          padding:  EdgeInsets.only(top: MediaQuery.sizeOf(context).height/2),
+          child:const Column(
             children: [
               Center(
                 child: CircularProgressIndicator(
