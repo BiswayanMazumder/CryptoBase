@@ -84,7 +84,11 @@ class _News_HomePageState extends State<News_HomePage> {
                     if(urltoimage[i]!=null)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20),
-                        child: Image(image: NetworkImage(urltoimage[i])),
+                        child: InkWell(
+                            onTap: ()async{
+                              await launchUrl(Uri.parse(URL[i]));
+                            },
+                            child: Image(image: NetworkImage(urltoimage[i]))),
                       ),
                     InkWell(
                       onTap: ()async{
@@ -93,7 +97,7 @@ class _News_HomePageState extends State<News_HomePage> {
                       child: Text(title[i],style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
-                        fontSize: 18
+                        fontSize: 17
                       ),),
                     ),
                     if(author[i]!=null)
