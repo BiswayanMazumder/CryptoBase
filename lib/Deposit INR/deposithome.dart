@@ -12,6 +12,7 @@ class DepositHome extends StatefulWidget {
 class _DepositHomeState extends State<DepositHome> {
   bool istransaction=true;
   int walletbalance=0;
+  bool isloaded=false;
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
   Future<void>fetchbalance() async{
@@ -45,12 +46,14 @@ class _DepositHomeState extends State<DepositHome> {
 
   }
   Future<void> paymentamountfetch() async{
+    await paymentstatusfetch();
     final user=_auth.currentUser;
     try{
       final docsnap=await _firestore.collection('Payment Amount').doc(user!.uid).get();
       if(docsnap.exists){
         setState(() {
           paymentamount=docsnap.data()?['Amount'];
+          isloaded=true;
         });
         // print(paymentamount);
       }
@@ -127,72 +130,96 @@ class _DepositHomeState extends State<DepositHome> {
              const SizedBox(
                height: 20,
              ),
-             for(int i=0;i<paymentamount.length;i++)
-               Padding(
-                 padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
-                 child: Column(
-                   children: [
-                     Row(
+         isloaded?   istransaction? Column(
+               children: [
+                 for(int i=0;i<paymentamount.length;i++)
+                   Padding(
+                     padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
+                     child: Column(
                        children: [
-                         if(paymentstatus[i])
-                           Text('Processing Deposit',style: GoogleFonts.poppins(
-                               color: Colors.white,
-                               fontWeight: FontWeight.w500,
-                                fontSize: 18
-                           ),),
-                         if(!paymentstatus[i])
-                           Text('Deposit',style: GoogleFonts.poppins(
-                               color: Colors.white,
-                               fontWeight: FontWeight.w500,
-                               fontSize: 18
-                           ),),
+                         Row(
+                           children: [
+                             Padding(
+                               padding: const EdgeInsets.only(right: 5),
+                               child: Icon(paymentstatus[i]? Icons.check:Icons.access_time,
+                                 size: 20,color:paymentstatus[i]? Colors.green:Colors.grey,),
+                             ),
+                             if(paymentstatus[i])
+                               Text('Deposit',style: GoogleFonts.poppins(
+                                   color: Colors.white,
+                                   fontWeight: FontWeight.w500,
+                                   fontSize: 18
+                               ),),
+                             if(!paymentstatus[i])
+                               Text('Payment Deposit',style: GoogleFonts.poppins(
+                                   color: Colors.white,
+                                   fontWeight: FontWeight.w500,
+                                   fontSize: 18
+                               ),),
+                             const Spacer(),
+                             Text('${paymentamount[i]} INR',style: GoogleFonts.poppins(
+                               color: paymentstatus[i]?Colors.green:Colors.grey,
+                               fontWeight: FontWeight.w600,
 
+                             ),)
+                           ],
+                         )
                        ],
-                     )
-                   ],
+                     ),
+                   ),
+               ],
+             ):Container(): Column(
+               children: [
+                 SizedBox(
+                            height: MediaQuery.sizeOf(context).height/5,
+
+                          ),
+                 const CircularProgressIndicator(
+                   color: Colors.white,
                  ),
-               ),
+               ],
+             ),
              SizedBox(
               height: MediaQuery.sizeOf(context).height/1.4,
             ),
-            Container(
-              width: double.infinity,
-              height:78,
-              color: const Color(0xFF1c2835),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: 70,
-                    width: MediaQuery.sizeOf(context).width/2.5,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
-                    child: Center(
-                      child: Text('DEPOSIT',style: GoogleFonts.poppins(
-                        color: Colors.white,fontWeight: FontWeight.bold,
-                        fontSize: 15
-                      ),),
-                    ),
-                  ),
-                  Container(
-                    height: 70,
-                    width: MediaQuery.sizeOf(context).width/2.5,
-                    decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
-                    child: Center(
-                      child: Text('WITHDRAW',style: GoogleFonts.poppins(
-                          color: Colors.white,fontWeight: FontWeight.bold,
-                          fontSize: 15
-                      ),),
-                    ),
-                  ),
-                ],
-              ),
-            )
+            // Container(
+            //   width: double.infinity,
+            //   height:78,
+            //   color: const Color(0xFF1c2835),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
+            //       Container(
+            //         height: 70,
+            //         width: MediaQuery.sizeOf(context).width/2.5,
+            //         decoration: const BoxDecoration(
+            //           color: Colors.blue,
+            //           borderRadius: BorderRadius.all(Radius.circular(10))
+            //         ),
+            //         child: Center(
+            //           child: Text('DEPOSIT',style: GoogleFonts.poppins(
+            //             color: Colors.white,fontWeight: FontWeight.bold,
+            //             fontSize: 15
+            //           ),),
+            //         ),
+            //       ),
+            //       Container(
+            //         height: 70,
+            //         width: MediaQuery.sizeOf(context).width/2.5,
+            //         decoration: const BoxDecoration(
+            //             color: Colors.blue,
+            //             borderRadius: BorderRadius.all(Radius.circular(10))
+            //         ),
+            //         child: Center(
+            //           child: Text('WITHDRAW',style: GoogleFonts.poppins(
+            //               color: Colors.white,fontWeight: FontWeight.bold,
+            //               fontSize: 15
+            //           ),),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),
