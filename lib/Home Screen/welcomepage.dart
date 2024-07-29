@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
+import 'package:cryptobase/Deposit%20INR/deposithome.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:cryptobase/Money%20Options/currencypage.dart';
 import 'package:cryptobase/News%20Pages/news_homepage.dart';
+import 'package:cryptobase/Profile%20Page/Your%20Account%20Page/account_homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -171,7 +173,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
           )
         ],
-        leading: const InkWell(
+        leading:  InkWell(
+          onTap: (){
+            Navigator.push(context,MaterialPageRoute(builder: (context) => AccountHomePage(),));
+          },
           child: Icon(
             Icons.person_add_alt_rounded,
             color: Colors.white,
@@ -336,43 +341,48 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Container(
-                height: 80,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF1c2835),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Icon(
-                        Icons.wallet,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Text(
-                        'Deposit INR',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: InkWell(
+              child: InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DepositHome(),));
+                },
+                child: Container(
+                  height: 80,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF1c2835),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 20),
                         child: Icon(
-                          Icons.arrow_forward,
+                          Icons.wallet,
                           color: Colors.blue,
                         ),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Text(
+                          'Deposit INR',
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: InkWell(
+                          child: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
