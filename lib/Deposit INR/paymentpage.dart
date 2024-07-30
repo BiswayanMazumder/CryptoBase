@@ -16,15 +16,69 @@ class _PaymentPageState extends State<PaymentPage> {
   int walletbalance=0;
   bool isrp=true;
   bool ismk=false;
+  int amount=0;
+  bool paymentsts=false;
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
-  void handlePaymentErrorResponse(PaymentFailureResponse response){
+  void handlePaymentErrorResponse(PaymentFailureResponse response)async{
     print('payment failed');
+    final user=_auth.currentUser;
+    setState(() {
+      paymentsts=false;
+    });
+    print(paymentsts);
+    try{
+      await _firestore.collection('Payment Status').doc(user!.uid).set({
+        'Status':FieldValue.arrayUnion([paymentsts])
+      },SetOptions(merge: true));
+    }catch(e){
+      print(e);
+    }
+    try{
+      await _firestore.collection('Payment Amount').doc(user!.uid).set({
+        'Amount':FieldValue.arrayUnion([amount/100])
+      },SetOptions(merge: true));
+    }catch(e){
+      print(e);
+    }
   }
 
-  void handlePaymentSuccessResponse(PaymentSuccessResponse response){
-    // print('payment done');
-    Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+  void handlePaymentSuccessResponse(PaymentSuccessResponse response)async{
+    // print('${(amount / 100)+walletbalance}');
+    final user=_auth.currentUser;
+    await fetchbalance();
+    // final user=_auth.currentUser;
+    setState(() {
+      paymentsts=true;
+    });
+    print(paymentsts);
+    try{
+      await _firestore.collection('Payment Status').doc(user!.uid).set({
+        'Status':FieldValue.arrayUnion([paymentsts])
+      },SetOptions(merge: true));
+    }catch(e){
+      print(e);
+    }
+    try{
+      await _firestore.collection('Payment Amount').doc(user!.uid).set({
+        'Amount':FieldValue.arrayUnion([amount/100])
+      },SetOptions(merge: true));
+    }catch(e){
+      print(e);
+    }
+    try{
+        await _firestore.collection('Wallet Balance').doc(user!.uid).set({
+          'Balance':(amount / 100)+walletbalance
+        });
+        await _firestore.collection('Payment Status').doc(user!.uid).set({
+          'Status':FieldValue.arrayUnion([
+            true
+          ])
+        },SetOptions(merge: true));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+    }catch(e){
+      print(e);
+    }
 
   }
 
@@ -361,7 +415,9 @@ class _PaymentPageState extends State<PaymentPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                  ElevatedButton(onPressed: (){
-                   var amount=int.parse(_pricecontroller.text)*100;
+                   setState(() {
+                     amount=int.parse(_pricecontroller.text)*100;
+                   });
                    Razorpay razorpay = Razorpay();
                    var options = {
                      'key': 'rzp_test_9nWSDmh9oFPqMq',

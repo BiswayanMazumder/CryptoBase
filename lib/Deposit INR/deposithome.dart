@@ -12,7 +12,7 @@ class DepositHome extends StatefulWidget {
 
 class _DepositHomeState extends State<DepositHome> {
   bool istransaction=true;
-  int walletbalance=0;
+  double walletbalance=0;
   bool isloaded=false;
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
@@ -33,13 +33,20 @@ class _DepositHomeState extends State<DepositHome> {
   List<dynamic> paymentstatus=[];
   Future<void> paymentstatusfetch() async{
     final user=_auth.currentUser;
+    // await paymentamountfetch();
     try{
       final docsnap=await _firestore.collection('Payment Status').doc(user!.uid).get();
       if(docsnap.exists){
         setState(() {
           paymentstatus=docsnap.data()?['Status'];
+          for(int i=0;i<paymentstatus.length;i++){
+            if(paymentstatus[i]){
+              setState(() {
+                walletbalance += paymentamount[i];
+              });
+            }
+          }
         });
-        // print(paymentstatus);
       }
     }catch(e){
       print(e);
@@ -193,24 +200,24 @@ class _DepositHomeState extends State<DepositHome> {
                            children: [
                              Padding(
                                padding: const EdgeInsets.only(right: 5),
-                               child: Icon(paymentstatus[i]? Icons.check:Icons.access_time,
-                                 size: 20,color:paymentstatus[i]? Colors.green:Colors.grey,),
+                               child: Icon(paymentstatus[i]? Icons.check:Icons.sms_failed,
+                                 size: 20,color:paymentstatus[i]? Colors.green:Colors.red,),
                              ),
                              if(paymentstatus[i])
                                Text('Deposit',style: GoogleFonts.poppins(
-                                   color: Colors.white,
+                                   color: Colors.green,
                                    fontWeight: FontWeight.w500,
                                    fontSize: 18
                                ),),
                              if(!paymentstatus[i])
-                               Text('Payment Deposit',style: GoogleFonts.poppins(
-                                   color: Colors.white,
+                               Text('Failed Deposit',style: GoogleFonts.poppins(
+                                   color: Colors.red,
                                    fontWeight: FontWeight.w500,
                                    fontSize: 18
                                ),),
                              const Spacer(),
                              Text('${paymentamount[i]} INR',style: GoogleFonts.poppins(
-                               color: paymentstatus[i]?Colors.green:Colors.grey,
+                               color: paymentstatus[i]?Colors.green:Colors.red,
                                fontWeight: FontWeight.w600,
 
                              ),)
