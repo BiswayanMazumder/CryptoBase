@@ -12,7 +12,7 @@ class DepositHome extends StatefulWidget {
 
 class _DepositHomeState extends State<DepositHome> {
   bool istransaction=true;
-  double walletbalance=0;
+  int walletbalance=0;
   bool isloaded=false;
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
@@ -39,13 +39,6 @@ class _DepositHomeState extends State<DepositHome> {
       if(docsnap.exists){
         setState(() {
           paymentstatus=docsnap.data()?['Status'];
-          for(int i=0;i<paymentstatus.length;i++){
-            if(paymentstatus[i]){
-              setState(() {
-                walletbalance += paymentamount[i];
-              });
-            }
-          }
         });
       }
     }catch(e){

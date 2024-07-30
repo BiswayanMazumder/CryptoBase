@@ -1,4 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cryptobase/Deposit%20INR/paymentpage.dart';
+import 'package:cryptobase/Home%20Screen/welcomepage.dart';
+import 'package:cryptobase/Login%20Page/emaillogin.dart';
+import 'package:cryptobase/Login%20Page/getstarted.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -77,40 +81,55 @@ class _AccountHomePageState extends State<AccountHomePage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left:10),
-                        child: Container(
-                          height: 50,
-                          width: MediaQuery.sizeOf(context).width/2.5,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                              borderRadius: BorderRadius.all(Radius.circular(10))
-                          ),
-                          child: Center(
-                            child: Text('ADD FUNDS',style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500
-                            ),),
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentPage(),));
+                          },
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.sizeOf(context).width/2.5,
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                                borderRadius: BorderRadius.all(Radius.circular(10))
+                            ),
+                            child: Center(
+                              child: Text('ADD FUNDS',style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500
+                              ),),
+                            ),
                           ),
                         ),
 
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
-                        child: Container(
-                          height: 50,
-                          width: MediaQuery.sizeOf(context).width/2.5,
-                          decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            border: Border.all(
-                              color: Colors.blue,
-                              width: 1
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(10))
-                          ),
-                          child: Center(
-                            child: Text('WITHDRAW',style: GoogleFonts.poppins(
+                        child: InkWell(
+                          onTap: ()async{
+                            try{
+                              _auth.signOut();
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GetStarted(),));
+                            }catch(e){
+
+                            }
+                          },
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.sizeOf(context).width/2.5,
+                            decoration: BoxDecoration(
+                                color: Colors.transparent,
+                              border: Border.all(
                                 color: Colors.blue,
-                                fontWeight: FontWeight.w500
-                            ),),
+                                width: 1
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(10))
+                            ),
+                            child: Center(
+                              child: Text('LOG OUT',style: GoogleFonts.poppins(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w500
+                              ),),
+                            ),
                           ),
                         ),
                       )
