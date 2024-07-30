@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);
 
@@ -16,6 +18,18 @@ class _PaymentPageState extends State<PaymentPage> {
   bool ismk=false;
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
+  void handlePaymentErrorResponse(PaymentFailureResponse response){
+    print('payment failed');
+  }
+
+  void handlePaymentSuccessResponse(PaymentSuccessResponse response){
+    // print('payment done');
+    Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+
+  }
+
+  void handleExternalWalletSelected(ExternalWalletResponse response){
+  }
   Future<void>fetchbalance() async{
     final user=_auth.currentUser;
     try{
@@ -346,8 +360,26 @@ class _PaymentPageState extends State<PaymentPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                 ElevatedButton(onPressed: (){},
-                     style: ButtonStyle(
+                 ElevatedButton(onPressed: (){
+                   var amount=int.parse(_pricecontroller.text)*100;
+                   Razorpay razorpay = Razorpay();
+                   var options = {
+                     'key': 'rzp_test_9nWSDmh9oFPqMq',
+                     'amount': amount,
+                     'name': 'CryptoBase',
+                     'description': 'Wallet Deposit',
+                     'retry': {'enabled': true, 'max_count': 1},
+                     'send_sms_hash': true,
+                     'external': {
+                       'wallets': ['paytm']
+                     }
+                   };
+                   razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
+                   razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
+                   razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWalletSelected);
+                   razorpay.open(options);
+                 },
+                     style:const ButtonStyle(
                        backgroundColor: MaterialStatePropertyAll(Colors.blue)
                      ),
                      child: Text('Proceed to pay',style: GoogleFonts.poppins(
