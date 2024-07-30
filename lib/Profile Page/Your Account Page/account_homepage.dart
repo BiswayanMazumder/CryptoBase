@@ -1,14 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 class AccountHomePage extends StatefulWidget {
   const AccountHomePage({Key? key}) : super(key: key);
-
   @override
   State<AccountHomePage> createState() => _AccountHomePageState();
 }
 
 class _AccountHomePageState extends State<AccountHomePage> {
+  final FirebaseFirestore _firestore=FirebaseFirestore.instance;
+  int walletbalance=0;
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  Future<void>fetchbalance() async{
+    final user=_auth.currentUser;
+    try{
+      final docsnap=await _firestore.collection('Wallet Balance').doc(user!.uid).get();
+      if(docsnap.exists){
+        setState(() {
+          walletbalance=docsnap.data()?['Balance'];
+        });
+      }
+    }catch(e){
+      print(e);
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchbalance();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +62,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
                   ),
                   Row(
                     children: [
-                      Text('₹0.00',style: GoogleFonts.poppins(
+                      Text('₹${walletbalance}',style: GoogleFonts.poppins(
                           color: Colors.white,
                         fontSize: 25,
                         fontWeight: FontWeight.w500

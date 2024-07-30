@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cryptobase/Deposit%20INR/paymentpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,8 +73,59 @@ class _DepositHomeState extends State<DepositHome> {
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: const Color(0xFF232f3f),
+      bottomNavigationBar: Row(
+        children: [
+          Container(
+            height: 70,
+            width: MediaQuery.sizeOf(context).width,
+            color: const Color(0xFF1c2835),
+            child:  Padding(
+              padding: const EdgeInsets.only(top: 10,bottom: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentPage(),));
+                    },
+                    child: Container(
+                      height: 70,
+                      width: MediaQuery.sizeOf(context).width/2.5,
+                      decoration: const BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: Center(
+                        child: Text('DEPOSIT',style: GoogleFonts.poppins(
+                            color: Colors.white,fontWeight: FontWeight.bold,
+                            fontSize: 15
+                        ),),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 70,
+                    width: MediaQuery.sizeOf(context).width/2.5,
+                    decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    child: Center(
+                      child: Text('WITHDRAW',style: GoogleFonts.poppins(
+                          color: Colors.white,fontWeight: FontWeight.bold,
+                          fontSize: 15
+                      ),),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
