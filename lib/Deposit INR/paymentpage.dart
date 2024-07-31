@@ -22,6 +22,7 @@ class _PaymentPageState extends State<PaymentPage> {
   bool ismk=false;
   int amount=0;
   bool paymentsts=false;
+  String orderid='';
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
   Future<void> createRazorpayOrder() async {
@@ -66,6 +67,9 @@ class _PaymentPageState extends State<PaymentPage> {
       // Extract the `id` from the response
       final orderId = responseBody['id'];
       final user=_auth.currentUser;
+      setState(() {
+        orderid=orderId;
+      });
       await _firestore.collection('Payment Order ID').doc(user!.uid).set({
         'Order ID':orderId,
         'Time Of Payment':FieldValue.serverTimestamp(),
@@ -89,7 +93,8 @@ class _PaymentPageState extends State<PaymentPage> {
       'send_sms_hash': true,
       'external': {
         'wallets': ['paytm']
-      }
+      },
+      'order_id': orderid
     };
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
