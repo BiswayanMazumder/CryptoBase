@@ -69,7 +69,7 @@ class _DepositHomeState extends State<DepositHome> {
     // TODO: implement initState
     super.initState();
     fetchbalance();
-    paymentstatusfetch();
+    // paymentstatusfetch();
     paymentamountfetch();
   }
   @override
@@ -199,24 +199,17 @@ class _DepositHomeState extends State<DepositHome> {
                            children: [
                              Padding(
                                padding: const EdgeInsets.only(right: 5),
-                               child: Icon(paymentstatus[i]? Icons.check:Icons.refresh_rounded,
-                                 size: 20,color:paymentstatus[i]? Colors.green:Colors.red,),
+                               child: Icon(Icons.check,
+                                 size: 20,color:Colors.green),
                              ),
-                             if(paymentstatus[i])
                                Text('Deposit Credited',style: GoogleFonts.poppins(
                                    color: Colors.green,
                                    fontWeight: FontWeight.w500,
                                    fontSize: 18
                                ),),
-                             if(!paymentstatus[i])
-                               Text('Deposit Refunded',style: GoogleFonts.poppins(
-                                   color: Colors.red,
-                                   fontWeight: FontWeight.w500,
-                                   fontSize: 18
-                               ),),
                              const Spacer(),
                              Text('${paymentamount[i]} INR',style: GoogleFonts.poppins(
-                               color: paymentstatus[i]?Colors.green:Colors.red,
+                               color: Colors.green,
                                fontWeight: FontWeight.w600,
 
                              ),)

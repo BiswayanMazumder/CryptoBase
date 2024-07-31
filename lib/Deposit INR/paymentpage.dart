@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:cryptobase/Home%20Screen/welcomepage.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:http/http.dart' as http;
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);
 
@@ -21,6 +24,56 @@ class _PaymentPageState extends State<PaymentPage> {
   bool paymentsts=false;
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
+  Future<void> createRazorpayOrder() async {
+    final url = 'https://api.razorpay.com/v1/orders';
+    final keyId = Environment.razorpaykeyid;
+    final keySecret = Environment.razorpaysecret;
+    setState(() {
+      amount=int.parse(_pricecontroller.text)*100;
+    });
+    // Combine Key ID and Key Secret into a single string and encode in Base64
+    final credentials = '$keyId:$keySecret';
+    final encodedCredentials = base64Encode(utf8.encode(credentials));
+
+    // Set up the headers including Basic Auth
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic $encodedCredentials',
+    };
+
+    // Define the request body
+    final body = jsonEncode({
+      'amount': amount,
+      'currency': 'INR',
+      'receipt': 'receipt#1',
+      'notes': {
+        'key1': 'value3',
+        'key2': 'value2',
+      },
+    });
+
+    // Make the POST request
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+      encoding: Encoding.getByName('utf-8'),
+    );
+
+    // Handle the response
+    if (response.statusCode == 200){
+      final responseBody = jsonDecode(response.body);
+      // Extract the `id` from the response
+      final orderId = responseBody['id'];
+      final user=_auth.currentUser;
+      await _firestore.collection('Payment Order ID').doc(user!.uid).set({
+        'Order ID':orderId,
+        'Time Of Payment':FieldValue.serverTimestamp(),
+      });
+    } else {
+      print('Failed to create order: ${response.statusCode}');
+    }
+  }
   void handlePaymentErrorResponse(PaymentFailureResponse response)async{
     print('payment failed');
     final user=_auth.currentUser;
@@ -47,18 +100,12 @@ class _PaymentPageState extends State<PaymentPage> {
     // print('${(amount / 100)+walletbalance}');
     final user=_auth.currentUser;
     await fetchbalance();
+    await createRazorpayOrder();
     // final user=_auth.currentUser;
     setState(() {
       paymentsts=true;
     });
     print(paymentsts);
-    try{
-      await _firestore.collection('Payment Status').doc(user!.uid).set({
-        'Status':FieldValue.arrayUnion([paymentsts])
-      },SetOptions(merge: true));
-    }catch(e){
-      print(e);
-    }
     try{
       await _firestore.collection('Payment Amount').doc(user!.uid).set({
         'Amount':FieldValue.arrayUnion([amount/100])
@@ -70,11 +117,6 @@ class _PaymentPageState extends State<PaymentPage> {
         await _firestore.collection('Wallet Balance').doc(user!.uid).set({
           'Balance':(amount / 100)+walletbalance
         });
-        await _firestore.collection('Payment Status').doc(user!.uid).set({
-          'Status':FieldValue.arrayUnion([
-            true
-          ])
-        },SetOptions(merge: true));
       Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
     }catch(e){
       print(e);
