@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Deposit%20INR/paymentpage.dart';
+import 'package:cryptobase/Deposit%20INR/refundpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -106,18 +107,23 @@ class _DepositHomeState extends State<DepositHome> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 70,
-                    width: MediaQuery.sizeOf(context).width/2.5,
-                    decoration: const BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
-                    child: Center(
-                      child: Text('WITHDRAW',style: GoogleFonts.poppins(
-                          color: Colors.white,fontWeight: FontWeight.bold,
-                          fontSize: 15
-                      ),),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => RefundPage(),));
+                    },
+                    child: Container(
+                      height: 70,
+                      width: MediaQuery.sizeOf(context).width/2.5,
+                      decoration: const BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                      child: Center(
+                        child: Text('WITHDRAW',style: GoogleFonts.poppins(
+                            color: Colors.white,fontWeight: FontWeight.bold,
+                            fontSize: 15
+                        ),),
+                      ),
                     ),
                   ),
                 ],
@@ -193,17 +199,17 @@ class _DepositHomeState extends State<DepositHome> {
                            children: [
                              Padding(
                                padding: const EdgeInsets.only(right: 5),
-                               child: Icon(paymentstatus[i]? Icons.check:Icons.sms_failed,
+                               child: Icon(paymentstatus[i]? Icons.check:Icons.refresh_rounded,
                                  size: 20,color:paymentstatus[i]? Colors.green:Colors.red,),
                              ),
                              if(paymentstatus[i])
-                               Text('Deposit',style: GoogleFonts.poppins(
+                               Text('Deposit Credited',style: GoogleFonts.poppins(
                                    color: Colors.green,
                                    fontWeight: FontWeight.w500,
                                    fontSize: 18
                                ),),
                              if(!paymentstatus[i])
-                               Text('Failed Deposit',style: GoogleFonts.poppins(
+                               Text('Deposit Refunded',style: GoogleFonts.poppins(
                                    color: Colors.red,
                                    fontWeight: FontWeight.w500,
                                    fontSize: 18

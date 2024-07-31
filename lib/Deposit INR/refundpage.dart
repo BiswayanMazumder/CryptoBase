@@ -1,18 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+class RefundPage extends StatefulWidget {
+  const RefundPage({Key? key}) : super(key: key);
 
   @override
-  State<PaymentPage> createState() => _PaymentPageState();
+  State<RefundPage> createState() => _RefundPageState();
 }
 
-class _PaymentPageState extends State<PaymentPage> {
+class _RefundPageState extends State<RefundPage> {
   @override
   int walletbalance=0;
   bool isrp=true;
@@ -21,69 +20,6 @@ class _PaymentPageState extends State<PaymentPage> {
   bool paymentsts=false;
   final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   final FirebaseAuth _auth=FirebaseAuth.instance;
-  void handlePaymentErrorResponse(PaymentFailureResponse response)async{
-    print('payment failed');
-    final user=_auth.currentUser;
-  }
-  void razorpaypayment() async{
-    Razorpay razorpay = Razorpay();
-    var options = {
-      'key':Environment.razorpaykeyid,
-      'amount': amount,
-      'name': 'CryptoBase',
-      'description': 'Wallet Deposit',
-      'retry': {'enabled': true, 'max_count': 1},
-      'send_sms_hash': true,
-      'external': {
-        'wallets': ['paytm']
-      }
-    };
-    razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentErrorResponse);
-    razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccessResponse);
-    razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWalletSelected);
-    razorpay.open(options);
-  }
-  void handlePaymentSuccessResponse(PaymentSuccessResponse response)async{
-    // print('${(amount / 100)+walletbalance}');
-    final user=_auth.currentUser;
-    await fetchbalance();
-    // final user=_auth.currentUser;
-    setState(() {
-      paymentsts=true;
-    });
-    print(paymentsts);
-    try{
-      await _firestore.collection('Payment Status').doc(user!.uid).set({
-        'Status':FieldValue.arrayUnion([paymentsts])
-      },SetOptions(merge: true));
-    }catch(e){
-      print(e);
-    }
-    try{
-      await _firestore.collection('Payment Amount').doc(user!.uid).set({
-        'Amount':FieldValue.arrayUnion([amount/100])
-      },SetOptions(merge: true));
-    }catch(e){
-      print(e);
-    }
-    try{
-        await _firestore.collection('Wallet Balance').doc(user!.uid).set({
-          'Balance':(amount / 100)+walletbalance
-        });
-        await _firestore.collection('Payment Status').doc(user!.uid).set({
-          'Status':FieldValue.arrayUnion([
-            true
-          ])
-        },SetOptions(merge: true));
-      Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
-    }catch(e){
-      print(e);
-    }
-
-  }
-
-  void handleExternalWalletSelected(ExternalWalletResponse response){
-  }
   Future<void>fetchbalance() async{
     final user=_auth.currentUser;
     try{
@@ -136,8 +72,8 @@ class _PaymentPageState extends State<PaymentPage> {
                 height: 80,
                 width: MediaQuery.sizeOf(context).width,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF1c2935),
-                  borderRadius: BorderRadius.all(Radius.circular(10))
+                    color: Color(0xFF1c2935),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
@@ -147,8 +83,8 @@ class _PaymentPageState extends State<PaymentPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: Text('Current Balance',style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500
                         ),),
                       ),
                       const Spacer(),
@@ -169,7 +105,7 @@ class _PaymentPageState extends State<PaymentPage> {
               child: Row(
                 children: [
                   Text(
-                    'PAYMENT METHODS',
+                    'WITHDRAWAL WALLET',
                     style: GoogleFonts.poppins(
                       color: Colors.grey,
                       fontWeight: FontWeight.w500,
@@ -182,22 +118,22 @@ class _PaymentPageState extends State<PaymentPage> {
             Padding(
               padding: const EdgeInsets.only(left: 20,top: 30,right: 20),
               child:InkWell(
-              onTap: (){
-                setState(() {
-                  ismk=false;
-                  isrp=true;
-                });
-              },
-              child:  Container(
+                onTap: (){
+                  setState(() {
+                    ismk=false;
+                    isrp=true;
+                  });
+                },
+                child:  Container(
                   height: 200,
                   width: double.infinity,
                   decoration:  BoxDecoration(
-                    color:isrp?Color(0xFF1c2935): Color(0xFF232f3f),
-                    border: Border.all(
-                      color: isrp?Colors.transparent:Colors.white,
-                      width: 0.5
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(10))
+                      color:isrp?Color(0xFF1c2935): Color(0xFF232f3f),
+                      border: Border.all(
+                          color: isrp?Colors.transparent:Colors.white,
+                          width: 0.5
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10,top: 10),
@@ -208,7 +144,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         Row(
                           children: [
                             Text(
-                              'Instant Payment-RazorPay',
+                              'Instant withdrawal-RazorPay',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
@@ -216,7 +152,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             ),
                             const Spacer(),
-                          isrp?  const Padding(
+                            isrp?  const Padding(
                               padding:  EdgeInsets.only(right: 20),
                               child: Icon(Icons.check,color: Colors.blue,),
                             ):Container()
@@ -253,7 +189,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           height: 10,
                         ),
                         Text(
-                          'Processing Time:Upto 3 hours',
+                          'Withrawal Time:Upto 3 hours',
                           style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontWeight: FontWeight.w300,
@@ -298,7 +234,7 @@ class _PaymentPageState extends State<PaymentPage> {
                         Row(
                           children: [
                             Text(
-                              'Instant Payment-MobiKwik',
+                              'Instant withdrawal-MobiKwik',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
@@ -306,7 +242,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               ),
                             ),
                             const Spacer(),
-                          ismk?  const Padding(
+                            ismk?  const Padding(
                               padding:  EdgeInsets.only(right: 20),
                               child: Icon(Icons.check,color: Colors.blue,),
                             ):Container()
@@ -343,7 +279,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           height: 10,
                         ),
                         Text(
-                          'Processing Time:Upto 4 hours',
+                          'Withdrawal Time:Upto 4 hours',
                           style: GoogleFonts.poppins(
                             color: Colors.white,
                             fontWeight: FontWeight.w300,
@@ -382,9 +318,9 @@ class _PaymentPageState extends State<PaymentPage> {
                     height:50,
                     width: MediaQuery.sizeOf(context).width/2,
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white
-                      )
+                        border: Border.all(
+                            color: Colors.white
+                        )
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
@@ -396,12 +332,12 @@ class _PaymentPageState extends State<PaymentPage> {
                         ),
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'Amount to be deposited',
-                          hintStyle: GoogleFonts.arbutusSlab(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w200
-                          )
+                            hintText: 'Amount to be withdrawn',
+                            hintStyle: GoogleFonts.arbutusSlab(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w200
+                            )
                         ),
                       ),
                     ),
@@ -414,19 +350,18 @@ class _PaymentPageState extends State<PaymentPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                 ElevatedButton(onPressed: (){
-                   setState(() {
-                     amount=int.parse(_pricecontroller.text)*100;
-                   });
-                   razorpaypayment();
-                 },
-                     style:const ButtonStyle(
-                       backgroundColor: MaterialStatePropertyAll(Colors.blue)
-                     ),
-                     child: Text('Proceed to pay',style: GoogleFonts.poppins(
-                       color: Colors.white,
-                       fontWeight: FontWeight.w600
-                     ),))
+                  ElevatedButton(onPressed: (){
+                    setState(() {
+                      amount=int.parse(_pricecontroller.text)*100;
+                    });
+                  },
+                      style:const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.blue)
+                      ),
+                      child: Text('Proceed to withdraw',style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600
+                      ),))
                 ],
               ),
             ),
