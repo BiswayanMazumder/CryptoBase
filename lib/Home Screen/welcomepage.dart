@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
 import 'package:cryptobase/Deposit%20INR/deposithome.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
+import 'package:cryptobase/Login%20Page/getstarted.dart';
 import 'package:cryptobase/Money%20Options/currencypage.dart';
 import 'package:cryptobase/News%20Pages/news_homepage.dart';
 import 'package:cryptobase/Profile%20Page/Your%20Account%20Page/account_homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   String currency = '';
   Icon currencyicon = Icon(Icons.currency_rupee, color: Colors.white);
   bool datafetched = false;
+  final FirebaseAuth _auth=FirebaseAuth.instance;
   Future<void> readfetcheddata() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? counter = prefs.getString('selected_currency_name');
@@ -174,11 +177,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           )
         ],
         leading:  InkWell(
-          onTap: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context) => AccountHomePage(),));
+          onTap: ()async{
+            try{
+              _auth.signOut();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GetStarted(),));
+            }catch(e){
+
+            }
           },
           child: Icon(
-            Icons.person_add_alt_rounded,
+            Icons.logout,
             color: Colors.white,
           ),
         ),

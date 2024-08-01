@@ -247,11 +247,16 @@ class _EmailLoginState extends State<EmailLogin> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Forgot Password',
-                      style: GoogleFonts.poppins(
-                        color: Colors.blueGrey,
-                        fontWeight: FontWeight.w400,
+                    child: InkWell(
+                      onTap: (){
+                        _auth.sendPasswordResetEmail(email: _emailController.text);
+                      },
+                      child: Text(
+                        'Forgot Password',
+                        style: GoogleFonts.poppins(
+                          color: Colors.blueGrey,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),
