@@ -31,6 +31,7 @@ class _DepositHomeState extends State<DepositHome> {
     }
   }
   List <dynamic> paymentamount=[];
+  List <dynamic> refundamount=[];
   List<dynamic> paymentstatus=[];
   Future<void> paymentstatusfetch() async{
     final user=_auth.currentUser;
@@ -64,6 +65,23 @@ class _DepositHomeState extends State<DepositHome> {
     }
 
   }
+  Future<void> refundamountfetch() async{
+    await paymentstatusfetch();
+    final user=_auth.currentUser;
+    try{
+      final docsnap=await _firestore.collection('Payment Refund').doc(user!.uid).get();
+      if(docsnap.exists){
+        setState(() {
+          refundamount=docsnap.data()?['Amount'];
+          // isloaded=true;
+        });
+        print(refundamount);
+      }
+    }catch(e){
+      print(e);
+    }
+
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -71,6 +89,7 @@ class _DepositHomeState extends State<DepositHome> {
     fetchbalance();
     // paymentstatusfetch();
     paymentamountfetch();
+    refundamountfetch();
   }
   @override
   Widget build(BuildContext context) {
@@ -178,7 +197,7 @@ class _DepositHomeState extends State<DepositHome> {
                       istransaction=false;
                     });
                   },
-                  child: Text('EXCHANGE',style: GoogleFonts.poppins(
+                  child: Text('WITHDRAWAL',style: GoogleFonts.poppins(
                       color:istransaction? Colors.grey:Colors.white,
                       fontWeight: FontWeight.w600
                   ),),
@@ -205,7 +224,7 @@ class _DepositHomeState extends State<DepositHome> {
                                Text('Deposit Credited',style: GoogleFonts.poppins(
                                    color: Colors.green,
                                    fontWeight: FontWeight.w500,
-                                   fontSize: 18
+                                   fontSize: 15
                                ),),
                              const Spacer(),
                              Text('${paymentamount[i]} INR',style: GoogleFonts.poppins(
@@ -214,12 +233,43 @@ class _DepositHomeState extends State<DepositHome> {
 
                              ),)
                            ],
-                         )
+                         ),
                        ],
                      ),
                    ),
                ],
-             ):Container(): Column(
+             ):Column(
+           children: [
+             for(int i=0;i<refundamount.length;i++)
+               Padding(
+                 padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
+                 child: Column(
+                   children: [
+                     Row(
+                       children: [
+                         Padding(
+                           padding: const EdgeInsets.only(right: 5),
+                           child: Icon(Icons.check,
+                               size: 20,color:Colors.green),
+                         ),
+                         Text('Withdrawal Successful',style: GoogleFonts.poppins(
+                             color: Colors.green,
+                             fontWeight: FontWeight.w500,
+                             fontSize: 15
+                         ),),
+                         const Spacer(),
+                         Text('${refundamount[i]} INR',style: GoogleFonts.poppins(
+                           color: Colors.green,
+                           fontWeight: FontWeight.w600,
+
+                         ),)
+                       ],
+                     ),
+                   ],
+                 ),
+               ),
+           ],
+         ): Column(
                children: [
                  SizedBox(
                             height: MediaQuery.sizeOf(context).height/5,
@@ -230,6 +280,7 @@ class _DepositHomeState extends State<DepositHome> {
                  ),
                ],
              ),
+
              SizedBox(
               height: MediaQuery.sizeOf(context).height/1.4,
             ),

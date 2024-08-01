@@ -150,9 +150,8 @@ class _PaymentPageState extends State<PaymentPage> {
     });
     print(paymentsts);
     await _firestore.collection('Payment Order ID').doc(user!.uid).set({
-      'Order ID':response.paymentId,
-      'Time Of Payment':FieldValue.serverTimestamp(),
-    });
+      'Order ID':FieldValue.arrayUnion([response.paymentId]),
+    },SetOptions(merge: true));
     try{
       await _firestore.collection('Payment Amount').doc(user!.uid).set({
         'Amount':FieldValue.arrayUnion([amount/100])

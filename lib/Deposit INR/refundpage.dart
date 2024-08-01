@@ -38,7 +38,7 @@ class _RefundPageState extends State<RefundPage> {
       print(e);
     }
   }
-  String orderid='';
+  List<dynamic> orderid=[];
   Future<void> fetchorderid()async{
     final user=_auth.currentUser;
     if(user!=null){
@@ -52,58 +52,92 @@ class _RefundPageState extends State<RefundPage> {
     print(orderid);
   }
   Future<void> issuerefund() async {
-    await fetchorderid();
-    final url = 'https://api.razorpay.com/v1/payments/${orderid}/refund';
-    final keyId = Environment.razorpaykeyid;
-    final keySecret = Environment.razorpaysecret;
-    setState(() {
-      amount=int.parse(_pricecontroller.text)*100;
-    });
-    // Combine Key ID and Key Secret into a single string and encode in Base64
-    final credentials = '$keyId:$keySecret';
-    final encodedCredentials = base64Encode(utf8.encode(credentials));
+    // Define retry parameters
+    int retryCount = 3; // Number of retry attempts
+    int currentAttempt = 0; // Track current attempt
 
-    // Set up the headers including Basic Auth
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic $encodedCredentials',
-    };
+    // Iterate over each order ID in the list
+    for (int index = orderid.length - 1; index >= 0; index--) {
+      final currentOrderId = orderid[index];
+      bool success = false;
 
-    // Define the request body
-    final body = jsonEncode({
-      "amount":amount,
-      "speed":"optimum",
-    });
+      while (currentAttempt < retryCount && !success) {
+        try {
+          final url = 'https://api.razorpay.com/v1/payments/$currentOrderId/refund';
+          final keyId = Environment.razorpaykeyid;
+          final keySecret = Environment.razorpaysecret;
 
-    // Make the POST request
-    final response = await http.post(
-      Uri.parse(url),
-      headers: headers,
-      body: body,
-      encoding: Encoding.getByName('utf-8'),
-    );
+          setState(() {
+            amount = int.parse(_pricecontroller.text) * 100;
+          });
 
-    // Handle the response
-    if (response.statusCode == 200){
+          // Combine Key ID and Key Secret into a single string and encode in Base64
+          final credentials = '$keyId:$keySecret';
+          final encodedCredentials = base64Encode(utf8.encode(credentials));
 
-      final responseBody = jsonDecode(response.body);
-      // Extract the `id` from the response
-      // final orderId = responseBody['id'];
-      final user=_auth.currentUser;
-      await _firestore.collection('Payment Refund').doc(user!.uid).set({
-        'Amount':FieldValue.arrayUnion([amount/100])
-      });
-      var newamount=walletbalance-(amount/100);
-      print(newamount);
-      await _firestore.collection('Wallet Balance').doc(user!.uid).set({
-        'Balance':newamount
-      });
-      Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
-    } else {
-      final responseBody = jsonDecode(response.body);
-      print('Failed to capture payment: ${responseBody['error']}');
+          // Set up the headers including Basic Auth
+          final headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic $encodedCredentials',
+          };
+
+          // Define the request body
+          final body = jsonEncode({
+            "amount": amount,
+            "speed": "optimum",
+          });
+
+          // Make the POST request
+          final response = await http.post(
+            Uri.parse(url),
+            headers: headers,
+            body: body,
+            encoding: Encoding.getByName('utf-8'),
+          );
+
+          // Handle the response
+          if (response.statusCode == 200) {
+            final responseBody = jsonDecode(response.body);
+            final user = _auth.currentUser;
+
+            await _firestore.collection('Payment Refund').doc(user!.uid).set({
+              'Amount': FieldValue.arrayUnion([amount / 100]),
+            },SetOptions(merge: true));
+
+            var newamount = walletbalance - (amount / 100);
+            print(newamount);
+
+            await _firestore.collection('Wallet Balance').doc(user.uid).set({
+              'Balance': newamount,
+            });
+
+            Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
+            success = true; // Indicate success
+          } else {
+            final responseBody = jsonDecode(response.body);
+            print('Failed to capture payment: ${responseBody['error']}');
+            currentAttempt++; // Increment attempt counter
+            if (currentAttempt >= retryCount) {
+              print('Failed after $retryCount attempts for order ID $currentOrderId');
+              success = true; // Move to next order ID
+            }
+          }
+        } catch (e) {
+          // Handle any other exceptions (e.g., network issues)
+          print('Error: $e');
+          currentAttempt++; // Increment attempt counter
+          if (currentAttempt >= retryCount) {
+            print('Failed after $retryCount attempts for order ID $currentOrderId');
+            success = true; // Move to next order ID
+          }
+        }
+      }
+
+      // Reset attempt counter for the next order ID
+      currentAttempt = 0;
     }
   }
+
   void initState() {
     // TODO: implement initState
     super.initState();
