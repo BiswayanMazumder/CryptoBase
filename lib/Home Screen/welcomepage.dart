@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
+import 'package:cryptobase/Currency%20Details%20Pages/marletdetails.dart';
 import 'package:cryptobase/Deposit%20INR/deposithome.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:cryptobase/Login%20Page/getstarted.dart';
@@ -492,7 +493,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                           overflow: TextOverflow.ellipsis,
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w600,
                                             fontSize: 16,
                                           ),
                                         ),
@@ -676,7 +677,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                           overflow: TextOverflow.ellipsis,
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w600,
                                             fontSize: 16,
                                           ),
                                         ),
@@ -768,7 +769,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               Padding(
                   padding: const EdgeInsets.only(right: 35),
                   child: InkWell(
-                    onTap: () async {},
+                    onTap: () async {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MarketDetails(),));
+                    },
                     child: Text(
                       'See all',
                       style: GoogleFonts.poppins(
@@ -833,6 +836,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 true, // Ensure ListView takes only the space it needs
                             itemCount: 8, // Replace with your itemCount
                             itemBuilder: (context, index) {
+                              index+=10;
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -892,7 +896,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                             overflow: TextOverflow.ellipsis,
                                             style: GoogleFonts.poppins(
                                               color: Colors.white,
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.w600,
                                               fontSize: 16,
                                             ),
                                           ),

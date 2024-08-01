@@ -105,7 +105,7 @@ class _RefundPageState extends State<RefundPage> {
             },SetOptions(merge: true));
 
             var newamount = walletbalance - (amount / 100);
-            print(newamount);
+            // print(newamount);
 
             await _firestore.collection('Wallet Balance').doc(user.uid).set({
               'Balance': newamount,
