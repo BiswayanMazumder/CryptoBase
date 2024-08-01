@@ -6,6 +6,7 @@ import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:http/http.dart' as http;
 class RefundPage extends StatefulWidget {
@@ -37,11 +38,77 @@ class _RefundPageState extends State<RefundPage> {
       print(e);
     }
   }
+  String orderid='';
+  Future<void> fetchorderid()async{
+    final user=_auth.currentUser;
+    if(user!=null){
+      final docsnap=await _firestore.collection('Payment Order ID').doc(user.uid).get();
+      if(docsnap.exists){
+        setState(() {
+          orderid=docsnap.data()?['Order ID'];
+        });
+      }
+    }
+    print(orderid);
+  }
+  Future<void> issuerefund() async {
+    await fetchorderid();
+    final url = 'https://api.razorpay.com/v1/payments/${orderid}/refund';
+    final keyId = Environment.razorpaykeyid;
+    final keySecret = Environment.razorpaysecret;
+    setState(() {
+      amount=int.parse(_pricecontroller.text)*100;
+    });
+    // Combine Key ID and Key Secret into a single string and encode in Base64
+    final credentials = '$keyId:$keySecret';
+    final encodedCredentials = base64Encode(utf8.encode(credentials));
 
+    // Set up the headers including Basic Auth
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic $encodedCredentials',
+    };
+
+    // Define the request body
+    final body = jsonEncode({
+      "amount":amount,
+      "speed":"optimum",
+    });
+
+    // Make the POST request
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+      encoding: Encoding.getByName('utf-8'),
+    );
+
+    // Handle the response
+    if (response.statusCode == 200){
+
+      final responseBody = jsonDecode(response.body);
+      // Extract the `id` from the response
+      // final orderId = responseBody['id'];
+      final user=_auth.currentUser;
+      await _firestore.collection('Payment Refund').doc(user!.uid).set({
+        'Amount':FieldValue.arrayUnion([amount/100])
+      });
+      var newamount=walletbalance-(amount/100);
+      print(newamount);
+      await _firestore.collection('Wallet Balance').doc(user!.uid).set({
+        'Balance':newamount
+      });
+      Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+    } else {
+      final responseBody = jsonDecode(response.body);
+      print('Failed to capture payment: ${responseBody['error']}');
+    }
+  }
   void initState() {
     // TODO: implement initState
     super.initState();
     fetchbalance();
+    fetchorderid();
   }
   final TextEditingController _pricecontroller=TextEditingController();
   @override
@@ -355,10 +422,12 @@ class _RefundPageState extends State<RefundPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(onPressed: (){
+                  ElevatedButton(onPressed: ()async{
                     setState(() {
                       amount=int.parse(_pricecontroller.text)*100;
+
                     });
+                    issuerefund();
                   },
                       style:const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(Colors.blue)

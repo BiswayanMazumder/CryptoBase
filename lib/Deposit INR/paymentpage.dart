@@ -78,6 +78,42 @@ class _PaymentPageState extends State<PaymentPage> {
       print('Failed to create order: ${response.statusCode}');
     }
   }
+  Future<void> capturepayment(String? paymentid) async {
+    final url = 'https://api.razorpay.com/v1/payments/${paymentid}/capture';
+    final keyId = Environment.razorpaykeyid;
+    final keySecret = Environment.razorpaysecret;
+    setState(() {
+      amount=int.parse(_pricecontroller.text)*100;
+    });
+    // Combine Key ID and Key Secret into a single string and encode in Base64
+    final credentials = '$keyId:$keySecret';
+    final encodedCredentials = base64Encode(utf8.encode(credentials));
+
+    // Set up the headers including Basic Auth
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic $encodedCredentials',
+    };
+
+    // Define the request body
+    final body = jsonEncode({
+      'amount': amount,
+      'currency': 'INR',
+    });
+
+    // Make the POST request
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+      encoding: Encoding.getByName('utf-8'),
+    );
+
+    // Handle the response
+    if (response.statusCode == 200){
+      print('captured');
+    }
+  }
   void handlePaymentErrorResponse(PaymentFailureResponse response)async{
     print('payment failed');
     final user=_auth.currentUser;
@@ -103,14 +139,20 @@ class _PaymentPageState extends State<PaymentPage> {
   }
   void handlePaymentSuccessResponse(PaymentSuccessResponse response)async{
     // print('${(amount / 100)+walletbalance}');
+    print('Successful');
     final user=_auth.currentUser;
     await fetchbalance();
-    await createRazorpayOrder();
+    await capturepayment(response.paymentId);
+    // await createRazorpayOrder();
     // final user=_auth.currentUser;
     setState(() {
       paymentsts=true;
     });
     print(paymentsts);
+    await _firestore.collection('Payment Order ID').doc(user!.uid).set({
+      'Order ID':response.paymentId,
+      'Time Of Payment':FieldValue.serverTimestamp(),
+    });
     try{
       await _firestore.collection('Payment Amount').doc(user!.uid).set({
         'Amount':FieldValue.arrayUnion([amount/100])
