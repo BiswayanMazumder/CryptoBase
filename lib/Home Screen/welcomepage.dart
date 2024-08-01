@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
-import 'package:cryptobase/Currency%20Details%20Pages/marletdetails.dart';
+import 'package:cryptobase/Currency%20Details%20Pages/seeallmarketdetails.dart';
 import 'package:cryptobase/Deposit%20INR/deposithome.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
 import 'package:cryptobase/Login%20Page/getstarted.dart';
