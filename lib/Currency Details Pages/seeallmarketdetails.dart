@@ -224,15 +224,15 @@ class _MarketDetailsState extends State<MarketDetails> {
                           },
                           child: Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 1),
-                                child: Image(
-                                  image: NetworkImage(images[i]),
-                                  height: 30,
-                                  width: 50,
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(
+                              //       top: 1),
+                              //   child: Image(
+                              //     image: NetworkImage(images[i]),
+                              //     height: 30,
+                              //     width: 50,
+                              //   ),
+                              // ),
                               Text(name[i],style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 16

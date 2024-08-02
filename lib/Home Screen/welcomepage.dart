@@ -174,10 +174,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       await generatewalletaddress();
       await _firestore.collection('Wallet ID').doc(user!.uid).set({
         'Wallet Address':walletaddress
-      });
+      },SetOptions(merge: true));
       await _firestore.collection('All IDs').doc('Wallet IDs').set({
         'Wallet Address':FieldValue.arrayUnion([walletaddress])
-      });
+      },SetOptions(merge: true));
       print('address written');
     }
   }
@@ -222,7 +222,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               child: currencyicon,
             ),
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AccountHomePage(),
+                  ),
+                );
+              },
+              child:const Icon(Icons.person,color: Colors.white,),
+            ),
+          ),
         ],
         leading:  InkWell(
           onTap: ()async{
