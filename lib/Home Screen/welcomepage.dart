@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
 import 'package:cryptobase/Currency%20Details%20Pages/seeallmarketdetails.dart';
 import 'package:cryptobase/Deposit%20INR/deposithome.dart';
@@ -28,6 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Icon currencyicon = Icon(Icons.currency_rupee, color: Colors.white);
   bool datafetched = false;
   final FirebaseAuth _auth=FirebaseAuth.instance;
+  final FirebaseFirestore _firestore=FirebaseFirestore.instance;
   Future<void> readfetcheddata() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? counter = prefs.getString('selected_currency_name');
@@ -135,13 +137,58 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     }
     // print(pricehistory[5]);
   }
+  String username='';
+  Future<void> fetchname() async{
+    final user=_auth.currentUser;
+    try{
+      final docsnap=await _firestore.collection('User Details').doc(user!.uid).get();
+      if (docsnap.exists){
+        setState(() {
+          username=docsnap.data()?['Name'];
+        });
+        print('Username ${username}');
+      }
+    }catch(e){
+      print(e);
+    }
 
+  }
+  String walletaddress='';
+  Future<void> generatewalletaddress()async{
+    final random = Random();
+    final tenDigitNumber = 10000 + random.nextInt(90000);
+    setState(() {
+      walletaddress='CB$tenDigitNumber';
+    });
+    print('CB$tenDigitNumber');
+  }
+  Future<void> storewalletaddress()async{
+    final user=_auth.currentUser;
+    final docsnap=await _firestore.collection('Wallet ID').doc(user!.uid).get();
+    if(docsnap.exists){
+      setState(() {
+        walletaddress=docsnap.data()?['Wallet Address'];
+      });
+      print('address fetched');
+    }else{
+      await generatewalletaddress();
+      await _firestore.collection('Wallet ID').doc(user!.uid).set({
+        'Wallet Address':walletaddress
+      });
+      await _firestore.collection('All IDs').doc('Wallet IDs').set({
+        'Wallet Address':FieldValue.arrayUnion([walletaddress])
+      });
+      print('address written');
+    }
+  }
   @override
   void initState() {
     super.initState();
     readfetcheddata();
     setcurrencyicon();
     fetchapidetails();
+    fetchname();
+    storewalletaddress();
   }
 
   @override
@@ -195,77 +242,108 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0,left: 20),
+              child: Row(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17,
+                      ),
+                      children: <TextSpan>[
+                        const TextSpan(
+                            text: 'Welcome Back '),
+                        TextSpan(
+                          text: username,
+                          style: GoogleFonts.poppins(
+                              color: Colors.yellow),
+                        ),
+                        const TextSpan(text: '!'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
-                    Container(
-                      height: 190,
-                      width: MediaQuery.sizeOf(context).width - 70,
-                      decoration: BoxDecoration(
-                        color: Colors.blue.shade700,
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  'Confused about\ncrypto taxes?',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
+                    InkWell(
+                      onTap: (){
+                        generatewalletaddress();
+                      },
+                      child: Container(
+                        height: 190,
+                        width: MediaQuery.sizeOf(context).width - 70,
+                        decoration: BoxDecoration(
+                          color: Colors.blue.shade700,
+                          borderRadius: const BorderRadius.all(Radius.circular(8)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    'Confused about\ncrypto taxes?',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                RichText(
-                                  text: TextSpan(
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text: 'Simplify your taxes\nwith '),
+                                        TextSpan(
+                                          text: 'TaxNodes',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.yellow),
+                                        ),
+                                        TextSpan(text: '!'),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Get a ₹200 coupon\non sign-up',
                                     style: GoogleFonts.poppins(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 15,
                                     ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: 'Simplify your taxes\nwith '),
-                                      TextSpan(
-                                        text: 'TaxNodes',
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.yellow),
-                                      ),
-                                      TextSpan(text: '!'),
-                                    ],
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Get a ₹200 coupon\non sign-up',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Image(
-                              image: NetworkImage(
-                                'https://firebasestorage.googleapis.com/v0/b/cryptoba'
-                                'se-admin.appspot.com/o/Home%20Screen%20Card%20Images%2Fpngtree-smiling-woma'
-                                'n-counting-money-banknotes-png-image_8792772-removebg-preview.png?alt=medi'
-                                'a&token=78242793-6f0f-4085-8460-efe7acc5eaeb',
+                                ],
                               ),
-                            )
-                          ],
+                              const Image(
+                                image: NetworkImage(
+                                  'https://firebasestorage.googleapis.com/v0/b/cryptoba'
+                                  'se-admin.appspot.com/o/Home%20Screen%20Card%20Images%2Fpngtree-smiling-woma'
+                                  'n-counting-money-banknotes-png-image_8792772-removebg-preview.png?alt=medi'
+                                  'a&token=78242793-6f0f-4085-8460-efe7acc5eaeb',
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

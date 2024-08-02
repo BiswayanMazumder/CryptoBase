@@ -154,6 +154,26 @@ class _Currency_DetailsState extends State<Currency_Details> {
       print(e);
     }
   }
+  String username='';
+  Future<void> fetchname() async{
+    final user=_auth.currentUser;
+    if(user!=null){
+      try{
+        final docsnap=await _firestore.collection('User Details').doc(user.uid).get();
+        if (docsnap.exists){
+          setState(() {
+            username=docsnap.data()?['Name'];
+          });
+          print('Username ${username}');
+        }
+      }catch(e){
+        print(e);
+      }
+    }else{
+      print('User is null');
+    }
+
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -161,6 +181,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
     setcurrencyicon();
     _generateTimestamps();
     fetchlikedcurrencies();
+    // fetchname();
   }
 
   @override
