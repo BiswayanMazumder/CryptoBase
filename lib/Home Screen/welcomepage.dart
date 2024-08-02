@@ -355,7 +355,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => DepositHome(),));
                 },
                 child: Container(
-                  height: 80,
+                  height: 70,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     color: Color(0xFF1c2835),
@@ -363,7 +363,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   child: Row(
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 20),
                         child: Icon(
                           Icons.wallet,

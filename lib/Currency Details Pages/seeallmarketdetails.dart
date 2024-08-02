@@ -177,7 +177,7 @@ class _MarketDetailsState extends State<MarketDetails> {
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 30,bottom: 20),
+                        padding: const EdgeInsets.only(left: 10,bottom: 20,right: 10),
                         child: InkWell(
                           onTap: () async {
                             // final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -224,6 +224,15 @@ class _MarketDetailsState extends State<MarketDetails> {
                           },
                           child: Row(
                             children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 1),
+                                child: Image(
+                                  image: NetworkImage(images[i]),
+                                  height: 30,
+                                  width: 50,
+                                ),
+                              ),
                               Text(name[i],style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 16
