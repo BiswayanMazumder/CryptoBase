@@ -1,4 +1,4 @@
-import 'package:click_to_copy/click_to_copy.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Deposit%20INR/paymentpage.dart';
 import 'package:cryptobase/Deposit%20INR/refundpage.dart';
@@ -250,7 +250,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
                             padding: const EdgeInsets.only(left: 10),
                             child: InkWell(
                                 onTap: () async {
-                                  await ClickToCopy.copy(walletaddress);
+
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       backgroundColor: Colors.green,
