@@ -895,7 +895,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               'Trending Pairs',
                               style: GoogleFonts.poppins(
                                 color: Colors.grey,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -906,7 +906,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 'Price',
                                 style: GoogleFonts.poppins(
                                   color: Colors.grey,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -915,7 +915,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               '24h change%',
                               style: GoogleFonts.poppins(
                                 color: Colors.grey,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -989,12 +989,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                             style: GoogleFonts.poppins(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 16,
+                                              fontSize: 15,
                                             ),
                                           ),
                                           const Spacer(),
                                           Padding(
-                                            padding: EdgeInsets.only(right: 20),
+                                            padding: const EdgeInsets.only(right: 20),
                                             child: Text(
                                               '\₹${price[index]}',
                                               style: GoogleFonts.poppins(
