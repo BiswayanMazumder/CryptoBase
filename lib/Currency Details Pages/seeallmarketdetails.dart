@@ -177,7 +177,7 @@ class _MarketDetailsState extends State<MarketDetails> {
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10,bottom: 20,right: 10),
+                        padding: const EdgeInsets.only(left: 20,bottom: 20,right: 10),
                         child: InkWell(
                           onTap: () async {
                             // final SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -105,14 +105,14 @@ class _AccountHomePageState extends State<AccountHomePage> {
             child: Center(
               child: CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.blue,
                 child: Text(
                   namesplit.length > 1
                       ? namesplit[0][0] + namesplit[1][0]
                       : namesplit[0][0],
                   style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
                     fontSize: 18,
                   ),
                 )
@@ -129,7 +129,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Padding(
                   padding:
-                      EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 10),
+                      const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 10),
                   child: Column(
                     children: [
                       Row(

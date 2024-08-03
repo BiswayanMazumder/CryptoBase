@@ -241,6 +241,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         leading:  InkWell(
           onTap: ()async{
             try{
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.clear();
               _auth.signOut();
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GetStarted(),));
             }catch(e){
@@ -324,14 +326,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                         fontSize: 15,
                                       ),
                                       children: <TextSpan>[
-                                        TextSpan(
+                                        const TextSpan(
                                             text: 'Simplify your taxes\nwith '),
                                         TextSpan(
-                                          text: 'TaxNodes',
+                                          text: 'Blogs',
                                           style: GoogleFonts.poppins(
                                               color: Colors.yellow),
                                         ),
-                                        TextSpan(text: '!'),
+                                        const TextSpan(text: '!'),
                                       ],
                                     ),
                                   ),
