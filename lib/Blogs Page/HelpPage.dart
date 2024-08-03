@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Environment%20Files/.env.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -13,8 +15,10 @@ class HelpSection extends StatefulWidget {
 
 class _HelpSectionState extends State<HelpSection> {
   TextEditingController _helptext = TextEditingController();
-  List<String?> items = ['Hello', 'How can I help you?'];
-  List<bool> isowner = [false, false];
+  List<String?> items = [];
+  final FirebaseFirestore _firestore=FirebaseFirestore.instance;
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  List<bool> isowner = [];
   bool ismessagetyped=false;
   Future<void> getresponse() async {
     // Access your API key as an environment variable (see "Set up your API key" above)
@@ -69,7 +73,20 @@ class _HelpSectionState extends State<HelpSection> {
       body: Column(
         children: [
           const Padding(padding: EdgeInsets.only(bottom: 20)),
-          Expanded(
+          items.isEmpty?Expanded(child: Column(
+            children: [
+               SizedBox(
+                height: MediaQuery.sizeOf(context).height/2.5,
+              ),
+              Center(
+                child: Text('Welcome To CryptoBase Support',style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500
+                ),),
+              )
+            ],
+          )): Expanded(
             child: ListView.builder(
               itemCount: items.length,
               itemBuilder: (context, index) => ListTile(
@@ -77,17 +94,18 @@ class _HelpSectionState extends State<HelpSection> {
                   children: [
                     isowner[index] ? const Spacer() : Container(),
                     Container(
-                      width: 200,
+                      width: 150,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(Radius.circular(20)),
                         color: isowner[index] ? const Color(0xFF1c2835) : const Color(0xFF1c2895),
                       ),
                       child: Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+                          mainAxisAlignment: MainAxisAlignment.start, // Center vertically
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.only(top: 10,left: 10,right: 10),
                               child: Text(
                                 '${items[index]}\n',
                                 overflow: TextOverflow.visible,
@@ -117,11 +135,11 @@ class _HelpSectionState extends State<HelpSection> {
                   Expanded(
                     child: TextField(
                       controller: _helptext,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Type your message...',
                         border: InputBorder.none,
                         contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 16),
+                        EdgeInsets.symmetric(horizontal: 16),
                       ),
                     ),
                   ),
@@ -132,8 +150,9 @@ class _HelpSectionState extends State<HelpSection> {
                         setState(() {
                           items.add(_helptext.text);
                           isowner.add(true);
-                          getresponse();
                         });
+                        final user=_auth.currentUser;
+                        getresponse();
                       }
                     },
                   ),
