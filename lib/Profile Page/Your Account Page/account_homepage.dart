@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountHomePage extends StatefulWidget {
   const AccountHomePage({Key? key}) : super(key: key);
@@ -50,6 +51,8 @@ class _AccountHomePageState extends State<AccountHomePage> {
   }
 
   String username = '';
+  List<dynamic> namesplit=[];
+  bool dataloaded=false;
   Future<void> fetchname() async {
     final user = _auth.currentUser;
     try {
@@ -58,14 +61,29 @@ class _AccountHomePageState extends State<AccountHomePage> {
       if (docsnap.exists) {
         setState(() {
           username = docsnap.data()?['Name'];
+          namesplit=username.split(' ');
+          dataloaded=true;
         });
         print('Username ${username}');
+        print('Splitted ${namesplit}');
       }
     } catch (e) {
       print(e);
     }
   }
+  String currency='';
 
+  Future<void> readfetcheddata() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? counter = prefs.getString('selected_currency_name');
+    if (counter != null) {
+      setState(() {
+        currency = counter;
+      });
+    } else {
+      prefs.setString('selected_currency_name', 'INR');
+    }
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -73,17 +91,36 @@ class _AccountHomePageState extends State<AccountHomePage> {
     fetchbalance();
     getwalletaddress();
     fetchname();
+    readfetcheddata();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1c2835),
-      body: SingleChildScrollView(
+      body:dataloaded? SingleChildScrollView(
         child: Column(
           children: [
+             Padding(padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+            child: Center(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.black,
+                child: Text(
+                  namesplit.length > 1
+                      ? namesplit[0][0] + namesplit[1][0]
+                      : namesplit[0][0],
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                  ),
+                )
+              ),
+            ),
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
               child: Container(
                 height: 110,
                 width: double.infinity,
@@ -109,10 +146,50 @@ class _AccountHomePageState extends State<AccountHomePage> {
                       Row(
                         children: [
                           Text(
-                            '$username',
+                            username,
                             style: GoogleFonts.poppins(
                                 color: Colors.white,
-                                fontSize: 25,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: Container(
+                height: 110,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                    color: Color(0xFF232f3f),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Padding(
+                  padding:
+                  const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 10),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Preferred Currency',
+                            style: GoogleFonts.poppins(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            currency,
+                            style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w500),
                           ),
                         ],
@@ -152,7 +229,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
                             '₹$walletbalance',
                             style: GoogleFonts.poppins(
                                 color: Colors.white,
-                                fontSize: 25,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w500),
                           ),
                         ],
@@ -262,7 +339,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
                                     ),
                                   );
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.copy,
                                   color: Colors.grey,
                                   size: 15,
@@ -279,7 +356,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
                             showaddress ? '$walletaddress' : '*********',
                             style: GoogleFonts.poppins(
                                 color: Colors.white,
-                                fontSize: 25,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w500),
                           ),
                         ],
@@ -349,6 +426,17 @@ class _AccountHomePageState extends State<AccountHomePage> {
                   ),
                 ),
               ),
+            )
+          ],
+        ),
+      ):Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height/2,
+            ),
+            const CircularProgressIndicator(
+              color: Colors.white,
             )
           ],
         ),
