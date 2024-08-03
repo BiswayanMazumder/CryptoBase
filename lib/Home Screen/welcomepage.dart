@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cryptobase/Blogs%20Page/HelpPage.dart';
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
 import 'package:cryptobase/Currency%20Details%20Pages/seeallmarketdetails.dart';
 import 'package:cryptobase/Deposit%20INR/deposithome.dart';
@@ -292,7 +293,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: [
                     InkWell(
                       onTap: (){
-                        generatewalletaddress();
+                        // generatewalletaddress();
+                        Navigator.push(context, MaterialPageRoute(builder:
+                            (context) => const HelpSection(),));
                       },
                       child: Container(
                         height: 190,
@@ -329,7 +332,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                         const TextSpan(
                                             text: 'Simplify your taxes\nwith '),
                                         TextSpan(
-                                          text: 'Blogs',
+                                          text: 'Agents',
                                           style: GoogleFonts.poppins(
                                               color: Colors.yellow),
                                         ),
