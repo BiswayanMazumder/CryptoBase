@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Deposit%20INR/paymentpage.dart';
 import 'package:cryptobase/Deposit%20INR/refundpage.dart';
@@ -38,7 +40,30 @@ class _AccountHomePageState extends State<AccountHomePage> {
       print(e);
     }
   }
-
+  String _randomString = '';
+  String generateRandomAlphanumeric(int length) {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    Random random = Random();
+    return List.generate(length, (_) => chars[random.nextInt(chars.length)]).join();
+  }
+  Future<void> _generateRandomString() async{
+    final user=_auth.currentUser;
+    final docsnap=await _firestore.collection('Referral Codes').doc(user!.uid).get();
+    if(docsnap.exists){
+      setState(() {
+        _randomString=docsnap.data()?['Referral Code'];
+      });
+      // print('fetched');
+    }else{
+      setState(() {
+        _randomString = generateRandomAlphanumeric(10);
+      });
+      await _firestore.collection('Referral Codes').doc(user!.uid).set({
+        'Referral Code':_randomString
+      });
+      // print('written');
+    }
+  }
   String walletaddress = '';
   Future<void> getwalletaddress() async {
     final user = _auth.currentUser;
@@ -47,6 +72,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
     if (docsnap.exists) {
       setState(() {
         walletaddress = docsnap.data()?['Wallet Address'];
+        dataloaded=true;
       });
       print('address fetched');
     }
@@ -94,6 +120,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
     getwalletaddress();
     fetchname();
     readfetcheddata();
+    _generateRandomString();
   }
 
   @override
@@ -211,6 +238,57 @@ class _AccountHomePageState extends State<AccountHomePage> {
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: Container(
+                height: 130,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                    color: Color(0xFF232f3f),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Padding(
+                  padding:
+                  const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 10),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Referral Code',
+                            style: GoogleFonts.poppins(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            _randomString,
+                            style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Refer to friend and get 200 INR in bonus',
+                            style: GoogleFonts.poppins(color: Colors.grey),
                           ),
                         ],
                       ),
@@ -446,7 +524,8 @@ class _AccountHomePageState extends State<AccountHomePage> {
                   ),
                 ),
               ),
-            )
+            ),
+
           ],
         ),
       ):Center(

@@ -188,6 +188,46 @@ class _Currency_DetailsState extends State<Currency_Details> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF232f3f),
+      // bottomNavigationBar: Container(
+      //   height: 70,
+      //   width: MediaQuery.sizeOf(context).width,
+      //   decoration: const BoxDecoration(
+      //     color:const Color(0xFF232f3f),
+      //   ),
+      //   child:  Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: [
+      //       Container(
+      //         height:50,
+      //         width: MediaQuery.sizeOf(context).width/3,
+      //         decoration: const BoxDecoration(
+      //           color: Colors.green,
+      //           borderRadius: BorderRadius.all(Radius.circular(10))
+      //         ),
+      //         child: Center(
+      //           child: Text('BUY',style: GoogleFonts.poppins(
+      //             color: Colors.white,
+      //             fontWeight: FontWeight.w500
+      //           ),),
+      //         ),
+      //       ),
+      //       Container(
+      //         height:50,
+      //         width: MediaQuery.sizeOf(context).width/3,
+      //         decoration: const BoxDecoration(
+      //             color: Colors.red,
+      //             borderRadius: BorderRadius.all(Radius.circular(10))
+      //         ),
+      //         child: Center(
+      //           child: Text('SELL',style: GoogleFonts.poppins(
+      //               color: Colors.white,
+      //               fontWeight: FontWeight.w500
+      //           ),),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -562,7 +602,8 @@ class _Currency_DetailsState extends State<Currency_Details> {
                   ),
                 ],
               ),
-            )
+            ),
+
           ],
         ),
       ),
