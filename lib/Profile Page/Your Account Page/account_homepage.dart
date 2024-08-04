@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 class AccountHomePage extends StatefulWidget {
   const AccountHomePage({Key? key}) : super(key: key);
   @override
@@ -20,6 +21,7 @@ class AccountHomePage extends StatefulWidget {
 class _AccountHomePageState extends State<AccountHomePage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   int walletbalance = 0;
+  File? _selectedimage;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool showaddress = false;
   Future<void> fetchbalance() async {
@@ -103,19 +105,37 @@ class _AccountHomePageState extends State<AccountHomePage> {
           children: [
              Padding(padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
             child: Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.blue,
-                child: Text(
-                  namesplit.length > 1
-                      ? namesplit[0][0] + namesplit[1][0]
-                      : namesplit[0][0],
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                  ),
-                )
+              child: InkWell(
+                onTap: ()async{
+                  print('Clicked');
+                  FilePickerResult? result = await FilePicker.platform.pickFiles(
+                    type: FileType.image, // Specify that you want images
+                  );
+
+                  if (result != null) {
+                    // Get the selected file
+                    PlatformFile file = result.files.first;
+
+                    // Print file details
+                    print('File name: ${file.name}');
+                    print('File size: ${file.size} bytes');
+                    print('File path: ${file.path}');
+                    setState(() {
+                      _selectedimage = File(result.files.single.path!);
+                    });
+                  } else {
+                    // User canceled the picker
+                    print('No file selected');
+                  }
+                },
+                child:CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.blue,
+                  backgroundImage: _selectedimage == null
+                      ? AssetImage('assets/images/crypto_image-removebg-preview.png') as ImageProvider
+                      : FileImage(_selectedimage!) as ImageProvider,
+                ),
+
               ),
             ),
             ),
