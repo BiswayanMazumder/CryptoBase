@@ -18,6 +18,7 @@ class _EmailLoginState extends State<EmailLogin> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
+  TextEditingController _referenceController=TextEditingController();
   bool isLogin = true;
   bool _errorMessage = false;
   bool showPw = false;
@@ -86,10 +87,21 @@ class _EmailLoginState extends State<EmailLogin> {
     final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
     return emailRegex.hasMatch(email);
   }
+  List<dynamic> referencecodes=[];
+  Future<void> getreferencecodes() async{
+    final docsnap=await _firestore.collection('All Referral Codes').doc('User Referral').get();
+    if(docsnap.exists){
+      setState(() {
+        referencecodes=docsnap.data()?['Codes'];
+      });
+    }
+    print(referencecodes);
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getreferencecodes();
   }
   @override
   Widget build(BuildContext context) {
@@ -245,7 +257,61 @@ class _EmailLoginState extends State<EmailLogin> {
                 ),
               ),
             ),
-
+            if(!isLogin)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blueGrey, width: 0.9),
+                ),
+                child: TextField(
+                  style: GoogleFonts.poppins(color: Colors.white),
+                  controller: _referenceController,
+                  decoration: InputDecoration(
+                    hintText: '  Referral Code',
+                    suffixIcon: InkWell(
+                      onTap: (){
+                        for(String num in referencecodes){
+                          if(_referenceController.text==num){
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text(
+                                  'Referral Code Applied',
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            );
+                          }
+                          else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text(
+                                  'Incorrect Referral Code',
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      child: const Icon(
+                        Icons.check,
+                        color: Colors.white,
+                      ),
+                    ),
+                    hintStyle: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             if (isLogin)
               Row(
                 children: [
