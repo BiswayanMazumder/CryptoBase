@@ -53,7 +53,6 @@ class _AccountHomePageState extends State<AccountHomePage> {
       setState(() {
         _randomString=docsnap.data()?['Referral Code'];
       });
-      // print('fetched');
     }else{
       setState(() {
         _randomString = generateRandomAlphanumeric(10);
@@ -61,6 +60,10 @@ class _AccountHomePageState extends State<AccountHomePage> {
       await _firestore.collection('Referral Codes').doc(user!.uid).set({
         'Referral Code':_randomString
       });
+      await _firestore.collection('All Referral Codes').doc('User Referral').set(
+          {
+            'Codes':FieldValue.arrayUnion([_randomString])
+          },SetOptions(merge: true));
       // print('written');
     }
   }
@@ -121,6 +124,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
     fetchname();
     readfetcheddata();
     _generateRandomString();
+    // getwalletaddress();
   }
 
   @override
