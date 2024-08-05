@@ -38,25 +38,48 @@ class _EmailLoginState extends State<EmailLogin> {
       });
     }
   }
-  Future<void> signup() async{
-    final user=_auth.currentUser;
-    try{
-      if(_nameController.text!=null && _emailController.text!=null && _passwordController.text!=null){
-        await _auth.createUserWithEmailAndPassword(email: _emailController.text,
-            password: _passwordController.text);
-        await _firestore.collection('User Details').doc(user!.uid).set({
-          'Email':_emailController.text,
-          'Name':_nameController.text,
-          'Date Of Registration':FieldValue.serverTimestamp()
-        });
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
-      }else{
+  bool isreferralcorrect=true;
+  Future<void> signup() async {
+    try {
+      if (_nameController.text.isNotEmpty &&
+          _emailController.text.isNotEmpty &&
+          _passwordController.text.isNotEmpty) {
 
+        // Create a user with email and password
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+
+        // Get the user object
+        User? user = userCredential.user;
+
+        // Write user details to Firestore
+        if (user != null) {
+          await _firestore.collection('User Details').doc(user.uid).set({
+            'Email': _emailController.text,
+            'Name': _nameController.text,
+            'Date Of Registration': FieldValue.serverTimestamp(),
+          });
+          if(isreferralcorrect){
+            await _firestore.collection('Wallet Balance').doc(user.uid).set({
+              'Balance':200
+            });
+          }
+          print('User ID: ${user.uid}');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => WelcomeScreen()),
+          );
+        }
+      } else {
+        print('Please fill all fields');
       }
-    }catch(e){
-
+    } catch (e) {
+      print('Error: $e');
     }
   }
+
   void changePage() {
     setState(() {
       isLogin = !isLogin;
@@ -274,6 +297,9 @@ class _EmailLoginState extends State<EmailLogin> {
                       onTap: (){
                         for(String num in referencecodes){
                           if(_referenceController.text==num){
+                            setState(() {
+                              isreferralcorrect=true;
+                            });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.green,
@@ -284,8 +310,12 @@ class _EmailLoginState extends State<EmailLogin> {
                                 ),
                               ),
                             );
+                            break;
                           }
                           else{
+                            setState(() {
+                              isreferralcorrect=false;
+                            });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.red,
