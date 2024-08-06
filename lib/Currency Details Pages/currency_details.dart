@@ -39,6 +39,8 @@ class _Currency_DetailsState extends State<Currency_Details> {
   String? cryptoname = '';
   bool isliked = false;
   int? Cryptoprice;
+  double totalprice=0.0;
+  TextEditingController _pricecrypto=TextEditingController();
   double? percentage_24h;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -334,6 +336,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                               onTap: () {
                                                 setModalState(() {
                                                   buyingprice += 0.1;
+                                                  totalprice=(((double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice))+(0.05*(double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice)))));
                                                 });
                                               },
                                               child: Container(
@@ -356,6 +359,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                                 if(buyingprice>500){
                                                   setModalState(() {
                                                     buyingprice -= 0.1;
+                                                    totalprice=(((double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice))+(0.05*(double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice)))));
                                                   });
                                                 }
                                               },
@@ -454,7 +458,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                     Row(
                                       children: [
                                         Text(
-                                          (double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice)).toStringAsFixed(5),
+                                          totalprice.toStringAsFixed(5),
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -469,6 +473,37 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                     const Divider(
                                       color: Colors.grey,
                                       thickness: 0.8,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text('5% Platform fee also levied',style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12
+                                        ),),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    Container(
+                                      height: 50,
+                                      width: MediaQuery.sizeOf(context).width,
+                                      decoration: const BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                                      child: Center(
+                                        child: Text(
+                                          'BUY',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white, fontWeight: FontWeight.w600,
+                                          fontSize: 17
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
