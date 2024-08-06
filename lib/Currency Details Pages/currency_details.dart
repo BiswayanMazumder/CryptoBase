@@ -61,7 +61,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
     }
   }
 
-  double buyingprice = 50;
+  double buyingprice = 500;
   double quantity = 0.01;
   void setcurrencyicon() async {
     await readfetcheddata();
@@ -214,232 +214,273 @@ class _Currency_DetailsState extends State<Currency_Details> {
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.sizeOf(context).width,
-                      color: const Color(0xFF1c2835),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
+                    return StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setModalState) {
+                        return Container(
+                          width: MediaQuery.sizeOf(context).width,
+                          color: const Color(0xFF1c2835),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                width: MediaQuery.sizeOf(context).width,
-                                height: 60,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    InkWell(
-                                      // onTap: () {
-                                      //   setState(() {
-                                      //     isbuying = true;
-                                      //   });
-                                      //   print(isbuying);
-                                      // },
-                                      child: Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width /
-                                                2,
-                                        color: isbuying
-                                            ? const Color(0xFF232f3f)
-                                            : Colors.transparent,
-                                        height: 60,
-                                        child: Center(
-                                          child: Text(
-                                            'BUY',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.green,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 18),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          isbuying = false;
-                                        });
-                                        print(isbuying);
-                                      },
-                                      child: Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width /
-                                                2,
-                                        color: isbuying
-                                            ? Colors.transparent
-                                            : const Color(0xFF232f3f),
-                                        // color: Colors.red,
-                                        height: 60,
-                                        child: Center(
-                                          child: Text(
-                                            'SELL',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.red,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 18),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'AT PRICE',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15),
-                                    ),
-                                    Text(
-                                      ' | $currency',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 15),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      buyingprice.toStringAsFixed(2),
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17),
-                                    ),
-                                    const Spacer(),
-                                    Row(
-                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              Row(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.sizeOf(context).width,
+                                    height: 60,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          percentage_24h! <= 0
-                                              ? 'Lowest Price'
-                                              : 'Higher Price',
-                                          style: GoogleFonts.poppins(
-                                              color: percentage_24h! <= 0
-                                                  ? Colors.green
-                                                  : Colors.red,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
                                         InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              buyingprice += 0.1;
-                                            });
-                                          },
                                           child: Container(
-                                            height: 30,
-                                            width: 50,
-                                            color: Colors.black,
-                                            child: const Center(
-                                              child: Icon(
-                                                Icons.add,
-                                                color: Colors.white,
+                                            width: MediaQuery.sizeOf(context).width / 2,
+                                            color: isbuying
+                                                ? const Color(0xFF232f3f)
+                                                : Colors.transparent,
+                                            height: 60,
+                                            child: Center(
+                                              child: Text(
+                                                'BUY',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.green,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 18),
                                               ),
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
                                         InkWell(
+                                          onTap: () {
+                                            setModalState(() {
+                                              isbuying = false;
+                                            });
+                                            print(isbuying);
+                                          },
                                           child: Container(
-                                            height: 30,
-                                            width: 50,
-                                            color: Colors.black,
-                                            child: const Center(
+                                            width: MediaQuery.sizeOf(context).width / 2,
+                                            color: isbuying
+                                                ? Colors.transparent
+                                                : const Color(0xFF232f3f),
+                                            height: 60,
+                                            child: Center(
                                               child: Text(
-                                                '-',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20),
+                                                'SELL',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.red,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 18),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ],
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Divider(
-                                  color: Colors.grey,
-                                  thickness: 0.8,
-                                ),
-                                // const SizedBox(
-                                //   height: 10,
-                                // ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'AMOUNT',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15),
                                     ),
-                                    Text(
-                                      ' | ${cryptoname.toString().toUpperCase()}',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 15),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20, right: 20),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'AT PRICE',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15),
+                                        ),
+                                        Text(
+                                          ' | $currency',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 15),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          buyingprice.toStringAsFixed(2),
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17),
+                                        ),
+                                        const Spacer(),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              percentage_24h! <= 0
+                                                  ? 'Lowest Price'
+                                                  : 'Higher Price',
+                                              style: GoogleFonts.poppins(
+                                                  color: percentage_24h! <= 0
+                                                      ? Colors.green
+                                                      : Colors.red,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                setModalState(() {
+                                                  buyingprice += 0.1;
+                                                });
+                                              },
+                                              child: Container(
+                                                height: 30,
+                                                width: 50,
+                                                color: Colors.black,
+                                                child: const Center(
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                if(buyingprice>500){
+                                                  setModalState(() {
+                                                    buyingprice -= 0.1;
+                                                  });
+                                                }
+                                              },
+                                              child: Container(
+                                                height: 30,
+                                                width: 50,
+                                                color: Colors.black,
+                                                child: const Center(
+                                                  child: Text(
+                                                    '-',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      thickness: 0.8,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'AMOUNT',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15),
+                                        ),
+                                        Text(
+                                          ' | ${cryptoname.toString().toUpperCase()}',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 15),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '${(1 / (double.parse(widget.price)) * buyingprice).toStringAsFixed(5)}',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      thickness: 0.8,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'TOTAL',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15),
+                                        ),
+                                        Text(
+                                          ' | $currency',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 15),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          (double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice)).toStringAsFixed(5),
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      thickness: 0.8,
                                     ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    // Text(
-                                    //   '${(1/(int.parse(widget.price)))*buyingprice}',
-                                    //   style: GoogleFonts.poppins(
-                                    //       color: Colors.white,
-                                    //       fontWeight: FontWeight.bold,
-                                    //       fontSize: 17),
-                                    // ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Divider(
-                                  color: Colors.grey,
-                                  thickness: 0.8,
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
                     );
                   },
                 );
+
               },
               child: Container(
                 height: 50,
