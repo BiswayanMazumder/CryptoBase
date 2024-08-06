@@ -33,7 +33,7 @@ class _AccountHomePageState extends State<AccountHomePage> {
           await _firestore.collection('Wallet Balance').doc(user!.uid).get();
       if (docsnap.exists) {
         setState(() {
-          walletbalance = (docsnap.data()?['Balance'] as double).round();
+          walletbalance = (docsnap.data()?['Balance']);
         });
       }
     } catch (e) {

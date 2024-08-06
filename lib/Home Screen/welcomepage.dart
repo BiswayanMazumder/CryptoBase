@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Blogs%20Page/HelpPage.dart';
 import 'package:cryptobase/Currency%20Details%20Pages/currency_details.dart';
@@ -72,7 +73,38 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         currencyicon = Icon(Icons.currency_pound, color: Colors.white);
     });
   }
-
+  void generatenotifications()async{
+    await fetchname();
+    await fetchapidetails();
+    AwesomeNotifications().initialize(
+      // set the icon to null if you want to use the default app icon
+        null,
+        [
+          NotificationChannel(
+              channelGroupKey: 'basic_channel_group',
+              channelKey: 'basic_channel',
+              channelName: 'Basic notifications',
+              channelDescription: 'Notification channel for basic tests',
+              defaultColor: Color(0xFF9D50DD),
+              ledColor: Colors.white)
+        ],
+        channelGroups: [
+          NotificationChannelGroup(
+              channelGroupKey: 'basic_channel_group',
+              channelGroupName: 'Basic group')
+        ],
+        debug: true
+    );
+    AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 10, // Unique ID for the notification
+        channelKey: 'basic_channel', // The channel where the notification will be sent
+        title: 'Hello ${username}',
+        body: 'Greetings from CryptoBase family\n Invest more in ${name[0]} to get more profit value of ${name[0]} as of now is ₹${price[0]}',
+        notificationLayout: NotificationLayout.Messaging,
+      ),
+    );
+  }
   List<dynamic> name = [];
   List<dynamic> images = [];
   List<dynamic> price = [];
@@ -190,6 +222,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     fetchapidetails();
     fetchname();
     storewalletaddress();
+    generatenotifications();
   }
 
   @override
@@ -214,6 +247,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             padding: EdgeInsets.only(right: 10),
             child: InkWell(
               onTap: () {
+                // generatenotifications();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

@@ -22,6 +22,7 @@ class _EmailLoginState extends State<EmailLogin> {
   bool isLogin = true;
   bool _errorMessage = false;
   bool showPw = false;
+  bool loginpressed=false;
   bool loginfail=false;
   String loginerrormessage='';
   Future<void> login ()async{
@@ -371,6 +372,11 @@ class _EmailLoginState extends State<EmailLogin> {
                 },
                 child: InkWell(
                   onTap: (){
+                    if(_emailController.text!=null && _passwordController.text!=null){
+                      setState(() {
+                        loginpressed=true;
+                      });
+                    }
                     isLogin?login():signup();
                   },
                   child: Container(
@@ -381,7 +387,7 @@ class _EmailLoginState extends State<EmailLogin> {
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),
                     child: Center(
-                      child: Text(
+                      child:loginpressed?CircularProgressIndicator(color: Colors.white,): Text(
                         isLogin ? 'LOGIN' : 'SIGN UP',
                         style: GoogleFonts.poppins(
                           color: Colors.white,
