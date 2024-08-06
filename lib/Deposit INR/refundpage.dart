@@ -19,6 +19,7 @@ class RefundPage extends StatefulWidget {
 class _RefundPageState extends State<RefundPage> {
   @override
   int walletbalance=0;
+  int newamount=0;
   bool isrp=true;
   bool ismk=false;
   int amount=0;
@@ -31,7 +32,7 @@ class _RefundPageState extends State<RefundPage> {
       final docsnap=await _firestore.collection('Wallet Balance').doc(user!.uid).get();
       if(docsnap.exists){
         setState(() {
-          walletbalance=docsnap.data()?['Balance'];
+          walletbalance=(docsnap.data()?['Balance'] as double).round();
         });
       }
     }catch(e){
@@ -104,7 +105,9 @@ class _RefundPageState extends State<RefundPage> {
               'Amount': FieldValue.arrayUnion([amount / 100]),
             },SetOptions(merge: true));
 
-            var newamount = walletbalance - (amount / 100);
+             setState(() {
+               newamount = (walletbalance - (amount / 100)).round();
+             });
             // print(newamount);
 
             await _firestore.collection('Wallet Balance').doc(user.uid).set({

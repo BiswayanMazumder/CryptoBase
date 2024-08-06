@@ -23,7 +23,7 @@ class _DepositHomeState extends State<DepositHome> {
       final docsnap=await _firestore.collection('Wallet Balance').doc(user!.uid).get();
       if(docsnap.exists){
         setState(() {
-          walletbalance=docsnap.data()?['Balance'];
+          walletbalance=(docsnap.data()?['Balance'] as double).round();
         });
       }
     }catch(e){
@@ -168,7 +168,7 @@ class _DepositHomeState extends State<DepositHome> {
               height: 5,
             ),
             Center(
-              child: Text('${walletbalance} INR',style: GoogleFonts.poppins(
+              child: Text('${walletbalance.round()} INR',style: GoogleFonts.poppins(
                 color: Colors.white,
                 fontSize: 25,
                 fontWeight: FontWeight.w700,

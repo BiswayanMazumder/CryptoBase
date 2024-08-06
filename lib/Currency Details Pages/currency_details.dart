@@ -39,8 +39,27 @@ class _Currency_DetailsState extends State<Currency_Details> {
   String? cryptoname = '';
   bool isliked = false;
   int? Cryptoprice;
-  double totalprice=0.0;
+  double totalprice = 0.0;
+  int final_balance=0;
   // TextEditingController _pricecrypto=buyingprice.toString();
+  int walletbalance = 0;
+  Future<void> fetchbalance() async {
+    final user = _auth.currentUser;
+    try {
+      final docsnap =
+          await _firestore.collection('Wallet Balance').doc(user!.uid).get();
+      if (docsnap.exists) {
+        setState(() {
+          walletbalance = (docsnap.data()?['Balance'] as double).round();
+          // isloaded = true;
+        });
+        print(walletbalance);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   double? percentage_24h;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -191,6 +210,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
     setcurrencyicon();
     _generateTimestamps();
     fetchlikedcurrencies();
+    fetchbalance();
     // fetchname();
   }
 
@@ -217,7 +237,8 @@ class _Currency_DetailsState extends State<Currency_Details> {
                   context: context,
                   builder: (BuildContext context) {
                     return StatefulBuilder(
-                      builder: (BuildContext context, StateSetter setModalState) {
+                      builder:
+                          (BuildContext context, StateSetter setModalState) {
                         return Container(
                           width: MediaQuery.sizeOf(context).width,
                           color: const Color(0xFF1c2835),
@@ -230,11 +251,14 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                     width: MediaQuery.sizeOf(context).width,
                                     height: 60,
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         InkWell(
                                           child: Container(
-                                            width: MediaQuery.sizeOf(context).width / 2,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width /
+                                                2,
                                             color: isbuying
                                                 ? const Color(0xFF232f3f)
                                                 : Colors.transparent,
@@ -258,7 +282,9 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                             print(isbuying);
                                           },
                                           child: Container(
-                                            width: MediaQuery.sizeOf(context).width / 2,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width /
+                                                2,
                                             color: isbuying
                                                 ? Colors.transparent
                                                 : const Color(0xFF232f3f),
@@ -283,7 +309,8 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                 height: 30,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 20, right: 20),
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
                                 child: Column(
                                   children: [
                                     Row(
@@ -309,14 +336,13 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                     ),
                                     Row(
                                       children: [
-
-                                        // Text(
-                                        //   buyingprice.toStringAsFixed(2),
-                                        //   style: GoogleFonts.poppins(
-                                        //       color: Colors.white,
-                                        //       fontWeight: FontWeight.bold,
-                                        //       fontSize: 17),
-                                        // ),
+                                        Text(
+                                          buyingprice.toStringAsFixed(2),
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17),
+                                        ),
                                         const Spacer(),
                                         Row(
                                           children: [
@@ -337,7 +363,21 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                               onTap: () {
                                                 setModalState(() {
                                                   buyingprice += 0.1;
-                                                  totalprice=(((double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice))+(0.05*(double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice)))));
+                                                  totalprice = (((double.parse(
+                                                              widget.price) *
+                                                          (1 /
+                                                              (double.parse(
+                                                                  widget
+                                                                      .price)) *
+                                                              buyingprice)) +
+                                                      (0.05 *
+                                                          (double.parse(widget
+                                                                  .price) *
+                                                              (1 /
+                                                                  (double.parse(
+                                                                      widget
+                                                                          .price)) *
+                                                                  buyingprice)))));
                                                 });
                                               },
                                               child: Container(
@@ -357,10 +397,25 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                             ),
                                             InkWell(
                                               onTap: () {
-                                                if(buyingprice>500){
+                                                if (buyingprice > 500) {
                                                   setModalState(() {
                                                     buyingprice -= 0.1;
-                                                    totalprice=(((double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice))+(0.05*(double.parse(widget.price)*(1 / (double.parse(widget.price)) * buyingprice)))));
+                                                    totalprice = (((double
+                                                                .parse(widget
+                                                                    .price) *
+                                                            (1 /
+                                                                (double.parse(
+                                                                    widget
+                                                                        .price)) *
+                                                                buyingprice)) +
+                                                        (0.05 *
+                                                            (double.parse(widget
+                                                                    .price) *
+                                                                (1 /
+                                                                    (double.parse(
+                                                                        widget
+                                                                            .price)) *
+                                                                    buyingprice)))));
                                                   });
                                                 }
                                               },
@@ -480,28 +535,47 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                     ),
                                     Row(
                                       children: [
-                                        Text('5% Platform fee also levied',style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12
-                                        ),),
+                                        Text(
+                                          '5% Platform fee also levied',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(
                                       height: 30,
                                     ),
-                                    Container(
-                                      height: 50,
-                                      width: MediaQuery.sizeOf(context).width,
-                                      decoration: const BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                                      child: Center(
-                                        child: Text(
-                                          'BUY',
-                                          style: GoogleFonts.poppins(
-                                              color: Colors.white, fontWeight: FontWeight.w600,
-                                          fontSize: 17
+                                    InkWell(
+                                      onTap: ()async{
+                                        if(walletbalance-totalprice>0){
+                                          setState(() {
+                                            final_balance=(walletbalance-totalprice).round();
+                                          });
+                                          print(final_balance);
+                                          final user=_auth.currentUser;
+                                          await _firestore.collection('Wallet Balance').doc(user!.uid).set(
+                                              {
+                                                'Balance':final_balance
+                                              });
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 50,
+                                        width: MediaQuery.sizeOf(context).width,
+                                        decoration:  BoxDecoration(
+                                            color:walletbalance-totalprice>0? Colors.green:Colors.grey,
+                                            borderRadius: const BorderRadius.all(
+                                                Radius.circular(10))),
+                                        child: Center(
+                                          child: Text(
+                                            walletbalance-totalprice>0?'BUY':'INSUFFICIENT FUNDS',
+                                            style: GoogleFonts.poppins(
+                                                color:walletbalance-totalprice>0? Colors.white:Colors.black,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 17),
                                           ),
                                         ),
                                       ),
@@ -516,7 +590,6 @@ class _Currency_DetailsState extends State<Currency_Details> {
                     );
                   },
                 );
-
               },
               child: Container(
                 height: 50,
