@@ -40,7 +40,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
   bool isliked = false;
   int? Cryptoprice;
   double totalprice=0.0;
-  TextEditingController _pricecrypto=TextEditingController();
+  // TextEditingController _pricecrypto=buyingprice.toString();
   double? percentage_24h;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -309,13 +309,14 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                     ),
                                     Row(
                                       children: [
-                                        Text(
-                                          buyingprice.toStringAsFixed(2),
-                                          style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 17),
-                                        ),
+
+                                        // Text(
+                                        //   buyingprice.toStringAsFixed(2),
+                                        //   style: GoogleFonts.poppins(
+                                        //       color: Colors.white,
+                                        //       fontWeight: FontWeight.bold,
+                                        //       fontSize: 17),
+                                        // ),
                                         const Spacer(),
                                         Row(
                                           children: [
