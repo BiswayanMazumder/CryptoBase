@@ -66,7 +66,7 @@ class _EmailLoginState extends State<EmailLogin> {
               'Balance':200
             });
           }
-          print('User ID: ${user.uid}');
+          // print('User ID: ${user.uid}');
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => WelcomeScreen()),

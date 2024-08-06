@@ -19,17 +19,16 @@ class Currency_Details extends StatefulWidget {
   final List<dynamic> pricehistory; // Ensure the type is dynamic
   const Currency_Details(
       {Key? key,
-        required this.price,
-        required this.high24h,
-        required this.low_24,
-        required this.volume,
-        required this.pricehistory,
-        required this.total_supply,
-        required this.max_supply,
-        required this.market_cap,
-        required this.popularity,
-        required this.circulating_supply
-      });
+      required this.price,
+      required this.high24h,
+      required this.low_24,
+      required this.volume,
+      required this.pricehistory,
+      required this.total_supply,
+      required this.max_supply,
+      required this.market_cap,
+      required this.popularity,
+      required this.circulating_supply});
 
   @override
   State<Currency_Details> createState() => _Currency_DetailsState();
@@ -62,6 +61,8 @@ class _Currency_DetailsState extends State<Currency_Details> {
     }
   }
 
+  double buyingprice = 50;
+  double quantity = 0.01;
   void setcurrencyicon() async {
     await readfetcheddata();
     setState(() {
@@ -85,95 +86,102 @@ class _Currency_DetailsState extends State<Currency_Details> {
         currencyicon = Icon(Icons.currency_pound, color: Colors.white);
     });
   }
-  List _timestamp=[];
-  bool isloaded=false;
+
+  List _timestamp = [];
+  bool isloaded = false;
   Future<void> _generateTimestamps() async {
     await Future.delayed(Duration(seconds: 1));
     final List<String> timestamps = [];
     final now = DateTime.now();
 
-    for (int i = 0; i < 20 ;i++) {
+    for (int i = 0; i < 20; i++) {
       final timestamp = now.subtract(Duration(seconds: i)).toLocal();
-      final formattedTimestamp = '${timestamp.hour}:${timestamp.minute}:${timestamp.second}';
+      final formattedTimestamp =
+          '${timestamp.hour}:${timestamp.minute}:${timestamp.second}';
       timestamps.add(formattedTimestamp);
     }
 
     setState(() {
       _timestamp = timestamps;
-      isloaded=true;
+      isloaded = true;
     });
   }
-  bool isfavourite=false;
-  Future<void> favouriteactions()async{
+
+  bool isfavourite = false;
+  Future<void> favouriteactions() async {
     await readfetcheddata();
     setState(() {
-      isfavourite=!isfavourite;
+      isfavourite = !isfavourite;
     });
-    final user=_auth.currentUser;
-    if(isfavourite){
-      await _firestore.collection('Favourite Currencies').doc(user!.uid).set(
-          {
-            'Currency':FieldValue.arrayUnion([
-              cryptoname.toString().toUpperCase(),
-            ])
-          }, SetOptions(merge: true));
+    final user = _auth.currentUser;
+    if (isfavourite) {
+      await _firestore.collection('Favourite Currencies').doc(user!.uid).set({
+        'Currency': FieldValue.arrayUnion([
+          cryptoname.toString().toUpperCase(),
+        ])
+      }, SetOptions(merge: true));
     }
-    if(!isfavourite){
-      await _firestore.collection('Favourite Currencies').doc(user!.uid).update({
-        'Currency':FieldValue.arrayRemove(
-          [
-            cryptoname.toString().toUpperCase()
-          ]
-        )
+    if (!isfavourite) {
+      await _firestore
+          .collection('Favourite Currencies')
+          .doc(user!.uid)
+          .update({
+        'Currency':
+            FieldValue.arrayRemove([cryptoname.toString().toUpperCase()])
       });
     }
   }
-  List<dynamic> getlikedcurrency=[];
-  Future<void> fetchlikedcurrencies()async{
-    final user=_auth.currentUser;
+
+  List<dynamic> getlikedcurrency = [];
+  Future<void> fetchlikedcurrencies() async {
+    final user = _auth.currentUser;
     await readfetcheddata();
-    try{
-      final docsnap=await _firestore.collection('Favourite Currencies').doc(user!.uid).get();
-      if(docsnap.exists){
+    try {
+      final docsnap = await _firestore
+          .collection('Favourite Currencies')
+          .doc(user!.uid)
+          .get();
+      if (docsnap.exists) {
         setState(() {
-          getlikedcurrency=docsnap.data()?['Currency'];
+          getlikedcurrency = docsnap.data()?['Currency'];
         });
       }
-      if(getlikedcurrency.contains(cryptoname.toString().toUpperCase())){
+      if (getlikedcurrency.contains(cryptoname.toString().toUpperCase())) {
         setState(() {
-          isfavourite=true;
+          isfavourite = true;
         });
-      }
-      else{
+      } else {
         setState(() {
-          isfavourite=false;
+          isfavourite = false;
         });
       }
       // print(getlikedcurrency);
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }
-  String username='';
-  Future<void> fetchname() async{
-    final user=_auth.currentUser;
-    if(user!=null){
-      try{
-        final docsnap=await _firestore.collection('User Details').doc(user.uid).get();
-        if (docsnap.exists){
+
+  String username = '';
+  Future<void> fetchname() async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      try {
+        final docsnap =
+            await _firestore.collection('User Details').doc(user.uid).get();
+        if (docsnap.exists) {
           setState(() {
-            username=docsnap.data()?['Name'];
+            username = docsnap.data()?['Name'];
           });
           print('Username ${username}');
         }
-      }catch(e){
+      } catch (e) {
         print(e);
       }
-    }else{
+    } else {
       print('User is null');
     }
-
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -184,50 +192,374 @@ class _Currency_DetailsState extends State<Currency_Details> {
     // fetchname();
   }
 
+  bool isbuying = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF232f3f),
-      // bottomNavigationBar: Container(
-      //   height: 70,
-      //   width: MediaQuery.sizeOf(context).width,
-      //   decoration: const BoxDecoration(
-      //     color:const Color(0xFF232f3f),
-      //   ),
-      //   child:  Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //     children: [
-      //       Container(
-      //         height:50,
-      //         width: MediaQuery.sizeOf(context).width/3,
-      //         decoration: const BoxDecoration(
-      //           color: Colors.green,
-      //           borderRadius: BorderRadius.all(Radius.circular(10))
-      //         ),
-      //         child: Center(
-      //           child: Text('BUY',style: GoogleFonts.poppins(
-      //             color: Colors.white,
-      //             fontWeight: FontWeight.w500
-      //           ),),
-      //         ),
-      //       ),
-      //       Container(
-      //         height:50,
-      //         width: MediaQuery.sizeOf(context).width/3,
-      //         decoration: const BoxDecoration(
-      //             color: Colors.red,
-      //             borderRadius: BorderRadius.all(Radius.circular(10))
-      //         ),
-      //         child: Center(
-      //           child: Text('SELL',style: GoogleFonts.poppins(
-      //               color: Colors.white,
-      //               fontWeight: FontWeight.w500
-      //           ),),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      bottomNavigationBar: Container(
+        height: 70,
+        width: MediaQuery.sizeOf(context).width,
+        decoration: const BoxDecoration(
+          color: const Color(0xFF232f3f),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InkWell(
+              onTap: () {
+                setState(() {
+                  isbuying = true;
+                });
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      color: const Color(0xFF1c2835),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: MediaQuery.sizeOf(context).width,
+                                height: 60,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    InkWell(
+                                      // onTap: () {
+                                      //   setState(() {
+                                      //     isbuying = true;
+                                      //   });
+                                      //   print(isbuying);
+                                      // },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                2,
+                                        color: isbuying
+                                            ? const Color(0xFF232f3f)
+                                            : Colors.transparent,
+                                        height: 60,
+                                        child: Center(
+                                          child: Text(
+                                            'BUY',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 18),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          isbuying = false;
+                                        });
+                                        print(isbuying);
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                2,
+                                        color: isbuying
+                                            ? Colors.transparent
+                                            : const Color(0xFF232f3f),
+                                        // color: Colors.red,
+                                        height: 60,
+                                        child: Center(
+                                          child: Text(
+                                            'SELL',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 18),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'AT PRICE',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15),
+                                    ),
+                                    Text(
+                                      ' | $currency',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      buyingprice.toStringAsFixed(2),
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17),
+                                    ),
+                                    const Spacer(),
+                                    Row(
+                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          percentage_24h! <= 0
+                                              ? 'Lowest Price'
+                                              : 'Higher Price',
+                                          style: GoogleFonts.poppins(
+                                              color: percentage_24h! <= 0
+                                                  ? Colors.green
+                                                  : Colors.red,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              buyingprice += 0.1;
+                                            });
+                                          },
+                                          child: Container(
+                                            height: 30,
+                                            width: 50,
+                                            color: Colors.black,
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        InkWell(
+                                          child: Container(
+                                            height: 30,
+                                            width: 50,
+                                            color: Colors.black,
+                                            child: const Center(
+                                              child: Text(
+                                                '-',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Divider(
+                                  color: Colors.grey,
+                                  thickness: 0.8,
+                                ),
+                                // const SizedBox(
+                                //   height: 10,
+                                // ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'AMOUNT',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 15),
+                                    ),
+                                    Text(
+                                      ' | ${cryptoname.toString().toUpperCase()}',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 15),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    // Text(
+                                    //   '${(1/(int.parse(widget.price)))*buyingprice}',
+                                    //   style: GoogleFonts.poppins(
+                                    //       color: Colors.white,
+                                    //       fontWeight: FontWeight.bold,
+                                    //       fontSize: 17),
+                                    // ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Divider(
+                                  color: Colors.grey,
+                                  thickness: 0.8,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                height: 50,
+                width: MediaQuery.sizeOf(context).width / 3,
+                decoration: const BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Center(
+                  child: Text(
+                    'BUY',
+                    style: GoogleFonts.poppins(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  isbuying = false;
+                });
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      color: const Color(0xFF1c2835),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: MediaQuery.sizeOf(context).width,
+                                height: 60,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    InkWell(
+                                      // onTap: () {
+                                      //   setState(() {
+                                      //     isbuying = true;
+                                      //   });
+                                      //   print(isbuying);
+                                      // },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                2,
+                                        color: isbuying
+                                            ? const Color(0xFF232f3f)
+                                            : Colors.transparent,
+                                        height: 60,
+                                        child: Center(
+                                          child: Text(
+                                            'BUY',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 18),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          isbuying = false;
+                                        });
+                                        print(isbuying);
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                2,
+                                        color: isbuying
+                                            ? Colors.transparent
+                                            : const Color(0xFF232f3f),
+                                        // color: Colors.red,
+                                        height: 60,
+                                        child: Center(
+                                          child: Text(
+                                            'SELL',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 18),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                height: 50,
+                width: MediaQuery.sizeOf(context).width / 3,
+                decoration: const BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Center(
+                  child: Text(
+                    'SELL',
+                    style: GoogleFonts.poppins(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -256,40 +588,40 @@ class _Currency_DetailsState extends State<Currency_Details> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 10),
-                        child: InkWell(
-                          onTap: () {
-                            // print(widget.pricehistory.length);
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 100,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFF232F3F),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Text(
-                                    '${cryptoname.toString().toUpperCase()} / ${currency}',
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12),
-                                  ),
+                        child: Container(
+                          height: 40,
+                          width: 100,
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFF232F3F),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  '${cryptoname.toString().toUpperCase()} / ${currency}',
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           favouriteactions();
                         },
-                        child: Icon(isfavourite?CupertinoIcons.star_fill:CupertinoIcons.star,
-                          color: Colors.yellow,size: 15,),
+                        child: Icon(
+                          isfavourite
+                              ? CupertinoIcons.star_fill
+                              : CupertinoIcons.star,
+                          color: Colors.yellow,
+                          size: 15,
+                        ),
                       ),
                       const Spacer(),
                       Padding(
@@ -304,7 +636,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                       ? Colors.green
                                       : Colors.red,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                      BorderRadius.all(Radius.circular(10)),
                                 ),
                                 child: Center(
                                   child: Text(
@@ -410,18 +742,24 @@ class _Currency_DetailsState extends State<Currency_Details> {
                     height: 20,
                   ),
                   if (isloaded)
-                    for (int i = 0; i < 20; i++) // Iterate up to pricehistory.length - 1
+                    for (int i = 0;
+                        i < 20;
+                        i++) // Iterate up to pricehistory.length - 1
                       SingleChildScrollView(
                         child: Column(
                           children: [
                             Container(
                               height: 50,
                               width: MediaQuery.sizeOf(context).width,
-                              color: (widget.pricehistory[i] is num && widget.pricehistory[i + 1] is num) && (widget.pricehistory[i] > widget.pricehistory[i + 1])
+                              color: (widget.pricehistory[i] is num &&
+                                          widget.pricehistory[i + 1] is num) &&
+                                      (widget.pricehistory[i] >
+                                          widget.pricehistory[i + 1])
                                   ? Colors.green.withOpacity(0.3)
                                   : Colors.red.withOpacity(0.3),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
@@ -440,7 +778,13 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                         child: Text(
                                           widget.pricehistory[i].toString(),
                                           style: GoogleFonts.poppins(
-                                              color: (widget.pricehistory[i] is num && widget.pricehistory[i + 1] is num && widget.pricehistory[i] > widget.pricehistory[i + 1])
+                                              color: (widget.pricehistory[i]
+                                                          is num &&
+                                                      widget.pricehistory[i + 1]
+                                                          is num &&
+                                                      widget.pricehistory[i] >
+                                                          widget.pricehistory[
+                                                              i + 1])
                                                   ? Colors.green
                                                   : Colors.red,
                                               fontWeight: FontWeight.w500),
@@ -448,9 +792,15 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(left: 5),
-                                        child: (widget.pricehistory[i] is num && widget.pricehistory[i + 1] is num && widget.pricehistory[i] > widget.pricehistory[i + 1])
-                                            ? Icon(Icons.arrow_upward, color: Colors.green)
-                                            : Icon(Icons.arrow_downward, color: Colors.red),
+                                        child: (widget.pricehistory[i] is num &&
+                                                widget.pricehistory[i + 1]
+                                                    is num &&
+                                                widget.pricehistory[i] >
+                                                    widget.pricehistory[i + 1])
+                                            ? Icon(Icons.arrow_upward,
+                                                color: Colors.green)
+                                            : Icon(Icons.arrow_downward,
+                                                color: Colors.red),
                                       )
                                     ],
                                   ),
@@ -482,128 +832,167 @@ class _Currency_DetailsState extends State<Currency_Details> {
                   const SizedBox(
                     height: 20,
                   ),
-                  isloaded?Padding(
-                    padding: const EdgeInsets.only(right:1),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20,top: 20,bottom: 20),
-                          child: Text('STATS',style: GoogleFonts.poppins(color: Colors.grey,fontWeight: FontWeight.w500,),),
-                        ),
-                        InkWell(
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 2,left: 5),
-                            child: Icon(CupertinoIcons.info,color: Colors.grey,size: 15,),
+                  isloaded
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 1),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, top: 20, bottom: 20),
+                                child: Text(
+                                  'STATS',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(bottom: 2, left: 5),
+                                  child: Icon(
+                                    CupertinoIcons.info,
+                                    color: Colors.grey,
+                                    size: 15,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         )
-                      ],
-                    ),
-                  ):Container(),
-                  isloaded?Padding(
-                    padding: const EdgeInsets.only(left: 20,right: 20),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: const Color(0xFF232f3f)
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
-                            child: Row(
+                      : Container(),
+                  isloaded
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width,
+                            decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: const Color(0xFF232f3f)),
+                            child: Column(
                               children: [
-                                Text('Market Cap',style: GoogleFonts.poppins(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                                const Spacer(),
-                                Text('₹${(int.parse(widget.market_cap)/1000000000).toStringAsFixed(2)}B',style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500
-                                ),),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 20, top: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Market Cap',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        '₹${(int.parse(widget.market_cap) / 1000000000).toStringAsFixed(2)}B',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 20, top: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Circulating Supply',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        '₹${widget.circulating_supply}',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 20, top: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Max Supply',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        '₹${widget.max_supply}B',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 20, top: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Total Supply',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        '₹${widget.total_supply}B',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 20, top: 20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Popularity',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        '#${widget.popularity}',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
-                            child: Row(
-                              children: [
-                                Text('Circulating Supply',style: GoogleFonts.poppins(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                                const Spacer(),
-                                Text('₹${widget.circulating_supply}',style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
-                            child: Row(
-                              children: [
-                                Text('Max Supply',style: GoogleFonts.poppins(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                                const Spacer(),
-                                Text('₹${widget.max_supply}B',style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
-                            child: Row(
-                              children: [
-                                Text('Total Supply',style: GoogleFonts.poppins(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                                const Spacer(),
-                                Text('₹${widget.total_supply}B',style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500
-                                ),),
-
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10,right: 20,top: 20),
-                            child: Row(
-                              children: [
-                                Text('Popularity',style: GoogleFonts.poppins(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                                const Spacer(),
-                                Text('#${widget.popularity}',style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500
-                                ),),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ):Container(),
+                        )
+                      : Container(),
                   const SizedBox(
                     height: 20,
                   ),
                 ],
               ),
             ),
-
           ],
         ),
       ),
