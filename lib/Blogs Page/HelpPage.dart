@@ -36,8 +36,37 @@ class _HelpSectionState extends State<HelpSection> {
       isowner.add(false);
 
     });
+    final user=_auth.currentUser;
+    await _firestore.collection('Customer Care Chats').doc(user!.uid).set(
+        {
+          'Chats':FieldValue.arrayUnion([response.text])
+        },SetOptions(merge: true));
     print(response.text);
     _helptext.clear();
+  }
+  List<dynamic>userchats=[];
+  List<dynamic>customercarechats=[];
+  Future<void> fetcholdchats()async{
+    final user=_auth.currentUser;
+    final docsnap=await _firestore.collection('User Chats').doc(user!.uid).get();
+    if(docsnap.exists){
+      setState(() {
+        userchats=docsnap.data()?['Chats'];
+      });
+    }
+    final docsnaps=await _firestore.collection('Customer Care Chats').doc(user!.uid).get();
+    if(docsnap.exists){
+      setState(() {
+        customercarechats=docsnaps.data()?['Chats'];
+      });
+    }
+    print(customercarechats);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetcholdchats();
   }
   @override
   Widget build(BuildContext context) {
@@ -73,54 +102,88 @@ class _HelpSectionState extends State<HelpSection> {
       body: Column(
         children: [
           const Padding(padding: EdgeInsets.only(bottom: 20)),
-          items.isEmpty?Expanded(child: Column(
-            children: [
-               SizedBox(
-                height: MediaQuery.sizeOf(context).height/2.5,
-              ),
-              Center(
-                child: Text('Welcome To CryptoBase Support',style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500
-                ),),
-              )
-            ],
-          )): Expanded(
-            child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) => ListTile(
-                title: Row(
-                  children: [
-                    isowner[index] ? const Spacer() : Container(),
-                    Container(
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                        color: isowner[index] ? const Color(0xFF1c2835) : const Color(0xFF1c2895),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start, // Center vertically
-                          crossAxisAlignment: CrossAxisAlignment.start,
+          Expanded(
+            child: StreamBuilder<DocumentSnapshot>(
+              stream: _firestore.collection('User Chats').doc(_auth.currentUser!.uid).snapshots(),
+              builder: (context, userChatSnapshot) {
+                if (userChatSnapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (!userChatSnapshot.hasData) {
+                  return Center(child: Text('No messages found'));
+                }
+
+                // Safely cast user chat data
+                final userChatsData = userChatSnapshot.data!.data() as Map<String, dynamic>?;
+                final userChats = userChatsData?['Chats'] as List<dynamic>? ?? [];
+
+                return StreamBuilder<DocumentSnapshot>(
+                  stream: _firestore.collection('Customer Care Chats').doc(_auth.currentUser!.uid).snapshots(),
+                  builder: (context, customerCareChatSnapshot) {
+                    if (customerCareChatSnapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (!customerCareChatSnapshot.hasData) {
+                      return Center(child: Text('No messages found'));
+                    }
+
+                    // Safely cast customer care chat data
+                    final customerCareChatsData = customerCareChatSnapshot.data!.data() as Map<String, dynamic>?;
+                    final customerCareChats = customerCareChatsData?['Chats'] as List<dynamic>? ?? [];
+
+                    // Combine both chats in interleaved order
+                    List<Map<String, dynamic>> interleavedChats = [];
+                    final maxLength = userChats.length > customerCareChats.length
+                        ? userChats.length
+                        : customerCareChats.length;
+
+                    for (int i = 0; i < maxLength; i++) {
+                      if (i < userChats.length) {
+                        interleavedChats.add({'text': userChats[i], 'isUser': true});
+                      }
+                      if (i < customerCareChats.length) {
+                        interleavedChats.add({'text': customerCareChats[i], 'isUser': false});
+                      }
+                    }
+
+                    return ListView.builder(
+                      itemCount: interleavedChats.length,
+                      itemBuilder: (context, index) => ListTile(
+                        title: Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10,left: 10,right: 10),
-                              child: Text(
-                                '${items[index]}\n',
-                                overflow: TextOverflow.visible,
-                                style: GoogleFonts.poppins(color: Colors.white, fontSize: 14),
-                                textAlign: TextAlign.center, // Center text horizontally
+                            interleavedChats[index]['isUser']
+                                ? const Spacer()
+                                : Container(),
+                            Container(
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                color: interleavedChats[index]['isUser']
+                                    ? const Color(0xFF1c2895)
+                                    : const Color(0xFF1c2835),
+                              ),
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    '${interleavedChats[index]['text']}\n',
+                                    overflow: TextOverflow.visible,
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                    )
-
-                  ],
-                ),
-              ),
+                    );
+                  },
+                );
+              },
             ),
           ),
           Padding(
@@ -138,20 +201,25 @@ class _HelpSectionState extends State<HelpSection> {
                       decoration: const InputDecoration(
                         hintText: 'Type your message...',
                         border: InputBorder.none,
-                        contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
                       ),
                     ),
                   ),
                   IconButton(
                     icon: Icon(Icons.send),
-                    onPressed: ()async{
-                      if(_helptext.text!=''){
+                    onPressed: () async {
+                      if (_helptext.text != '') {
                         setState(() {
                           items.add(_helptext.text);
                           isowner.add(true);
                         });
-                        final user=_auth.currentUser;
+                        final user = _auth.currentUser;
+                        await _firestore.collection('User Chats').doc(user!.uid).set(
+                          {
+                            'Chats': FieldValue.arrayUnion([_helptext.text])
+                          },
+                          SetOptions(merge: true),
+                        );
                         getresponse();
                       }
                     },
@@ -164,4 +232,5 @@ class _HelpSectionState extends State<HelpSection> {
       ),
     );
   }
+
 }
