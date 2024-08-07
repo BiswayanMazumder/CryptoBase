@@ -1,5 +1,6 @@
 import 'package:cryptobase/Deposit%20INR/deposithome.dart';
 import 'package:cryptobase/Home%20Screen/welcomepage.dart';
+import 'package:cryptobase/PortFolio/userportfolio.dart';
 import 'package:cryptobase/Profile%20Page/Your%20Account%20Page/account_homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -27,6 +28,7 @@ class _NavBarState extends State<NavBar> {
   final List screens=[
     WelcomeScreen(),
     DepositHome(),
+    PortFolio(),
     AccountHomePage(),
   ];
   @override
@@ -62,6 +64,9 @@ class _NavBarState extends State<NavBar> {
             ),
             GButton(icon: Icons.money,text: 'Wallet',
               backgroundColor: Colors.lightGreenAccent,
+            ),
+            GButton(icon: Icons.attach_money_outlined,text: 'Portfolio',
+              backgroundColor: Colors.yellowAccent,
             ),
             GButton(icon: Icons.person,text: 'Profile',
               backgroundColor: Colors.deepOrangeAccent,
