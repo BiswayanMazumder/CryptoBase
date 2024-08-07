@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Home%20Screen/welcomepage.dart';
+import 'package:cryptobase/Navigation%20Bar%20Page/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,10 @@ class _EmailLoginState extends State<EmailLogin> {
       // print(_emailController.text);
       await _auth.signInWithEmailAndPassword(email: _emailController.text,
           password: _passwordController.text);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NavBar()),
+      );
     }catch(e){
       print(e);
       setState(() {
@@ -70,7 +74,7 @@ class _EmailLoginState extends State<EmailLogin> {
           // print('User ID: ${user.uid}');
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => WelcomeScreen()),
+            MaterialPageRoute(builder: (context) => NavBar()),
           );
         }
       } else {

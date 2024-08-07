@@ -1,5 +1,6 @@
 import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:cryptobase/Login%20Page/getstarted.dart';
+import 'package:cryptobase/Navigation%20Bar%20Page/navbar.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       loadingText: Text("Loading...",style: GoogleFonts.poppins(
         color: Colors.white
       ),),
-      navigator: user!=null?WelcomeScreen():GetStarted(),
+      navigator: user!=null?NavBar():GetStarted(),
       durationInSeconds: 5,
     );
   }

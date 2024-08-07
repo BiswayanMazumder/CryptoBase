@@ -100,7 +100,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         id: 10, // Unique ID for the notification
         channelKey: 'basic_channel', // The channel where the notification will be sent
         title: 'Hello ${username}',
-        body: 'Greetings from CryptoBase family\n Invest more in ${name[0]} to get more profit value of ${name[0]} as of now is ₹${price[0]}',
+        body: 'Indian markets are likely to open on a positive note,tracking global cues.\n'
+            '• ${name[0]} : ${price[0]}\n'
+            '• ${name[1]} : ${price[1]}\n'
+            '• ${name[2]} : ${price[2]}\n',
         notificationLayout: NotificationLayout.Messaging,
       ),
     );
@@ -195,6 +198,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
     print('CB$tenDigitNumber');
   }
+  Future<void> recordlogintimes()async{
+    try{
+      final user=_auth.currentUser;
+      await _firestore.collection('Login Records').doc(user!.uid).set({
+        'Login Time':FieldValue.arrayUnion([DateTime.now()])
+      },SetOptions(merge: true));
+    }catch(e){
+      print(e);
+    }
+  }
   Future<void> storewalletaddress()async{
     final user=_auth.currentUser;
     final docsnap=await _firestore.collection('Wallet ID').doc(user!.uid).get();
@@ -223,6 +236,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     fetchname();
     storewalletaddress();
     generatenotifications();
+    recordlogintimes();
   }
 
   @override
@@ -258,20 +272,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: currencyicon,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AccountHomePage(),
-                  ),
-                );
-              },
-              child:const Icon(Icons.person,color: Colors.white,),
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(right: 10),
+          //   child: InkWell(
+          //     onTap: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (context) => AccountHomePage(),
+          //         ),
+          //       );
+          //     },
+          //     child:const Icon(Icons.person,color: Colors.white,),
+          //   ),
+          // ),
         ],
         leading:  InkWell(
           onTap: ()async{

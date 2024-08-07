@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptobase/Home%20Screen/welcomepage.dart';
 import 'package:cryptobase/Login%20Page/emaillogin.dart';
+import 'package:cryptobase/Navigation%20Bar%20Page/navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,10 @@ class _GetStartedState extends State<GetStarted> {
           setState(() {
             isloading=false;
           });
-          Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeScreen(),));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => NavBar()),
+          );
         }
         // Now the user should appear in Firebase Authentication
       } else {

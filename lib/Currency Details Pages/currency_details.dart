@@ -560,6 +560,22 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                               {
                                                 'Balance':final_balance
                                               });
+                                          await _firestore.collection('Portfolio Currency').doc(user!.uid).set(
+                                              {
+                                                'Currency':FieldValue.arrayUnion([cryptoname.toString().toUpperCase()])
+                                              },SetOptions(merge: true));
+                                          try{
+                                            await _firestore.collection('Portfolio Currency Volume').doc(user!.uid).set(
+                                                {
+                                                  'Currency':FieldValue.arrayUnion([(1 / (double.parse(widget.price)) * buyingprice).toStringAsFixed(5)])
+                                                },SetOptions(merge: true));
+                                          }catch(e){
+                                            print(e);
+                                          }
+                                          await _firestore.collection('Payment Refund').doc(user!.uid).set(
+                                              {
+                                                'Amount':FieldValue.arrayUnion([totalprice.toInt()])
+                                              },SetOptions(merge: true));
                                           Navigator.pop(context);
                                         }
                                       },
