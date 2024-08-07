@@ -40,7 +40,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
   bool isliked = false;
   int? Cryptoprice;
   double totalprice = 0.0;
-  int final_balance=0;
+  int final_balance = 0;
   // TextEditingController _pricecrypto=buyingprice.toString();
   int walletbalance = 0;
   Future<void> fetchbalance() async {
@@ -280,7 +280,6 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                               isbuying = false;
                                             });
                                             print(isbuying);
-
                                           },
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
@@ -549,48 +548,79 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                       height: 30,
                                     ),
                                     InkWell(
-                                      onTap: ()async{
-                                        if(walletbalance-totalprice>0){
+                                      onTap: () async {
+                                        if (walletbalance - totalprice > 0) {
                                           setState(() {
-                                            final_balance=(walletbalance-totalprice).round();
+                                            final_balance =
+                                                (walletbalance - totalprice)
+                                                    .round();
                                           });
                                           print(final_balance);
-                                          final user=_auth.currentUser;
-                                          await _firestore.collection('Wallet Balance').doc(user!.uid).set(
-                                              {
-                                                'Balance':final_balance
-                                              });
-                                          await _firestore.collection('Portfolio Currency').doc(user!.uid).set(
-                                              {
-                                                'Currency':FieldValue.arrayUnion([cryptoname.toString().toUpperCase()])
-                                              },SetOptions(merge: true));
-                                          try{
-                                            await _firestore.collection('Portfolio Currency Volume').doc(user!.uid).set(
-                                                {
-                                                  'Currency':FieldValue.arrayUnion([(1 / (double.parse(widget.price)) * buyingprice).toStringAsFixed(5)])
-                                                },SetOptions(merge: true));
-                                          }catch(e){
+                                          final user = _auth.currentUser;
+                                          await _firestore
+                                              .collection('Wallet Balance')
+                                              .doc(user!.uid)
+                                              .set({'Balance': final_balance});
+                                          await _firestore
+                                              .collection('Portfolio Currency')
+                                              .doc(user!.uid)
+                                              .set({
+                                            'Currency': FieldValue.arrayUnion([
+                                              cryptoname
+                                                  .toString()
+                                                  .toUpperCase()
+                                            ])
+                                          }, SetOptions(merge: true));
+                                          try {
+                                            await _firestore
+                                                .collection(
+                                                    'Portfolio Currency Volume')
+                                                .doc(user!.uid)
+                                                .set({
+                                              'Currency':
+                                                  FieldValue.arrayUnion([
+                                                (1 /
+                                                        (double.parse(
+                                                            widget.price)) *
+                                                        buyingprice)
+                                                    .toStringAsFixed(5)
+                                              ])
+                                            }, SetOptions(merge: true));
+                                          } catch (e) {
                                             print(e);
                                           }
-                                          await _firestore.collection('Payment Refund').doc(user!.uid).set(
-                                              {
-                                                'Amount':FieldValue.arrayUnion([totalprice.toInt()])
-                                              },SetOptions(merge: true));
+                                          await _firestore
+                                              .collection('Payment Refund')
+                                              .doc(user!.uid)
+                                              .set({
+                                            'Amount': FieldValue.arrayUnion(
+                                                [totalprice.toInt()])
+                                          }, SetOptions(merge: true));
                                           Navigator.pop(context);
                                         }
                                       },
                                       child: Container(
                                         height: 50,
                                         width: MediaQuery.sizeOf(context).width,
-                                        decoration:  BoxDecoration(
-                                            color:walletbalance-totalprice>0? Colors.green:Colors.grey,
-                                            borderRadius: const BorderRadius.all(
-                                                Radius.circular(10))),
+                                        decoration: BoxDecoration(
+                                            color:
+                                                walletbalance - totalprice > 0
+                                                    ? Colors.green
+                                                    : Colors.grey,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10))),
                                         child: Center(
                                           child: Text(
-                                            walletbalance-totalprice>0?'BUY':'INSUFFICIENT FUNDS',
+                                            walletbalance - totalprice > 0
+                                                ? 'BUY'
+                                                : 'INSUFFICIENT FUNDS',
                                             style: GoogleFonts.poppins(
-                                                color:walletbalance-totalprice>0? Colors.white:Colors.black,
+                                                color:
+                                                    walletbalance - totalprice >
+                                                            0
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 17),
                                           ),
@@ -647,12 +677,12 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                     height: 60,
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                       children: [
                                         InkWell(
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
-                                                .width /
+                                                    .width /
                                                 2,
                                             color: isbuying
                                                 ? const Color(0xFF232f3f)
@@ -678,7 +708,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                           },
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
-                                                .width /
+                                                    .width /
                                                 2,
                                             color: isbuying
                                                 ? Colors.transparent
@@ -705,7 +735,7 @@ class _Currency_DetailsState extends State<Currency_Details> {
                               ),
                               Padding(
                                 padding:
-                                const EdgeInsets.only(left: 20, right: 20),
+                                    const EdgeInsets.only(left: 20, right: 20),
                                 child: Column(
                                   children: [
                                     Row(
@@ -759,15 +789,15 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                                 setModalState(() {
                                                   buyingprice += 0.1;
                                                   totalprice = (((double.parse(
-                                                      widget.price) *
-                                                      (1 /
-                                                          (double.parse(
-                                                              widget
-                                                                  .price)) *
-                                                          buyingprice)) +
+                                                              widget.price) *
+                                                          (1 /
+                                                              (double.parse(
+                                                                  widget
+                                                                      .price)) *
+                                                              buyingprice)) +
                                                       (0.05 *
                                                           (double.parse(widget
-                                                              .price) *
+                                                                  .price) *
                                                               (1 /
                                                                   (double.parse(
                                                                       widget
@@ -796,16 +826,16 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                                   setModalState(() {
                                                     buyingprice -= 0.1;
                                                     totalprice = (((double
-                                                        .parse(widget
-                                                        .price) *
-                                                        (1 /
-                                                            (double.parse(
-                                                                widget
-                                                                    .price)) *
-                                                            buyingprice)) +
+                                                                .parse(widget
+                                                                    .price) *
+                                                            (1 /
+                                                                (double.parse(
+                                                                    widget
+                                                                        .price)) *
+                                                                buyingprice)) +
                                                         (0.05 *
                                                             (double.parse(widget
-                                                                .price) *
+                                                                    .price) *
                                                                 (1 /
                                                                     (double.parse(
                                                                         widget
@@ -943,32 +973,50 @@ class _Currency_DetailsState extends State<Currency_Details> {
                                       height: 30,
                                     ),
                                     InkWell(
-                                      onTap: ()async{
+                                      onTap: () async {
                                         // if(walletbalance-totalprice>0){
-                                          setState(() {
-                                            final_balance=(walletbalance+totalprice).round();
-                                          });
-                                          print(final_balance);
-                                          final user=_auth.currentUser;
-                                          await _firestore.collection('Wallet Balance').doc(user!.uid).set(
-                                              {
-                                                'Balance':final_balance
-                                              });
-                                          Navigator.pop(context);
+                                        setState(() {
+                                          final_balance =
+                                              (walletbalance + totalprice)
+                                                  .round();
+                                        });
+                                        print(final_balance);
+                                        final user = _auth.currentUser;
+                                        await _firestore
+                                            .collection('Wallet Balance')
+                                            .doc(user!.uid)
+                                            .set({'Balance': final_balance});
+                                        try{
+                                          await _firestore
+                                              .collection('Payment Amount')
+                                              .doc(user!.uid)
+                                              .set({
+                                            'Amount': FieldValue.arrayUnion(
+                                                [totalprice.toInt()])
+                                          }, SetOptions(merge: true));
+                                        }catch(e){
+                                          print(e);
+                                        }
+                                        // Navigator.pop(context);
+                                        Navigator.pop(context);
                                         // }
                                       },
                                       child: Container(
                                         height: 50,
                                         width: MediaQuery.sizeOf(context).width,
-                                        decoration:  const BoxDecoration(
-                                            color:Colors.red,
+                                        decoration: const BoxDecoration(
+                                            color: Colors.red,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
                                         child: Center(
                                           child: Text(
                                             'SELL',
                                             style: GoogleFonts.poppins(
-                                                color:walletbalance-totalprice>0? Colors.white:Colors.black,
+                                                color:
+                                                    walletbalance - totalprice >
+                                                            0
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 17),
                                           ),
