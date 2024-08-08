@@ -53,9 +53,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void setcurrencyicon() async {
     await readfetcheddata();
     setState(() {
-      if (currency == 'USDT')
+      if (currency == 'USDT') {
         currencyicon = Icon(Icons.currency_lira, color: Colors.white);
-      else if (currency == 'INR')
+      } else if (currency == 'INR')
         currencyicon = Icon(Icons.currency_rupee, color: Colors.white);
       else if (currency == 'BTC')
         currencyicon = Icon(Icons.currency_bitcoin, color: Colors.white);
@@ -525,9 +525,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           ),
                         ),
                       ),
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20),
+                      const Spacer(),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 20),
                         child: InkWell(
                           child: Icon(
                             Icons.arrow_forward,
