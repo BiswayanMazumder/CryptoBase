@@ -131,4 +131,54 @@ body{
   text-align: center; 
   text-decoration: none;      /* Center text in case of multiline text */
 }
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 20%;
+  border: 0.8px solid black;
+}
+.firstoption {
+  position: relative;
+  top: 50px;
+  height: 40px; /* Use this height */
+  font-weight: 200; /* Keep only one font-weight declaration */
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: orangered;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  align-items: center; /* Vertically centers the content */
+  gap: 10px;
+  padding-left: 20px;
+  border-radius: 20px;
+}
+
+.sidebarimage {
+  height: 25px; /* Adjust image size if needed */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.otheroptions {
+  position: relative;
+  top: 100px; /* You can adjust or remove this if needed */
+  height: 40px; /* Use this height */
+  font-weight: 200; /* Keep only one font-weight declaration */
+  font-size: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* background-color: orangered; */
+  color: black;
+  display: flex;
+  align-items: center; /* Vertically centers the content */
+  gap: 10px;
+  padding-left: 20px;
+  border-radius: 20px;
+}
+.otheroptions:hover{
+  background-color: orangered;
+}
+
 

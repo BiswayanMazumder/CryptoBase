@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 export default function Homepage() {
   useEffect(() => {
     document.title = 'Welcome To CryproBase Admin Panel';
@@ -33,7 +33,7 @@ export default function Homepage() {
         <div className="textfields">
           <input type="password" className='emailfield' placeholder='Enter Password' />
         </div>
-        <Link className="siginbutton">
+        <Link className="siginbutton" to={'/home'}>
         <div>
           <center>SIGN IN</center>
         </div>

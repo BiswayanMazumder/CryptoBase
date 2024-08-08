@@ -7,12 +7,16 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import Sidebar from './Side Bar/sidebar';
 
 function App() {
   return (
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
+        </Routes>
+        <Routes>
+          <Route path="/home" element={<Sidebar />} />
         </Routes>
     </BrowserRouter>
   );
