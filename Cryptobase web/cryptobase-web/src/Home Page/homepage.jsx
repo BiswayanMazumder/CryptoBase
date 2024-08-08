@@ -13,14 +13,29 @@ export default function Homepage() {
         className='Homepageimg'
       />
       <div className="loginoptions">
-      <img src="https://firebasestorage.googleapis.com/v0/b/cryptobase-admin.appspot.com/o/CryptoBase%20Admin%20photos%2Fcryptobaselogo.png?alt=media&token=ad490f3d-9ecd-451d-bab9-e7d3974093a0" 
-      alt="image" className='logoimage'/>
-      <div className="welcometext">
-        Welcome Back!!!
-      </div>
-      <div className="header">
-      <h1>Sign In!!!</h1>
-      </div>
+        <img src="https://firebasestorage.googleapis.com/v0/b/cryptobase-admin.appspot.com/o/CryptoBase%20Admin%20photos%2Fcryptobaselogo.png?alt=media&token=ad490f3d-9ecd-451d-bab9-e7d3974093a0"
+          alt="image" className='logoimage' />
+        <div className="welcometext">
+          Welcome Back!!!
+        </div>
+        <div className="header">
+          <h1>Sign In!!!</h1>
+        </div>
+        <div className="emailtext">
+          Email
+        </div>
+        <div className="textfields">
+          <input type="text" className='emailfield' placeholder='Enter Email' />
+        </div>
+        <div className="passwordtext">
+          Password
+        </div>
+        <div className="textfields">
+          <input type="text" className='emailfield' placeholder='Enter Password' />
+        </div>
+        <div className="siginbutton">
+          <center>SIGN IN</center>
+        </div>
       </div>
     </div>
   );
