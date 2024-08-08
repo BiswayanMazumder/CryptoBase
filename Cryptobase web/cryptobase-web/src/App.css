@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 .App {
   text-align: center;
 }
@@ -35,4 +39,53 @@
   to {
     transform: rotate(360deg);
   }
+}
+.homepage {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Optional: Hide any overflow */
+}
+
+.Homepageimg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; /* Ensure the image covers the container */
+}
+
+.loginoptions {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 80vh; /* Adjust height as needed */
+  background-color: black;
+  border: 0.8px solid white;
+  color:white;
+  border-radius: 10px;
+  padding-left: 20px;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  opacity: 0.5;
+  box-shadow: white;
+}
+.logoimage{
+  padding-top: 50px;
+  padding-left: 20px;
+  width: 30%;
+  height: 20%;
+}
+.welcometext{
+  padding-top: 30px;
+  padding-left: 20px;
+  color: white;
+}
+.header{
+  padding-top: 20px;
+  padding-left: 20px;
+  color: white;
 }
