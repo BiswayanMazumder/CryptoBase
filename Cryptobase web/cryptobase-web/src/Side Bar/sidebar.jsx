@@ -7,7 +7,7 @@ export default function Sidebar() {
                 <Link className="linktexts">
                 <div className="firstoption">
                     <img src="https://app.litebite.rdiff.ridiv.in/static/media/Subscribers.cec7b8685986133672e3dc0f6c70c65b.svg" alt="" className='sidebarimage' />
-                    Users
+                    Users Overview
                 </div>
                 </Link>
                 <Link className='linktexts'>

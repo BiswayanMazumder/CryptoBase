@@ -212,10 +212,10 @@ body{
   top: 100px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-left: 50px;
   margin-right: 50px;
-  width: 100%;
+  width: 90%;
   height: 80px;
   background-color: orangered;
 }
@@ -230,4 +230,5 @@ body{
   color: white;
   padding-top: 30px;
   padding-left: 70px;
+  padding-right: 70px;
 }

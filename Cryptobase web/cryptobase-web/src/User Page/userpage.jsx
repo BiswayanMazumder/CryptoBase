@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from '../Side Bar/sidebar'
 
 export default function Userpage() {
+    useEffect(() => {
+        document.title = 'CryproBase Admin Panel';
+      }, []);
   return (
+    
     <div className="pages">
         <Sidebar />
         <div className="detailspage">
