@@ -4,11 +4,14 @@
 }
 body{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
 }
 .App {
   text-align: center;
 }
-
+.scrollable-container::-webkit-scrollbar {
+  display: none;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -207,28 +210,37 @@ body{
   width: 25%;
   border: 0.8px solid black;
 }
-.tables {
-  position: relative;
-  top: 100px;
+.pages {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-left: 50px;
-  margin-right: 50px;
-  width: 90%;
-  height: 80px;
+}
+
+.detailspage {
+  flex: 1;
+  margin: 20px;
+}
+
+.userTable {
+  width: 100%;
+  position: relative;
+  top: 10vh;
+  border-collapse: collapse;
+}
+
+.userTable th,
+.userTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.userTable th {
   background-color: orangered;
+  text-align: left;
 }
-.ListDetails{
-  list-style: none;
-  color: white;
-  padding-top: 30px;
-  padding-left: 70px;
+
+.userTable tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
-.ListDetails2{
-  list-style: none;
-  color: white;
-  padding-top: 30px;
-  padding-left: 70px;
-  padding-right: 70px;
+
+.userTable tr:hover {
+  background-color: orangered;
 }
