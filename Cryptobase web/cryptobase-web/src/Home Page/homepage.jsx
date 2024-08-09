@@ -1,9 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
+  authDomain: "cryptobase-admin.firebaseapp.com",
+  projectId: "cryptobase-admin",
+  storageBucket: "cryptobase-admin.appspot.com",
+  messagingSenderId: "1090236390686",
+  appId: "1:1090236390686:web:856b22fd209b267b89fd0f",
+  measurementId: "G-LTBWYEEF6E"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
 export default function Homepage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   useEffect(() => {
-    document.title = 'Welcome To CryproBase Admin Panel';
+    document.title = 'Welcome To CryptoBase Admin Panel';
   }, []);
+
+  const LoginUser = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      window.location.replace('/home');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // Handle errors here
+      console.error('Error signing in:', errorCode, errorMessage);
+    }
+  }
 
   return (
     <div className='homepage'>
@@ -21,20 +56,32 @@ export default function Homepage() {
         <div className="header">
           <h1>Sign In!!!</h1>
         </div>
-        <div className="emailtext">
+        <div className="emailtext" >
           Email
         </div>
         <div className="textfields">
-          <input type="text" className='emailfield' placeholder='Enter Email' />
+          <input 
+            type="text" 
+            className='emailfield' 
+            placeholder='Enter Email' 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="passwordtext">
           Password
         </div>
-        <div className="textfields">
-          <input type="password" className='emailfield' placeholder='Enter Password' />
+        <div className="textfields" >
+          <input 
+            type="password" 
+            className='emailfield' 
+            placeholder='Enter Password' 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        <Link className="siginbutton" to={'/home'}>
-        <div>
+        <Link  className='linktexts'>
+        <div className="siginbutton" onClick={LoginUser}>
           <center>SIGN IN</center>
         </div>
         </Link>
