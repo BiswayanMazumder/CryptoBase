@@ -72,7 +72,7 @@ export default function Userpage() {
           placeholder="Search by name"
           value={searchTerm}
           onChange={handleSearch}
-          style={{ margin: '10px', padding: '8px', width: '300px', fontWeight: 'bold' }}
+          style={{ margin: '10px', padding: '8px', width: '300px', fontWeight: '600' }}
         />
         <table className="userTable">
           <thead>
