@@ -244,3 +244,30 @@ body{
 .userTable tr:hover {
   background-color: orangered;
 }
+.header{
+  display: flex;
+  flex-direction: row;
+
+}
+.exportbutton{
+  position: relative;
+  background-color: orangered;
+  height: 30px;
+  top: 5px;
+  width: 110px;
+  text-decoration: none;
+  left: 50%;
+  color: white;
+  /* font-size: 11; */
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: 8px;
+  padding-top: 10px;
+  transition: 0.3s ease;
+}
+.exportbutton:hover{
+  background-color: white;
+  color: orangered;
+  border: 0.8px solid orangered;
+}

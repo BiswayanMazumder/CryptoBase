@@ -4,6 +4,7 @@ import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { Link } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
@@ -67,6 +68,7 @@ export default function Userpage() {
     <div className="pages">
       <Sidebar />
       <div className="detailspage">
+        <div className="header">
         <input
           type="text"
           placeholder="Search by name"
@@ -74,6 +76,10 @@ export default function Userpage() {
           onChange={handleSearch}
           style={{ margin: '10px', padding: '8px', width: '300px', fontWeight: '600' }}
         />
+       <Link className='exportbutton'>
+       <div >Export CSV</div>
+       </Link>
+        </div>
         <table className="userTable">
           <thead>
             <tr>
