@@ -230,11 +230,15 @@ body{
 .userTable td {
   border: 1px solid #ddd;
   padding: 8px;
+  justify-content: center;
+  text-align: center;
 }
 
 .userTable th {
   background-color: orangered;
   text-align: left;
+  justify-content: center;
+  text-align: center;
 }
 
 .userTable tr:nth-child(even) {
