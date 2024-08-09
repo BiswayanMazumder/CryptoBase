@@ -139,46 +139,47 @@ body{
   border: 0.8px solid black;
 }
 .firstoption {
-  position: relative;
-  top: 50px;
-  height: 40px; /* Use this height */
-  font-weight: 200; /* Keep only one font-weight declaration */
+  height: 40px; /* Height of the option */
+  font-weight: 200;
   font-size: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-top: 50px;
+  margin-bottom: 30px; /* Space below the first option */
   background-color: orangered;
   color: black;
   text-decoration: none;
   display: flex;
-  align-items: center; /* Vertically centers the content */
+  align-items: center;
   gap: 10px;
   padding-left: 20px;
   border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .sidebarimage {
-  height: 25px; /* Adjust image size if needed */
+  height: 25px;
   width: auto; /* Maintain aspect ratio */
 }
 
 .otheroptions {
-  position: relative;
-  top: 100px; /* You can adjust or remove this if needed */
-  height: 40px; /* Use this height */
-  font-weight: 200; /* Keep only one font-weight declaration */
+  height: 40px;
+  font-weight: 200;
   font-size: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  /* background-color: orangered; */
+  margin-bottom: 30px; /* Space between other options */
   color: black;
   display: flex;
-  align-items: center; /* Vertically centers the content */
+  align-items: center;
+  text-decoration: none;
   gap: 10px;
   padding-left: 20px;
   border-radius: 20px;
+  transition: background-color 0.8s ease; 
 }
-.otheroptions:hover{
+
+.otheroptions:hover {
   background-color: orangered;
+  color: white;
 }
-
-
+.linktexts{
+  text-decoration: none;
+}
