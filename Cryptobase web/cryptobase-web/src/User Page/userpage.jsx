@@ -27,6 +27,7 @@ export default function Userpage() {
   }, []);
 
   const [userDetails, setUserDetails] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,10 +53,27 @@ export default function Userpage() {
     fetchData();
   }, []);
 
+  // Handle the search input change
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filter users based on search term
+  const filteredUsers = userDetails.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="pages">
       <Sidebar />
       <div className="detailspage">
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={searchTerm}
+          onChange={handleSearch}
+          style={{ margin: '10px', padding: '8px', width: '300px', fontWeight: 'bold' }}
+        />
         <table className="userTable">
           <thead>
             <tr>
@@ -65,13 +83,19 @@ export default function Userpage() {
             </tr>
           </thead>
           <tbody>
-            {userDetails.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3">No users found</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
