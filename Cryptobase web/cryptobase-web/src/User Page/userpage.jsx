@@ -64,19 +64,39 @@ export default function Userpage() {
     user.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Function to download CSV
+  const downloadCSV = () => {
+    const headers = ["User ID", "User Name", "User Email","user profilePic", "Date of Registration"];
+    const rows = filteredUsers.map(user => [user.id, user.name, user.email,user.profilePic,user.dateOfRegistration]);
+    const csvContent = [
+      headers.join(","),
+      ...rows.map(row => row.join(","))
+    ].join("\n");
+
+    // Create a blob with the CSV data and create a download link
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "Registered Users.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="pages">
       <Sidebar />
       <div className="detailspage">
         <div className="header">
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ margin: '10px', padding: '8px', width: '300px', fontWeight: '600' }}
-        />
-       <Link className='exportbutton'>
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={searchTerm}
+            onChange={handleSearch}
+            style={{ margin: '10px', padding: '8px', width: '300px', fontWeight: '600' }}
+          />
+          <Link className='exportbutton' onClick={downloadCSV}>
        <div >Export CSV</div>
        </Link>
         </div>
