@@ -23,35 +23,40 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 export default function Userpage() {
-  useEffect(() => {
-    document.title = 'CryptoBase Admin Panel';
-  }, []);
-
   const [userDetails, setUserDetails] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "User Details"));
-        const details = querySnapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            name: data.Name || '',
-            email: data.Email || '',
-            profilePic: data['Profile Pic'] || '',
-            dateOfRegistration: data['Date Of Registration'] || '',
-          };
-        });
-        setUserDetails(details);
-        console.log(details); // Logging details to verify fetched data
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      }
-    };
+  // Fetch user data
+  const fetchData = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "User Details"));
+      const details = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          name: data.Name || '',
+          email: data.Email || '',
+          profilePic: data['Profile Pic'] || '',
+          dateOfRegistration: data['Date Of Registration'] || '',
+        };
+      });
+      setUserDetails(details);
+      // console.log(details); // Logging details to verify fetched data
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
 
+  useEffect(() => {
+    // Set the document title
+    document.title = 'CryptoBase Admin Panel';
+
+    // Fetch data initially
     fetchData();
+
+    // Set up interval to fetch data every 30 seconds (adjust as needed)
+
+    // Clean up interval on component unmount
   }, []);
 
   // Handle the search input change
@@ -66,8 +71,8 @@ export default function Userpage() {
 
   // Function to download CSV
   const downloadCSV = () => {
-    const headers = ["User ID", "User Name", "User Email","user profilePic", "Date of Registration"];
-    const rows = filteredUsers.map(user => [user.id, user.name, user.email,user.profilePic,user.dateOfRegistration]);
+    const headers = ["User ID", "User Name", "User Email", "User Profile Pic", "Date of Registration"];
+    const rows = filteredUsers.map(user => [user.id, user.name, user.email, user.profilePic, user.dateOfRegistration]);
     const csvContent = [
       headers.join(","),
       ...rows.map(row => row.join(","))
@@ -97,8 +102,8 @@ export default function Userpage() {
             style={{ margin: '10px', padding: '8px', width: '300px', fontWeight: '600' }}
           />
           <Link className='exportbutton' onClick={downloadCSV}>
-       <div >Export CSV</div>
-       </Link>
+            <div>Export CSV</div>
+          </Link>
         </div>
         <table className="userTable">
           <thead>
