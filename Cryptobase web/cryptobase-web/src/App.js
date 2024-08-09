@@ -8,6 +8,7 @@ import {
   Route
 } from 'react-router-dom';
 import Sidebar from './Side Bar/sidebar';
+import Userpage from './User Page/userpage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
         </Routes>
         <Routes>
-          <Route path="/home" element={<Sidebar />} />
+          <Route path="/home" element={<Userpage />} />
         </Routes>
     </BrowserRouter>
   );
