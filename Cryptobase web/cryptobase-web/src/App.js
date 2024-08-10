@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Sidebar from './Side Bar/sidebar';
 import Userpage from './User Page/userpage';
+import Userpanverifications from './Home Page/userpanverifications';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/home" element={<Userpage />} />
+        </Routes>
+        <Routes>
+          <Route path="/verifications" element={<Userpanverifications />} />
         </Routes>
     </BrowserRouter>
   );
