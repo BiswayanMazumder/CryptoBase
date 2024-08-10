@@ -117,9 +117,9 @@ export default function Userpage() {
             {filteredUsers.length > 0 ? (
               filteredUsers.map((user) => (
                 <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+                  <td style={{fontSize:'13px'}}>{user.id}</td>
+                  <td style={{fontSize:'13px'}}>{user.name}</td>
+                  <td style={{fontSize:'13px'}}>{user.email}</td>
                 </tr>
               ))
             ) : (

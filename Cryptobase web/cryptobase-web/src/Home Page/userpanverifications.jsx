@@ -25,6 +25,7 @@ const db = getFirestore(app);
 export default function Userpanverifications() {
   const [userDetails, setUserDetails] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [verificationStatusMap, setVerificationStatusMap] = useState(new Map());
 
   // Fetch user data
   const fetchData = async () => {
@@ -38,12 +39,26 @@ export default function Userpanverifications() {
           email: data.Email || '',
           profilePic: data['Profile Pic'] || '',
           dateOfRegistration: data['Date Of Registration'] || '',
+          verification: verificationStatusMap.get(doc.id) || false, // Add verification status
         };
       });
       setUserDetails(details);
-      // console.log(details); // Logging details to verify fetched data
     } catch (error) {
       console.error("Error fetching user details:", error);
+    }
+  };
+
+  const fetchVerificationStatus = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "User Verification"));
+      const statusMap = new Map();
+      querySnapshot.docs.forEach((doc) => {
+        const data = doc.data();
+        statusMap.set(doc.id, data.verification || false);
+      });
+      setVerificationStatusMap(statusMap);
+    } catch (error) {
+      console.error("Error fetching verification status:", error);
     }
   };
 
@@ -52,12 +67,17 @@ export default function Userpanverifications() {
     document.title = 'CryptoBase Admin Panel';
 
     // Fetch data initially
+    fetchVerificationStatus();
     fetchData();
-
+    
     // Set up interval to fetch data every 30 seconds (adjust as needed)
+    const interval = setInterval(() => {
+      fetchData();
+    }, 300000);
 
     // Clean up interval on component unmount
-  }, []);
+    return () => clearInterval(interval);
+  }, [verificationStatusMap]);
 
   // Handle the search input change
   const handleSearch = (event) => {
@@ -71,8 +91,8 @@ export default function Userpanverifications() {
 
   // Function to download CSV
   const downloadCSV = () => {
-    const headers = ["User ID", "User Name", "User Email", "User Profile Pic", "Date of Registration"];
-    const rows = filteredUsers.map(user => [user.id, user.name, user.email, user.profilePic, user.dateOfRegistration]);
+    const headers = ["User ID", "User Name", "User Email", "User Profile Pic", "Date of Registration", "Verification Status"];
+    const rows = filteredUsers.map(user => [user.name, user.email, user.profilePic, user.dateOfRegistration, user.verification]);
     const csvContent = [
       headers.join(","),
       ...rows.map(row => row.join(","))
@@ -83,10 +103,15 @@ export default function Userpanverifications() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", "Registered Users.csv");
+    link.setAttribute("download", "User Verification Status.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  // Handle row click
+  const handleRowClick = (userName) => {
+    console.log(userName);
   };
 
   return (
@@ -108,18 +133,19 @@ export default function Userpanverifications() {
         <table className="userTable">
           <thead>
             <tr>
-              <th>User ID</th>
               <th>User Name</th>
-              <th>User Email</th>
+              <th>Verification Status</th>
+              <th>Email Address</th>
+              {/* <th>Actions</th> */}
             </tr>
           </thead>
           <tbody>
             {filteredUsers.length > 0 ? (
               filteredUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+                <tr key={user.id} onClick={() => handleRowClick(user.name)}>
+                  <td style={{fontSize:'13px'}}>{user.name}</td>
+                  <td style={{ color: user.verification ? 'green' : 'red',fontSize:'13px' }}>{user.verification ? "User Verified" : "User Not Verified"}</td>
+                  <td style={{ color: user.verification ? 'green' : 'red' ,fontSize:'13px'}}>{user.email}</td>
                 </tr>
               ))
             ) : (

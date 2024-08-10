@@ -31,7 +31,7 @@ export default function Sidebar() {
                 <Link className='linktexts' to={'/verifications'}>
                 <div className="otheroptions">
                     <img src="https://app.litebite.rdiff.ridiv.in/static/media/Orders.3c6715b85b4f1b027e5f35bed30187f2.svg" alt="" className='sidebarimage' />
-                    Users PAN Verifications
+                    Users KYC Verifications
                 </div>
                 </Link> 
                 <Link className="linktexts">
