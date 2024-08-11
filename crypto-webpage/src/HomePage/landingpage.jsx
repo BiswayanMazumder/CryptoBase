@@ -127,7 +127,7 @@ export default function Landingpage() {
                         </center>
                         Seamless API Trading
                         <div className="subtextfeature">
-                        Amplify your crypto trading <br /> experience with WazirX through <br />seamless API integration.
+                        Amplify your crypto trading <br /> experience with ChainTrade through <br />seamless API integration.
                         </div>
                     </div>
                 </section>
