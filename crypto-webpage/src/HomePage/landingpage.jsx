@@ -10,7 +10,7 @@ export default function Landingpage() {
         <>
             <div className="webbody" onLoad={setdoctitle()}>
                 <div className="firstpart">
-                    <img src="https://cdn.dribbble.com/userupload/3726865/file/original-332b7cf604fac4578e206989fffe9eee.png?resize=1200x817&vertical=center" alt="" className='bodyimage' />
+                    <video src="https://videos.pexels.com/video-files/4389377/4389377-uhd_2732_1440_30fps.mp4" alt="" className='bodyimage' autoPlay loop muted />
                     <div className="firstpartcontents">
                         <div className="texts">
                             <div className="headers">
