@@ -17,7 +17,7 @@ export default function Landingpage() {
                                 <Typewriter
                                     options={{
                                         strings: ['India का  Ripple ', 'India का  Solana ', 'India का  Tron ',
-                                            'India का  Matic ', 'India का  Etherium ', 'India का  Shiba Inu '],
+                                            'India का  Matic ', 'India का  Ethereum ', 'India का  Shiba Inu '],
                                         autoStart: true,
                                         loop: true,
                                         cursor: '|',
