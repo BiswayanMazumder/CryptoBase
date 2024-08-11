@@ -41,10 +41,10 @@ export default function Landingpage() {
                                             </div>
                                         </Link>
                                         <Link className="signupbtn">
-                                        <div >
-                                            SIGN UP
-                                        </div>
-                                    </Link>
+                                            <div >
+                                                SIGN UP
+                                            </div>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="downloadbtn">
@@ -77,19 +77,62 @@ export default function Landingpage() {
                         </div>
                     </div>
                 </div>
-                <div className="secondpart">
+                <section className="secondpart">
                     <div className="firstinfo">
-                    300+ cryptos to invest in for your next big move
-                    <img src="
+                        300+ cryptos to invest in for your next big move
+                        <img src="
                     https://media.wazirx.com/web_assets/cryptos/dark/3x.png" alt="" className='detailsimg' />
                     </div>
                     <div className="firstinfo">
-                    India’s best prices, driven by highest liquidity
-                    <img src="
+                        India’s best prices, driven by highest liquidity
+                        <img src="
                     https://media.wazirx.com/web_assets/liquidity/dark/3x.png" alt="" className='detailsimg' />
                     </div>
-                </div>
-                <br /><br />
+                </section>
+                <center>
+                <section className='thirdsection'>
+                    <div className="firstfeature">
+                        <center>
+                            <div className="featurebox">
+                                <center>
+                                    <img src="https://media.wazirx.com/web_assets/good_security_white/dark/1x.svg" alt="" className='featureimage' />
+                                </center>
+                            </div>
+                        </center>
+                        KYC - Swift & Compliant
+                        <div className="subtextfeature">
+                        Experience seamless onboarding <br />with swift KYC processes, ensuring <br />full compliance with regulations.
+                        </div>
+                    </div>
+                    <div className="firstfeature" >
+                        <center>
+                            <div className="featurebox" style={{ backgroundColor: '#EE895B' }}>
+                                <center>
+                                    <img src="https://media.wazirx.com/web_assets/live_help_white/dark/1x.svg" alt="" className='featureimage' />
+                                </center>
+                            </div>
+                        </center>
+                        24/7 Support
+                        <div className="subtextfeature">
+                        Like a trusted friend, our 24/7 expert <br /> support is always there, making your <br /> crypto investment journey smoother.
+                        </div>
+                    </div>
+                    <div className="firstfeature">
+                        <center>
+                            <div className="featurebox" style={{ backgroundColor: "#F56565" }}>
+                                <center>
+                                    <img src="https://media.wazirx.com/web_assets/api_white/dark/1x.svg" alt="" className='featureimage' />
+                                </center>
+                            </div>
+                        </center>
+                        Seamless API Trading
+                        <div className="subtextfeature">
+                        Amplify your crypto trading <br /> experience with WazirX through <br />seamless API integration.
+                        </div>
+                    </div>
+                </section>
+                </center>
+                <br /><br /><br />
             </div>
         </>
     )

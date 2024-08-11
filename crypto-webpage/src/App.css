@@ -17,10 +17,12 @@ body {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-html{
+
+html {
   height: 100%;
   width: 100%;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -75,7 +77,8 @@ html{
   text-align: start;
   color: #d9e1eb;
 }
-.secondpart{
+
+.secondpart {
   position: relative;
   color: white;
   /* Text color */
@@ -98,6 +101,7 @@ html{
   flex-wrap: wrap;
   gap: 50px;
 }
+
 .subtext {
   position: relative;
   top: 50px;
@@ -122,12 +126,14 @@ html{
   height: 469px;
   padding-left: 5px;
 }
-.heroimagemobo{
+
+.heroimagemobo {
   position: relative;
   top: 50px;
   height: 800px;
   /* width: 300px; */
 }
+
 .texts {
   display: flex;
   flex-direction: row;
@@ -188,13 +194,14 @@ html{
 }
 
 /* First Part Resposiveness */
-.detailsimg{
+.detailsimg {
   height: 223px;
   width: 443px;
   position: relative;
   top: 40px;
 }
-.firstinfo{
+
+.firstinfo {
   display: flex;
   flex-direction: column;
   font-size: 20px;
@@ -204,12 +211,59 @@ html{
   background-color: #212C3A;
   border-radius: 20px;
 }
+
+.thirdsection {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 50px;
+  top: 50px;
+  padding: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  /* height: 50px; */
+  margin-left: 20px;
+  margin-right: 20px;
+  flex-wrap: wrap;
+  /* background-color: red; */
+}
+.firstfeature{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+.featurebox{
+  position: relative;
+  display: flex;
+  height: 60px;
+  width: 60px;
+  justify-content: center;
+  background-color: #3BA072;
+  border-radius: 10px;
+}
+.featureimage{
+  justify-content: center;
+  position: relative;
+  top: 20%;
+}
+.subtextfeature{
+  color:grey;
+  font-weight: 400;
+  font-size: 18px;
+}
 @media screen and (min-width:741px) {
   .downloadbtnmobo {
     display: none;
   }
-  
+
 }
+
 @media screen and (max-width:740px) {
   .heroimage {
     display: flex;
@@ -218,12 +272,14 @@ html{
     /* left: 8vw; */
     justify-content: start;
   }
+
   .subtext {
     position: relative;
     display: flex;
     justify-content: center;
   }
-  .downloadbtn{
+
+  .downloadbtn {
     display: none;
     /* position: relative;
     display: flex;
@@ -231,16 +287,18 @@ html{
     align-self: center;
     width: 100vw; */
   }
-  .downloadbtnmobo{
+
+  .downloadbtnmobo {
     display: flex;
     position: relative;
     justify-content: center;
     width: 100vw;
     gap: 20px;
-    left:40vw;
+    left: 40vw;
     /* transform: translate(-50%, -50%); */
   }
-  .externalbtnsmobo{
+
+  .externalbtnsmobo {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -248,14 +306,18 @@ html{
     top: 100px;
     justify-content: center;
   }
-  .signupbtn, .playstorebtn{
+
+  .signupbtn,
+  .playstorebtn {
     width: 100vw;
   }
-  .secondpart{
+
+  .secondpart {
+    /* position: relative; */
+    top: 1350px;
     position: relative;
-    top:1350px;
     display: flex;
-    /* flex-direction: row; */
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     /* width: 500vw; */
@@ -263,6 +325,7 @@ html{
     /* background-color: red; */
   }
 }
+
 @media screen and (max-width:740px) {
   .texts {
     position: relative;
@@ -273,17 +336,25 @@ html{
     align-self: center;
     /* background-color: red; */
   }
-
-}
-@media screen and (max-width:740px) {
-  .bodyimage {
-    display: none;
-    
+  .thirdsection{
+    position: relative;
+    top: 1400px;
+    justify-content: center;
+    left: 55%;
   }
 
 }
+
 @media screen and (max-width:740px) {
-  .heroimagecont{
+  .bodyimage {
+    display: none;
+
+  }
+
+}
+
+@media screen and (max-width:740px) {
+  .heroimagecont {
     position: relative;
     /* background-color: red; */
     /* width: 100vw; */
