@@ -1,14 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
+
 export default function Landingpage() {
     function setdoctitle() {
-        document.title = 'Buy Bitcoin, Cryptocurrency at India’s Largest Exchange | Trading Platform | CryptoBase'
+        document.title = 'Buy Bitcoin, Cryptocurrency at India’s Largest Exchange | Trading Platform | CryptoBase';
     }
+
+    function changefeature() {
+        var thirdsection = document.querySelector('.thirdsection');
+        thirdsection.scrollIntoView({ behavior: "smooth" });
+        thirdsection.innerHTML += `<img src="https://media.wazirx.com/web_assets/landing_page_feature1/dark/3x.png" alt="" className='featureimagechanging'  />`;
+    }
+
+    const images = [
+        'https://media.wazirx.com/web_assets/landing_page_feature1/dark/3x.png',
+        'https://media.wazirx.com/web_assets/landing_page_feature2/dark/3x.png',
+        'https://media.wazirx.com/web_assets/landing_page_feature3/dark/3x.png',
+        'https://media.wazirx.com/web_assets/landing_page_feature4/dark/3x.png'
+    ];
+
+    useEffect(() => {
+        setdoctitle();
+
+        const interval = setInterval(() => {
+            const elements = document.querySelectorAll('.subtextfeaturechanging span');
+            const currentIndex = Math.floor(Date.now() / 10000) % elements.length;
+            elements.forEach((element, index) => {
+                element.style.color = index === currentIndex ? 'white' : 'grey';
+            });
+
+            // Change the image
+            const imageElement = document.querySelector('.featureimagechanging');
+            if (imageElement) {
+                imageElement.src = images[currentIndex];
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <>
-            <div className="webbody" onLoad={setdoctitle()}>
+            <div className="webbody">
                 <div className="firstpart">
                     <video src="https://videos.pexels.com/video-files/4389377/4389377-uhd_2732_1440_30fps.mp4" alt="" className='bodyimage' autoPlay loop muted />
                     <div className="firstpartcontents">
@@ -16,8 +50,7 @@ export default function Landingpage() {
                             <div className="headers">
                                 <Typewriter
                                     options={{
-                                        strings: ['India का  Ripple ', 'India का  Solana ', 'India का  Tron ',
-                                            'India का  Matic ', 'India का  Ethereum ', 'India का  Shiba Inu '],
+                                        strings: ['India का Ripple ', 'India का Solana ', 'India का Tron ', 'India का Matic ', 'India का Ethereum ', 'India का Shiba Inu '],
                                         autoStart: true,
                                         loop: true,
                                         cursor: '|',
@@ -41,9 +74,7 @@ export default function Landingpage() {
                                             </div>
                                         </Link>
                                         <Link className="signupbtn">
-                                            <div >
-                                                SIGN UP
-                                            </div>
+                                            <div>SIGN UP</div>
                                         </Link>
                                     </div>
                                 </div>
@@ -61,79 +92,86 @@ export default function Landingpage() {
                                         </Link>
                                     </div>
                                     <Link className="signupbtn">
-                                        <div >
-                                            SIGN UP
-                                        </div>
+                                        <div>SIGN UP</div>
                                     </Link>
-                                    {/* <div className="heroimagecont">
-                                    <img src="https://media.wazirx.com/web_assets/landing_page_hero_app_screen/dark/2x.png" alt=""
-                                        loading='lazy' className='heroimagemobo' />
-                                    </div> */}
                                 </div>
-
                             </div>
-                            <img src="https://media.wazirx.com/web_assets/landing_page_hero_app_screen/dark/2x.png" alt=""
-                                loading='lazy' className='heroimage' />
+                            <img src="https://media.wazirx.com/web_assets/landing_page_hero_app_screen/dark/2x.png" alt="" loading='lazy' className='heroimage' />
                         </div>
                     </div>
                 </div>
                 <section className="secondpart">
                     <div className="firstinfo">
                         300+ cryptos to invest in for your next big move
-                        <img src="
-                    https://media.wazirx.com/web_assets/cryptos/dark/3x.png" alt="" className='detailsimg' />
+                        <img src="https://media.wazirx.com/web_assets/cryptos/dark/3x.png" alt="" className='detailsimg' />
                     </div>
                     <div className="firstinfo">
                         India’s best prices, driven by highest liquidity
-                        <img src="
-                    https://media.wazirx.com/web_assets/liquidity/dark/3x.png" alt="" className='detailsimg' />
+                        <img src="https://media.wazirx.com/web_assets/liquidity/dark/3x.png" alt="" className='detailsimg' />
                     </div>
                 </section>
                 <center>
-                <section className='thirdsection'>
-                    <div className="firstfeature">
-                        <center>
-                            <div className="featurebox">
-                                <center>
-                                    <img src="https://media.wazirx.com/web_assets/good_security_white/dark/1x.svg" alt="" className='featureimage' />
-                                </center>
+                    <section className='thirdsection'>
+                        <div className="firstfeature">
+                            <center>
+                                <div className="featurebox">
+                                    <center>
+                                        <img src="https://media.wazirx.com/web_assets/good_security_white/dark/1x.svg" alt="" className='featureimage' />
+                                    </center>
+                                </div>
+                            </center>
+                            KYC - Swift & Compliant
+                            <div className="subtextfeature">
+                                Experience seamless onboarding <br />with swift KYC processes, ensuring <br />full compliance with regulations.
                             </div>
-                        </center>
-                        KYC - Swift & Compliant
-                        <div className="subtextfeature">
-                        Experience seamless onboarding <br />with swift KYC processes, ensuring <br />full compliance with regulations.
                         </div>
-                    </div>
-                    <div className="firstfeature" >
-                        <center>
-                            <div className="featurebox" style={{ backgroundColor: '#EE895B' }}>
-                                <center>
-                                    <img src="https://media.wazirx.com/web_assets/live_help_white/dark/1x.svg" alt="" className='featureimage' />
-                                </center>
+                        <div className="firstfeature">
+                            <center>
+                                <div className="featurebox" style={{ backgroundColor: '#EE895B' }}>
+                                    <center>
+                                        <img src="https://media.wazirx.com/web_assets/live_help_white/dark/1x.svg" alt="" className='featureimage' />
+                                    </center>
+                                </div>
+                            </center>
+                            24/7 Support
+                            <div className="subtextfeature">
+                                Like a trusted friend, our 24/7 expert <br /> support is always there, making your <br /> crypto investment journey smoother.
                             </div>
-                        </center>
-                        24/7 Support
-                        <div className="subtextfeature">
-                        Like a trusted friend, our 24/7 expert <br /> support is always there, making your <br /> crypto investment journey smoother.
                         </div>
-                    </div>
-                    <div className="firstfeature">
-                        <center>
-                            <div className="featurebox" style={{ backgroundColor: "#F56565" }}>
-                                <center>
-                                    <img src="https://media.wazirx.com/web_assets/api_white/dark/1x.svg" alt="" className='featureimage' />
-                                </center>
+                        <div className="firstfeature">
+                            <center>
+                                <div className="featurebox" style={{ backgroundColor: "#F56565" }}>
+                                    <center>
+                                        <img src="https://media.wazirx.com/web_assets/api_white/dark/1x.svg" alt="" className='featureimage' />
+                                    </center>
+                                </div>
+                            </center>
+                            Seamless API Trading
+                            <div className="subtextfeature">
+                                Amplify your crypto trading <br /> experience with ChainTrade through <br />seamless API integration.
                             </div>
-                        </center>
-                        Seamless API Trading
-                        <div className="subtextfeature">
-                        Amplify your crypto trading <br /> experience with ChainTrade through <br />seamless API integration.
                         </div>
-                    </div>
-                </section>
+                    </section>
+                </center>
+                <center>
+                    <section className='thirdsection'>
+                        <div className="firstfeature" style={{ fontSize: "25px" }}>
+                            Features You Will Love
+                            <div className="subtextfeaturechanging">
+                                <span>Stay informed, stay engaged - an all- <br /> inclusive dashboard, keeping you always <br /> in action.</span>
+                                {/* <br /><br /> */}
+                                <span>Simplify your crypto trading journey with <br />QuickBuy—the fastest way to buy and <br />sell your favorites.</span>
+                                {/* <br /><br /> */}
+                                <span>Take control with advanced P&L tracking <br /> for smarter decision-making.</span>
+                                {/* <br /><br /> */}
+                                <span>Refer, Earn, Repeat: With our unique  <br />Referral Program, you can invite friends <br />and earn up to 50% of their trading fees.</span>
+                            </div>
+                        </div>
+                        <img src="https://media.wazirx.com/web_assets/landing_page_feature3/dark/3x.png" alt="" className='featureimagechanging' />
+                    </section>
                 </center>
                 <br /><br /><br />
             </div>
         </>
-    )
+    );
 }
