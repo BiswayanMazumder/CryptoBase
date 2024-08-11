@@ -375,5 +375,56 @@ html {
     justify-content: center;
     align-items: center;
   }
+  .Cryptovalues{
+    display: none;
+  }
 
+}
+.Cryptovalues {
+  position: relative;
+  top: 100px;
+  height: 250px;
+  width: 100vw;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 50px;
+  background: linear-gradient(to right, #0A135B, #102380, #0C125B);
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+}
+.cryptotexts{
+  position: relative;
+  display: flex;
+  text-align: center;
+  top: 20%;
+  padding-left: 15%;
+}
+.cryptocontainers {
+  position: relative;
+  top: 80px;
+  width: 250px;
+  left: 15%;
+  height: 80px;
+  font-weight: 500;
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* This centers the text vertically */
+  background-color: #293F9B;
+  border-radius: 20px;
+}
+
+.dfknf{
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+.cryptocontainers:hover{
+  background-color: #1437AE;
+}
+.dcdjksj{
+  color: black;
+  font-weight: 600;
 }

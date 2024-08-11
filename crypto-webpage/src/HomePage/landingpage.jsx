@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 
@@ -39,7 +39,29 @@ export default function Landingpage() {
 
         return () => clearInterval(interval);
     }, []);
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+                // console.log(result);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
+        fetchData();
+    }, []);
+    const firstFourData = data.slice(0, 4);
     return (
         <>
             <div className="webbody">
@@ -170,7 +192,25 @@ export default function Landingpage() {
                         <img src="https://media.wazirx.com/web_assets/landing_page_feature3/dark/3x.png" alt="" className='featureimagechanging' />
                     </section>
                 </center>
-                <br /><br /><br />
+                <section className='Cryptovalues'>
+                    <div className="cryptotexts">
+                        Top crypto today
+                    </div>
+                    <Link className="dfknf" style={{textDecoration:"none",color:"white"}}>
+                        {firstFourData.map(coin => (
+                            <div key={coin.id} className="cryptocontainers">
+                                <center>
+                                    {coin.name}
+                                    <div className="dcdjksj">
+                                        {coin.symbol.toUpperCase()}
+                                    </div>
+                                    ₹{coin.current_price.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                                </center>
+                            </div>
+                        ))}
+                    </Link>
+                </section>
+                <br /><br /><br /><br />
             </div>
         </>
     );
