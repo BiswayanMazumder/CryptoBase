@@ -92,6 +92,8 @@ body {
   text-align: start;
   justify-content: space-evenly;
   color: #d9e1eb;
+  flex-wrap: wrap;
+  gap: 50px;
 }
 .subtext {
   position: relative;
@@ -126,6 +128,7 @@ body {
 .texts {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   /* gap: 50%; */
 }
 
@@ -139,6 +142,7 @@ body {
   display: flex;
   width: fit-content;
   flex-direction: column;
+  /* background-color: red; */
   gap: 20px;
 }
 
@@ -181,33 +185,6 @@ body {
 }
 
 /* First Part Resposiveness */
-@media screen and (max-width:740px) {
-  .heroimage {
-    display: none;
-  }
-
-}
-@media screen and (max-width:740px) {
-  .firstpart {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    
-  }
-
-}
-@media screen and (max-width:740px) {
-  .heroimagecont{
-    position: relative;
-    /* background-color: red; */
-    /* width: 100vw; */
-    display: flex;
-    /* height: 100vh; */
-    justify-content: center;
-    align-items: center;
-  }
-
-}
 .detailsimg{
   height: 223px;
   width: 443px;
@@ -223,4 +200,81 @@ body {
   height: auto;
   background-color: #212C3A;
   border-radius: 20px;
+}
+@media screen and (min-width:741px) {
+  .downloadbtnmobo {
+    display: none;
+  }
+  
+}
+@media screen and (max-width:740px) {
+  .heroimage {
+    display: flex;
+    position: relative;
+    top: 200px;
+    /* left: 8vw; */
+    justify-content: center;
+  }
+  .subtext {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .downloadbtn{
+    display: none;
+    /* position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+    width: 100vw; */
+  }
+  .downloadbtnmobo{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    width: 100vw;
+    gap: 20px;
+    left:40vw;
+    /* transform: translate(-50%, -50%); */
+  }
+  .externalbtnsmobo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    top: 100px;
+    justify-content: center;
+  }
+  .signupbtn, .playstorebtn{
+    width: 100vw;
+  }
+}
+@media screen and (max-width:740px) {
+  .texts {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+}
+@media screen and (max-width:740px) {
+  .bodyimage {
+    display: none;
+    
+  }
+
+}
+@media screen and (max-width:740px) {
+  .heroimagecont{
+    position: relative;
+    /* background-color: red; */
+    /* width: 100vw; */
+    display: flex;
+    /* height: 100vh; */
+    justify-content: center;
+    align-items: center;
+  }
+
 }
