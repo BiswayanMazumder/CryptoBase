@@ -1,9 +1,12 @@
 .App {
   text-align: center;
 }
-body{
+
+body {
   background-color: #101723;
+  overflow-x: hidden !important;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -34,34 +37,63 @@ body{
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 .bodyimage {
   width: 100%;
   height: 100%;
   /* display: block; */
 }
-.webbody{
+
+.webbody {
   background-color: #101723;
 }
+
 .firstpartcontents {
   position: absolute;
-  color: white; /* Text color */
-  font-size: 24px; /* Adjust font size as needed */
-  text-align: center; /* Center the text */
-  padding: 20px; /* Optional: padding around the text */
-  top: 180px;
+  color: white;
+  /* Text color */
+  font-size: 24px;
+  /* Adjust font size as needed */
+  /* text-align: center; */
+  /* Center the text */
+  padding: 20px;
+  /* Optional: padding around the text */
+  top: 100px;
   font-weight: 700;
   font-size: 72px;
   left: 150px;
   display: flex;
   flex-direction: row;
   text-align: start;
-  color:#d9e1eb;
+  color: #d9e1eb;
 }
-.subtext{
+.secondpart{
+  position: relative;
+  color: white;
+  /* Text color */
+  font-size: 24px;
+  /* Adjust font size as needed */
+  /* text-align: center; */
+  /* Center the text */
+  padding: 20px;
+  /* Optional: padding around the text */
+  top: 5px;
+  font-weight: 700;
+  font-size: 72px;
+  /* left: 150px; */
+  display: flex;
+  flex-direction: row;
+  background-color: #101723;
+  text-align: start;
+  justify-content: space-evenly;
+  color: #d9e1eb;
+}
+.subtext {
   position: relative;
   top: 50px;
   display: flex;
@@ -69,7 +101,8 @@ body{
   font-size: 32px;
   font-weight: 500;
 }
-.firstpart{
+
+.firstpart {
   width: 100%;
   height: 100%;
   background-color: #101723;
@@ -79,19 +112,28 @@ body{
   flex-direction: row;
   /* flex-wrap: wrap; */
 }
-.heroimage{
+
+.heroimage {
   height: 469px;
   padding-left: 5px;
 }
-.texts{
+.heroimagemobo{
+  position: relative;
+  top: 50px;
+  height: 800px;
+  /* width: 300px; */
+}
+.texts {
   display: flex;
   flex-direction: row;
   /* gap: 50%; */
 }
-.headers{
+
+.headers {
   width: 800px;
 }
-.downloadbtn{
+
+.downloadbtn {
   position: relative;
   top: 100px;
   display: flex;
@@ -99,7 +141,8 @@ body{
   flex-direction: column;
   gap: 20px;
 }
-.playstorebtn{
+
+.playstorebtn {
   display: flex;
   background-color: #101723;
   border: 0.5px solid white;
@@ -109,12 +152,14 @@ body{
   border-radius: 10px;
   align-items: center;
 }
-.playstoreimg{
+
+.playstoreimg {
   height: 48px;
   justify-content: center;
   width: 148px;
 }
-.signupbtn{
+
+.signupbtn {
   position: relative;
   top: 20px;
   background-color: #ECC94B;
@@ -128,8 +173,54 @@ body{
   align-items: center;
   display: flex;
 }
-.externalbtns{
+
+.externalbtns {
   display: flex;
   flex-direction: row;
   gap: 20px;
+}
+
+/* First Part Resposiveness */
+@media screen and (max-width:740px) {
+  .heroimage {
+    display: none;
+  }
+
+}
+@media screen and (max-width:740px) {
+  .firstpart {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+  }
+
+}
+@media screen and (max-width:740px) {
+  .heroimagecont{
+    position: relative;
+    /* background-color: red; */
+    /* width: 100vw; */
+    display: flex;
+    /* height: 100vh; */
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+.detailsimg{
+  height: 223px;
+  width: 443px;
+  position: relative;
+  top: 40px;
+}
+.firstinfo{
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  padding: 40px;
+  gap: 30px;
+  height: auto;
+  background-color: #212C3A;
+  border-radius: 20px;
 }

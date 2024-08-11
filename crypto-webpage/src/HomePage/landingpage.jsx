@@ -39,10 +39,14 @@ export default function Landingpage() {
                                         </div>
                                     </div>
                                     <Link className="signupbtn">
-                                    <div >
-                                    SIGN UP
-                                    </div>
+                                        <div >
+                                            SIGN UP
+                                        </div>
                                     </Link>
+                                    {/* <div className="heroimagecont">
+                                    <img src="https://media.wazirx.com/web_assets/landing_page_hero_app_screen/dark/2x.png" alt=""
+                                        loading='lazy' className='heroimagemobo' />
+                                    </div> */}
                                 </div>
 
                             </div>
@@ -51,6 +55,20 @@ export default function Landingpage() {
                         </div>
                     </div>
                 </div>
+                
+                <div className="secondpart">
+                    <div className="firstinfo">
+                    300+ cryptos to invest in for your next big move
+                    <img src="
+                    https://media.wazirx.com/web_assets/cryptos/dark/3x.png" alt="" className='detailsimg' />
+                    </div>
+                    <div className="firstinfo">
+                    India’s best prices, driven by highest liquidity
+                    <img src="
+                    https://media.wazirx.com/web_assets/liquidity/dark/3x.png" alt="" className='detailsimg' />
+                    </div>
+                </div>
+                <br /><br />
             </div>
         </>
     )
