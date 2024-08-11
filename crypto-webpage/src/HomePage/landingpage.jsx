@@ -10,7 +10,7 @@ export default function Landingpage() {
         <>
             <div className="webbody" onLoad={setdoctitle()}>
                 <div className="firstpart">
-                    <img src="https://media.wazirx.com/web_assets/landing_bg/dark/1x.svg" alt="" className='bodyimage' />
+                    <img src="https://cdn.dribbble.com/userupload/3726865/file/original-332b7cf604fac4578e206989fffe9eee.png?resize=1200x817&vertical=center" alt="" className='bodyimage' />
                     <div className="firstpartcontents">
                         <div className="texts">
                             <div className="headers">
