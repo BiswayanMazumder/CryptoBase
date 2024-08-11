@@ -77,8 +77,7 @@ export default function Landingpage() {
                         </div>
                     </div>
                 </div>
-
-                {/* <div className="secondpart">
+                <div className="secondpart">
                     <div className="firstinfo">
                     300+ cryptos to invest in for your next big move
                     <img src="
@@ -89,7 +88,7 @@ export default function Landingpage() {
                     <img src="
                     https://media.wazirx.com/web_assets/liquidity/dark/3x.png" alt="" className='detailsimg' />
                     </div>
-                </div> */}
+                </div>
                 <br /><br />
             </div>
         </>
