@@ -64,6 +64,8 @@ body{
 .subtext{
   position: relative;
   top: 50px;
+  display: flex;
+  flex-direction: row;
   font-size: 32px;
   font-weight: 500;
 }
@@ -87,5 +89,47 @@ body{
   /* gap: 50%; */
 }
 .headers{
-  width: 900px;
+  width: 800px;
+}
+.downloadbtn{
+  position: relative;
+  top: 100px;
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  gap: 20px;
+}
+.playstorebtn{
+  display: flex;
+  background-color: #101723;
+  border: 0.5px solid white;
+  justify-content: center;
+  height: 68px;
+  width: 200px;
+  border-radius: 10px;
+  align-items: center;
+}
+.playstoreimg{
+  height: 48px;
+  justify-content: center;
+  width: 148px;
+}
+.signupbtn{
+  position: relative;
+  top: 20px;
+  background-color: #ECC94B;
+  width: auto;
+  height: 60px;
+  border-radius: 10px;
+  color: #4f3502;
+  font-size: 18px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.externalbtns{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
