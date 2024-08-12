@@ -393,22 +393,6 @@ html {
   }
 
 }
-
-@media screen and (max-width:740px) {
-  .heroimagecont {
-    position: relative;
-    /* background-color: red; */
-    /* width: 100vw; */
-    display: flex;
-    /* height: 100vh; */
-    justify-content: center;
-    align-items: center;
-  }
-  .Cryptovalues{
-    display: none;
-  }
-
-}
 .Cryptovalues {
   position: relative;
   top: 100px;
@@ -484,11 +468,94 @@ html {
 .loginoptions{
   height: 90%;
   margin-top: 20px;
-  width: 50%;
+  width: 30%;
   display: flex;
   flex-direction: column;
-  background-color: #3F475A;
+  background-color: #333843;
   font-weight: 500;
   color: white;
   font-size: 20px;
+  justify-content: start;
+  text-align: start;
+  align-items: start;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+  gap: 20px;
+}
+.loginsignup{
+  width: 100%;
+  height:50px;
+  font-size: 15px;
+  background-color: #101623;
+  position: relative;
+  /* gap: 20px; */
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  align-items: center;
+  margin-bottom: 20px;
+}
+.loginbutton{
+  position: relative;
+  width: 49%;
+  height: 40px;
+  left: 5px;
+  background-color: #1E2433;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+}
+.signup{
+  position: relative;
+  width: 49%;
+  height: 40px;
+  left: 5px;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  border-radius: 5px;
+  color: white;
+}
+@media screen and (max-width:740px) {
+  .heroimagecont {
+    position: relative;
+    /* background-color: red; */
+    /* width: 100vw; */
+    display: flex;
+    /* height: 100vh; */
+    justify-content: center;
+    align-items: center;
+  }
+  .Cryptovalues{
+    display: none;
+  }
+  .loginoptions{
+    height: 90%;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #333843;
+    font-weight: 500;
+    color: white;
+    font-size: 20px;
+    justify-content: start;
+    text-align: start;
+    align-items: start;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+    gap: 20px;
+  }
+  .heading{
+    width: 120%;
+  }
 }

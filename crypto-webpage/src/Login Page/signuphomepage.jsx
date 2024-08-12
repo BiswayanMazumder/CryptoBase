@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Loginhomepage() {
+export default function Signuphomepage() {
     useEffect(() => {
         document.title = "Log in - CryptoForge"
     })
@@ -15,14 +15,14 @@ export default function Loginhomepage() {
                 </div>
                 <center>
                     <div className="loginoptions">
-                        Login to CryptoForge
+                        Sign up to CryptoForge
                         <div className="loginsignup">
-                            <Link className="loginbutton">
+                            <Link className="loginbutton" style={{backgroundColor:'transparent'}} to={'/login'}>
                                 <div >
                                     Login
                                 </div>
                             </Link>
-                            <Link className="signup" to={'/signup'} >
+                            <Link className="signup" style={{backgroundColor:'#1E2433'}}>
                                 <div >Sign Up</div>
                             </Link>
                         </div>

@@ -8,6 +8,7 @@ import {
 import Landingpage from './HomePage/landingpage';
 import { Analytics } from "@vercel/analytics/react"
 import Loginhomepage from './Login Page/loginhomepage';
+import Signuphomepage from './Login Page/signuphomepage';
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/login" element={<Loginhomepage />} />
+      </Routes>
+      <Routes>
+        <Route path="/signup" element={<Signuphomepage />} />
       </Routes>
       <Analytics />
     </BrowserRouter>
