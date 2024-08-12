@@ -9,6 +9,7 @@ import Landingpage from './HomePage/landingpage';
 import { Analytics } from "@vercel/analytics/react"
 import Loginhomepage from './Login Page/loginhomepage';
 import Signuphomepage from './Login Page/signuphomepage';
+import Download from './Download Page/download';
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/signup" element={<Signuphomepage />} />
+      </Routes>
+      <Routes>
+        <Route path="/download" element={<Download />} />
       </Routes>
       <Analytics />
     </BrowserRouter>
