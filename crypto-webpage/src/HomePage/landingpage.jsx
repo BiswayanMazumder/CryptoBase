@@ -196,7 +196,7 @@ export default function Landingpage() {
                     <div className="cryptotexts">
                         Top crypto today
                     </div>
-                    <Link className="dfknf" style={{textDecoration:"none",color:"white"}}>
+                    <Link className="dfknf" style={{ textDecoration: "none", color: "white" }}>
                         {firstFourData.map(coin => (
                             <div key={coin.id} className="cryptocontainers">
                                 <center>
@@ -210,7 +210,56 @@ export default function Landingpage() {
                         ))}
                     </Link>
                 </section>
-                <br /><br /><br /><br />
+                <center>
+                    <div className="thirdsectext">
+                        <center>Your Security Matters</center>
+                    </div>
+                    <section className='thirdsection'>
+                        <div className="firstfeature">
+
+                            <center>
+                                <div className="featurebox">
+                                    <center>
+                                        <img src="https://media.wazirx.com/web_assets/sd_card/dark/1x.svg" alt="" className='featureimage' />
+                                    </center>
+                                </div>
+                            </center>
+                            Safekeeping Your Digital Assets
+                            <div className="subtextfeature">
+                                We keep your digital assets safe with an extra layer of <br /> security.
+                            </div>
+                        </div>
+                        
+                        <div className="firstfeature">
+                            <center>
+                                <div className="featurebox" style={{ backgroundColor: '#EE895B' }}>
+                                    <center>
+                                        <img src="https://media.wazirx.com/web_assets/live_help_white/dark/1x.svg" alt="" className='featureimage' />
+                                    </center>
+                                </div>
+                            </center>
+                            2 - Factor Authentication
+                            <div className="subtextfeature">
+                                Double your CryptoForge account security with 2-factor  <br />authentication - choose the setup that suits you best.
+                            </div>
+                        </div>
+                        <div className="firstfeature">
+                            <center>
+                                <div className="featurebox" style={{ backgroundColor: "#F56565" }}>
+                                    <center>
+                                        <img src="https://media.wazirx.com/web_assets/api_white/dark/1x.svg" alt="" className='featureimage' />
+                                    </center>
+                                </div>
+                            </center>
+                            End-to-End Encryption
+                            <div className="subtextfeature">
+                                We use advanced encryption and follow the <br /> highest  industry standards, ensuring worry-free crypto <br />trading and investment for you.
+                            </div>
+                        </div>
+                    </section>
+                </center>
+                <center>
+                </center>
             </div>
         </>
     );
