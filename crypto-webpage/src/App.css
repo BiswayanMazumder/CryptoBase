@@ -495,7 +495,7 @@ html {
   flex-direction: row;
   /* justify-content: space-around; */
   align-items: center;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 .loginbutton{
   position: relative;
@@ -540,7 +540,7 @@ html {
   .loginoptions{
     height: 90%;
     margin-top: 20px;
-    width: 100%;
+    width: 110vw;
     display: flex;
     flex-direction: column;
     background-color: #333843;
@@ -552,10 +552,35 @@ html {
     align-items: start;
     padding-left: 20px;
     padding-top: 20px;
-    padding-right: 20px;
+    /* padding-right: 20px; */
     gap: 20px;
   }
   .heading{
     width: 120%;
   }
+}
+.emailaddress{
+  position: relative;
+  width: 100%;
+}
+.xjcxxckxc{
+  width: 98.5%;
+  height:40px;
+  font-size: 15px;
+  background-color: #101623;
+  position: relative;
+  /* gap: 20px; */
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  border: 2px 2px solid white;
+  align-items: center;
+  color: white;
+  /* margin-bottom: 10px; */
+}
+.dnjdkssq{
+  font-size: 15px;
+  text-decoration: none;
+  color:white;
 }
