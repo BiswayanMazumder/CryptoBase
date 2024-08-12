@@ -4,7 +4,7 @@ import Typewriter from 'typewriter-effect';
 
 export default function Landingpage() {
     function setdoctitle() {
-        document.title = 'Buy Bitcoin, Cryptocurrency at India’s Largest Exchange | Trading Platform | CryptoBase';
+        document.title = 'Buy Bitcoin, Cryptocurrency at India’s Largest Exchange | Trading Platform | CryptoForge';
     }
 
     function changefeature() {
@@ -95,7 +95,7 @@ export default function Landingpage() {
                                                 <img src="https://media.wazirx.com/web_assets/download_from_appstore_btn/dark/1x.svg" alt="" className='playstoreimg' />
                                             </div>
                                         </Link>
-                                        <Link className="signupbtn">
+                                        <Link className="signupbtn" to={'/login'}>
                                             <div>SIGN UP</div>
                                         </Link>
                                     </div>
@@ -113,7 +113,7 @@ export default function Landingpage() {
                                             </div>
                                         </Link>
                                     </div>
-                                    <Link className="signupbtn">
+                                    <Link className="signupbtn" to={'/login'}>
                                         <div>SIGN UP</div>
                                     </Link>
                                 </div>
@@ -229,7 +229,6 @@ export default function Landingpage() {
                                 We keep your digital assets safe with an extra layer of <br /> security.
                             </div>
                         </div>
-                        
                         <div className="firstfeature">
                             <center>
                                 <div className="featurebox" style={{ backgroundColor: '#EE895B' }}>

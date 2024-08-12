@@ -468,3 +468,27 @@ html {
   width: 100%;
   height: fit-content;
 }
+.heading{
+  width: 100%;
+  height: 60px;
+  background-color: #3F475A;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.homelogo{
+  height: 50px;
+  width: 100px;
+  margin-left: 20px;
+}
+.loginoptions{
+  height: 90%;
+  margin-top: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  background-color: #3F475A;
+  font-weight: 500;
+  color: white;
+  font-size: 20px;
+}
