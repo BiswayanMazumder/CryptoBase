@@ -459,6 +459,7 @@ html {
   align-items: center;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .homelogo{
   height: 50px;
@@ -557,6 +558,9 @@ html {
   }
   .heading{
     width: 120%;
+    display: flex;
+    flex-direction: row;
+    
   }
 }
 .emailaddress{
@@ -583,4 +587,15 @@ html {
   font-size: 15px;
   text-decoration: none;
   color:white;
+}
+.idsksld{
+  width: 50px;
+  height: 60px;
+  /* background-color: red; */
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.idsksld:hover{
+  background-color: #101723;
 }
