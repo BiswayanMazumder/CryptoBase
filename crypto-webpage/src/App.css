@@ -461,6 +461,32 @@ html {
   flex-direction: row;
   justify-content: space-between;
 }
+.jnnvmkjd{
+  width: 100%;
+  height: 60px;
+  color: white;
+  background-color: #3F475A;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  font-weight: 500;
+}
+.categories{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
+  overflow: scroll;
+  height: 100%;
+}
+.categories::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for WebKit browsers */
+}
 .homelogo{
   height: 50px;
   width: 100px;
@@ -678,6 +704,65 @@ html {
   align-items: center;
   color: white;
   gap: 20px;
+}
+.maincontent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  /* background-color: red; */
+  position: relative;
+  height: 100vh;
+  top: 20px;
+}
+.woijlf{
+  width: 90%;
+  height: 100%;
+  /* background-color: blue; */
+  padding: 20px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+.news-item{
+  color: white;
+  position: relative;
+  top: 50px;
+  font-size: 15px;
+  font-weight: 300;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 30px;
+  padding-bottom: 30px;
+  /* padding: 10px; */
+}
+.jfefj{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.kejfkejfk{
+  height: 100px;
+  width: 300px;
+  background-color: red;
+}
+.newsbody{
+  /* background-color: red; */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 50px;
+  font-weight: 400;
+  font-size: 25px;
+  color:white;
+  text-decoration: none;
+  flex-wrap: wrap;
 }
 @media screen and (max-width:740px) {
   .jhfjgj{
