@@ -19,10 +19,10 @@ export default function Download() {
                     </Link>
                 </div>
                 <div className="sdssww">
-                {/* <div className="ldkcdms" style={{width:"100%",height:"600px"\}}>
+                    {/* <div className="ldkcdms" style={{width:"100%",height:"600px"\}}>
                 <video src="https://videos.pexels.com/video-files/4389377/4389377-uhd_2732_1440_30fps.mp4" alt="" className='bodyimage' autoPlay loop muted />
                 </div> */}
-                    <div className="owck" style={{ paddingTop: "30px", width: "100%",zIndex: "999" }}>
+                    <div className="owck" style={{ paddingTop: "30px", width: "100%", zIndex: "999" }}>
                         <i >DOWNLOAD CRYPTOFORGE</i>
                     </div>
                     <div className="wjdsjcldkmc">
@@ -30,6 +30,24 @@ export default function Download() {
                     </div>
                     <center><img src="https://wazirx.com/static/media/downloads-banner-devices.bf2c48f1.png" alt="" className='jkhjkshk' /></center>
                 </div>
+                {/* <center> */}
+                <div className="ewkfwj">
+                    <div className="oijff">
+                    <div className="jdnsd" style={{ fontWeight: "bold" ,color:"white",fontSize:"20px"}}>
+                        Lightning fast for the trader in you
+                    </div>
+                    <br />
+                    There is speed and fluidity in everything you do. Every decision that goes into our app makes it stand apart - from the way it’s designed to the way we build in performance. We are by your side when you trade in a blink.
+                    </div>
+                    <div className="wowkdoko">
+                    <img src="https://wazirx.com/static/media/downloads-bullet-01-l2.2bc90d9e.gif" alt="" style={{
+                        height: "300px",width: "170px"
+                    }} />
+                    </div>
+                </div>
+
+                {/* </center> */}
+                <br /><br /><br />
             </div>
         </>
     )
