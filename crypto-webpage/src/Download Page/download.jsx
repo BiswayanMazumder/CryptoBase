@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
+import Typewriter from 'typewriter-effect';
 export default function Download() {
     useEffect(() => {
         document.title = 'Download CryotoForge Apps - Best Crypto Wallet App to Buy Bitcoin'
@@ -34,10 +34,26 @@ export default function Download() {
                 <div className="ewkfwj">
                     <div className="oijff">
                         <div className="jdnsd" style={{ fontWeight: "bold", color: "white", fontSize: "20px" }}>
-                            Lightning fast for the trader in you
+                        <Typewriter
+                                    options={{
+                                        strings: ['Lightning fast for the trader in you', 'Must-have for pro traders', 'Tweak the order and save time', 'Track your order', 'Pulse of the market'],
+                                        autoStart: true,
+                                        loop: true,
+                                        cursor: '|',
+                                        delay: 75,
+                                    }}
+                                />
                         </div>
                         <br />
-                        There is speed and fluidity in everything you do. Every decision that goes into our app makes it stand apart - from the way it’s designed to the way we build in performance. We are by your side when you trade in a blink.
+                        <Typewriter
+                                    options={{
+                                        strings: ['There is speed and fluidity in everything you do. Every decision that goes into our app makes it stand apart - from the way it’s designed to the way we build in performance. We are by your side when you trade in a blink.', 'Most of the experience has been stitched keeping pro-traders in mind. There’s advance order book to calculate liquidity and price actions at a glance. Take actions from order-book, trade history, and many more essential touch points. Launch buy and sell sheet almost anywhere.', 'One-tap order edit to keep you up in the order book. This is love at first sight.', 'Information is fundamental to trading, and we strive to make this easy for you. Order-books say a lot about the market, and in between orders, you can now track your position like a boss.', 'Smart notifications to track trending markets, and ensure that you will not miss the pumps or dumps! We’ll only seek your attention when and where it is needed.'],
+                                        autoStart: true,
+                                        loop: true,
+                                        cursor: '|',
+                                        delay: 75,
+                                    }}
+                                />
                     </div>
                     <div className="wowkdoko">
                         <img src="https://wazirx.com/static/media/downloads-bullet-02-l2.dd2b106c.gif" alt="" style={{
