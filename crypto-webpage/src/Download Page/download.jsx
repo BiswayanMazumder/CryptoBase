@@ -40,7 +40,7 @@ export default function Download() {
                         There is speed and fluidity in everything you do. Every decision that goes into our app makes it stand apart - from the way it’s designed to the way we build in performance. We are by your side when you trade in a blink.
                     </div>
                     <div className="wowkdoko">
-                        <img src="https://wazirx.com/static/media/downloads-bullet-01-l2.2bc90d9e.gif" alt="" style={{
+                        <img src="https://wazirx.com/static/media/downloads-bullet-02-l2.dd2b106c.gif" alt="" style={{
                             height: "300px", width: "170px"
                         }} />
                     </div>
