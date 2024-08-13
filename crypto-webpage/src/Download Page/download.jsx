@@ -33,19 +33,33 @@ export default function Download() {
                 {/* <center> */}
                 <div className="ewkfwj">
                     <div className="oijff">
-                    <div className="jdnsd" style={{ fontWeight: "bold" ,color:"white",fontSize:"20px"}}>
-                        Lightning fast for the trader in you
-                    </div>
-                    <br />
-                    There is speed and fluidity in everything you do. Every decision that goes into our app makes it stand apart - from the way it’s designed to the way we build in performance. We are by your side when you trade in a blink.
+                        <div className="jdnsd" style={{ fontWeight: "bold", color: "white", fontSize: "20px" }}>
+                            Lightning fast for the trader in you
+                        </div>
+                        <br />
+                        There is speed and fluidity in everything you do. Every decision that goes into our app makes it stand apart - from the way it’s designed to the way we build in performance. We are by your side when you trade in a blink.
                     </div>
                     <div className="wowkdoko">
-                    <img src="https://wazirx.com/static/media/downloads-bullet-01-l2.2bc90d9e.gif" alt="" style={{
-                        height: "300px",width: "170px"
-                    }} />
+                        <img src="https://wazirx.com/static/media/downloads-bullet-01-l2.2bc90d9e.gif" alt="" style={{
+                            height: "300px", width: "170px"
+                        }} />
                     </div>
                 </div>
-
+                <div className="owck" style={{ paddingTop: "30px", width: "100%", zIndex: "999" }}>
+                    <i >DOWNLOAD CRYPTOFORGE</i>
+                </div>
+                <div className="downloadcryptoforge">
+                    <Link to={'https://play.google.com/store/apps/details?id=com.wrx.wazirx&referrer=utm_source%3DWazirX%2520Desktop%26utm_medium%Hero%2520Image%26utm_term%3DDownload%2520App'} target='blank'>
+                        <div className="playstorebtn">
+                            <img src="https://media.wazirx.com/web_assets/download_from_playstore_btn/dark/1x.svg" alt="" className='playstoreimg' />
+                        </div>
+                    </Link>
+                    <Link to={'https://apps.apple.com/in/app/wazirx-buy-btc-trade-crypto/id1349082789'} target='blank'>
+                        <div className="playstorebtn">
+                            <img src="https://media.wazirx.com/web_assets/download_from_appstore_btn/dark/1x.svg" alt="" className='playstoreimg' />
+                        </div>
+                    </Link>
+                </div>
                 {/* </center> */}
                 <br /><br /><br />
             </div>

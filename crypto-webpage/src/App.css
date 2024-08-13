@@ -641,6 +641,34 @@ html {
   color: grey;
   /* padding-right: 200px; */
 }
+.iieoioek{
+  width: 100%;
+  height: 500px;
+  /* background-color: red; */
+  position: relative;
+  top: 250px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* padding-left:30px; */
+  color: grey;
+  /* padding-right: 200px; */
+}
+.downloadcryptoforge{
+  width: 100%;
+  height: 150px;
+  /* background-color: red; */
+  position: relative;
+  top: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 20px;
+}
 @media screen and (max-width:740px) {
   .ewkfwj{
     gap: 80px;
@@ -654,6 +682,10 @@ html {
 @media screen and (min-width:2000px) {
   .ewkfwj{
     top: 700px;
+  }
+  .downloadcryptoforge{
+    /* position: absolute; */
+    top: 1000px;
   }
 }
 .oijff{
