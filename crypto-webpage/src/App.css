@@ -612,7 +612,9 @@ html {
   padding-right: 40px; /* Extra space for the image */
   box-sizing: border-box; /* Ensures padding is included in width */
 }
-
+.hjkv:hover{
+  color: yellow;
+}
 .toggle-icon {
   position: absolute;
   right: 10px; /* Position from the right edge of the container */
