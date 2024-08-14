@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 const provider = new GoogleAuthProvider();
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,6 +27,23 @@ export default function Loginhomepage() {
     useEffect(() => {
         document.title = "Log in - CryptoForge"
     })
+    async function loginuser() {
+        const auth = getAuth();
+        var email=document.getElementById('whdujjfkem').value;
+        var password=document.getElementById('fnfjkfjf').value;
+        // console.log(email, password);
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                window.location.replace('/home')
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+    }
     async function googlelogin() {
         const auth = getAuth();
         signInWithPopup(auth, provider)
@@ -36,6 +53,7 @@ export default function Loginhomepage() {
                 const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
+                window.location.replace('/home')
                 // IdP data available using getAdditionalUserInfo(result)
                 // ...
             }).catch((error) => {
@@ -81,11 +99,11 @@ export default function Loginhomepage() {
                             </Link>
                         </div>
                         <div className="emailaddress">
-                            <input type="text" placeholder=" Enter your email" className='xjcxxckxc' />
+                            <input type="text" placeholder=" Enter your email" className='xjcxxckxc' id='whdujjfkem'/>
                         </div>
                         <div className="emailaddress">
                             <div className="input-container">
-                                <input type={passwordHidden ? "password" : "text"} placeholder="Enter your password" className='xjcxxckxc' />
+                                <input type={passwordHidden ? "password" : "text"} placeholder="Enter your password" className='xjcxxckxc' id='fnfjkfjf'/>
                                 <img src="https://account.coindcx.com/assets/password_hidden.svg" alt="Toggle Password Visibility" className='toggle-icon' onClick={handleClick} />
                             </div>
                         </div>
@@ -95,7 +113,7 @@ export default function Loginhomepage() {
                                 Forgot Password
                             </div>
                         </Link>
-                        <Link className="loginsignup" style={{ backgroundColor: '#3067F0', justifyContent: "center", fontWeight: "bold", marginBottom: "10px", textDecoration: "none", color: "white" }}>
+                        <Link className="loginsignup" style={{ backgroundColor: '#3067F0', justifyContent: "center", fontWeight: "bold", marginBottom: "10px", textDecoration: "none", color: "white" }} onClick={loginuser}>
                             <div>
                                 LOGIN
                             </div>

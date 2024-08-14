@@ -11,6 +11,7 @@ import Loginhomepage from './Login Page/loginhomepage';
 import Signuphomepage from './Login Page/signuphomepage';
 import Download from './Download Page/download';
 import About from './About Us/Updates';
+import Homepage from './Logged in page/homepage';
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +29,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/updates" element={<About />} />
+      </Routes>
+      <Routes>
+        <Route path="/home" element={<Homepage />} />
       </Routes>
       <Analytics />
     </BrowserRouter>
