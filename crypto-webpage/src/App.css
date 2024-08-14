@@ -589,26 +589,40 @@ html {
     
   }
 }
-.emailaddress{
+.emailaddress {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.input-container {
   position: relative;
   width: 100%;
 }
-.xjcxxckxc{
-  width: 98.5%;
-  height:40px;
+
+.xjcxxckxc {
+  width: 100%;
+  height: 40px;
   font-size: 15px;
   background-color: #101623;
-  position: relative;
-  /* gap: 20px; */
+  border: 2px solid white;
   border-radius: 5px;
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-around; */
-  border: 2px 2px solid white;
-  align-items: center;
   color: white;
-  /* margin-bottom: 10px; */
+  padding-right: 40px; /* Extra space for the image */
+  box-sizing: border-box; /* Ensures padding is included in width */
 }
+
+.toggle-icon {
+  position: absolute;
+  right: 10px; /* Position from the right edge of the container */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  cursor: pointer;
+  width: 20px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
 .dnjdkssq{
   font-size: 15px;
   text-decoration: none;

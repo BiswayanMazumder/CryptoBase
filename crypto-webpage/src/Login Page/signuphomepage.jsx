@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, getFirestore,setDoc } from "firebase/firestore";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 const provider = new GoogleAuthProvider();
 // TODO: Add SDKs for Firebase products that you want to use
@@ -50,20 +50,20 @@ export default function Signuphomepage() {
     async function signup() {
         const auth = getAuth();
         const db = getFirestore(); // Initialize Firestore
-    
+
         const name = document.getElementById('skdkdwld').value;
         const email = document.getElementById('okslxzdlkdm').value;
         const password = document.getElementById('wioiwodkwl').value;
-        
+
         console.log(email, name, password);
-        
+
         try {
             // Create user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            
+
             // Get the newly created user ID
             const userId = userCredential.user.uid;
-            
+
             // Define user data to be stored
             const userData = {
                 Name: name,
@@ -71,9 +71,9 @@ export default function Signuphomepage() {
             };
             // Write user data to Firestore in 'User Details' collection with document ID as userId
             await setDoc(doc(db, 'User Details', userId), userData);
-            
+
             console.log('User created and details written to Firestore!');
-            window.location.href='/';
+            window.location.href = '/';
         } catch (error) {
             console.error('Error creating user or writing to Firestore:', error);
         }
@@ -100,17 +100,22 @@ export default function Signuphomepage() {
                 // ...
             });
     }
+    const [passwordHidden, setPasswordHidden] = useState(true);
+    const handleClick = () => {
+        setPasswordHidden(!passwordHidden);
+        console.log('Password hidden:', passwordHidden);
+    };
     return (
         <>
             <div className="webbody">
-            <div className="heading">
+                <div className="heading">
                     <Link to={'/'}>
                         <img src="https://firebasestorage.googleapis.com/v0/b/cryptobase-admin.appspot.com/o/CryptoBase%20Admin%20photos%2Fcryptobaselogo.png?alt=media&token=ad490f3d-9ecd-451d-bab9-e7d3974093a0" alt="" className='homelogo' />
                     </Link>
-                    <Link to={'/download'} style={{paddingRight:"20px"}}>
-                    <div className="idsksld">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 1024 1024" class="sc-fFucqa hUWLJA"><path d="M695.467 209.067v618.666H294.4V209.067h401.067zM776.533 128h-563.2v780.8H780.8V128h-4.267z"></path><path d="M648.533 499.2l-153.6 149.333-153.6-149.333 55.467-55.467 59.733 76.8v-230.4h76.8v230.4l59.734-76.8 55.466 55.467zm-247.85 188.117v76.8h192v-76.8h-192z" fill='white'></path></svg>
-                    </div>
+                    <Link to={'/download'} style={{ paddingRight: "20px" }}>
+                        <div className="idsksld">
+                            <svg width="24" height="24" fill="white" viewBox="0 0 1024 1024" class="sc-fFucqa hUWLJA"><path d="M695.467 209.067v618.666H294.4V209.067h401.067zM776.533 128h-563.2v780.8H780.8V128h-4.267z"></path><path d="M648.533 499.2l-153.6 149.333-153.6-149.333 55.467-55.467 59.733 76.8v-230.4h76.8v230.4l59.734-76.8 55.466 55.467zm-247.85 188.117v76.8h192v-76.8h-192z" fill='white'></path></svg>
+                        </div>
                     </Link>
                 </div>
                 <center>
@@ -130,15 +135,19 @@ export default function Signuphomepage() {
                             <input type="text" placeholder=" Enter your name" className='xjcxxckxc' id='skdkdwld' />
                         </div>
                         <div className="emailaddress">
-                            <input type="text" placeholder=" Enter your email" className='xjcxxckxc' id='okslxzdlkdm'/>
+                            <input type="text" placeholder=" Enter your email" className='xjcxxckxc' id='okslxzdlkdm' />
                         </div>
                         <div className="emailaddress">
-                            <input type="password" placeholder=" Enter your password" className='xjcxxckxc' id='wioiwodkwl'/>
+                            <div className="input-container">
+                                <input type={passwordHidden ? "password" : "text"} placeholder="Enter your password" className='xjcxxckxc' />
+                                <img src="https://account.coindcx.com/assets/password_hidden.svg" alt="Toggle Password Visibility" className='toggle-icon' onClick={handleClick}/>
+                            </div>
                         </div>
-                        <Link className="loginsignup" style={{ backgroundColor: '#3067F0', justifyContent: "center", fontWeight: "bold", marginBottom: "10px",textDecoration:"none",color:"white" }} onClick={signup}>
-                        <div>
-                            SIGN UP
-                        </div>
+
+                        <Link className="loginsignup" style={{ backgroundColor: '#3067F0', justifyContent: "center", fontWeight: "bold", marginBottom: "10px", textDecoration: "none", color: "white" }} onClick={signup}>
+                            <div>
+                                SIGN UP
+                            </div>
                         </Link>
                         <div className="emailaddress" style={{
                             justifyContent: "center",
