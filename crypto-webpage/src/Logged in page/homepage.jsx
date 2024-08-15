@@ -4,6 +4,11 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Typewriter from 'typewriter-effect';
 export default function Homepage() {
     const value = [1.1, 2.67, -2];
+    async function logout() {
+        const auth=getAuth();
+        await auth.signOut();
+        window.location.replace('/')
+    }
     useEffect(() => {
         document.title = 'Best Place for Crypto Trading and buying Crypto | CryptoForge'
     })
@@ -94,7 +99,7 @@ export default function Homepage() {
                                 Profile
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "red" }}>
+                        <Link style={{ textDecoration: "none", color: "red" }} onClick={logout}>
                             <div className="hjkv">
                                 Signout
                             </div>
