@@ -120,6 +120,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[0]}
+                        <img src={data.map(coin=>coin.image)[0]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[0]}
@@ -137,6 +138,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                             {data.map(coin=>coin.name)[1]}
+                            <img src={data.map(coin=>coin.image)[1]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                             ₹{data.map(coin=>coin.current_price)[1]}
@@ -154,6 +156,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[2]}
+                        <img src={data.map(coin=>coin.image)[2]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[2]}
@@ -171,6 +174,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[3]}
+                        <img src={data.map(coin=>coin.image)[3]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[3]}
@@ -188,6 +192,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[4]}
+                        <img src={data.map(coin=>coin.image)[4]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[4]}
@@ -205,6 +210,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[5]}
+                        <img src={data.map(coin=>coin.image)[5]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[5]}
@@ -222,6 +228,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[6]}
+                        <img src={data.map(coin=>coin.image)[6]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[6]}
@@ -239,6 +246,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[7]}
+                        <img src={data.map(coin=>coin.image)[7]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[7]}
@@ -266,6 +274,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[8]}
+                        <img src={data.map(coin=>coin.image)[8]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[8]}
@@ -283,6 +292,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[9]}
+                        <img src={data.map(coin=>coin.image)[9]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[9]}
@@ -300,6 +310,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[10]}
+                        <img src={data.map(coin=>coin.image)[10]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[10]}
@@ -317,6 +328,7 @@ export default function Homepage() {
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                         {data.map(coin=>coin.name)[11]}
+                        <img src={data.map(coin=>coin.image)[11]} alt="" height={40} width={40}/>
                         </div>
                         <div className="currencyprice">
                         ₹{data.map(coin=>coin.current_price)[11]}
