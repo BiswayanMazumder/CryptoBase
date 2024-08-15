@@ -880,6 +880,24 @@ html {
   text-align: start;
   color: white;
 }
+.djkdmmm{
+  position: relative;
+  top: 50px;
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  /* gap: 10px; */
+  /* padding:10px; */
+  gap: 20px;
+  align-items: start;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-decoration: none;
+  color: white;
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
+}
 .wodklkf{
   position: relative;
   top: 50px;
@@ -895,6 +913,9 @@ html {
   white-space: nowrap;
   text-decoration: none;
   color: white;
+}
+.djkdmmm::-webkit-scrollbar{
+  display: none;
 }
 .wodklkf::-webkit-scrollbar{
   display: none;

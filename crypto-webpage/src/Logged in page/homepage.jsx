@@ -5,7 +5,7 @@ import Typewriter from 'typewriter-effect';
 export default function Homepage() {
     const value = [1.1, 2.67, -2];
     async function logout() {
-        const auth=getAuth();
+        const auth = getAuth();
         await auth.signOut();
         window.location.replace('/')
     }
@@ -119,13 +119,13 @@ export default function Homepage() {
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[0]}
-                        <img src={data.map(coin=>coin.image)[0]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[0]}
+                            <img src={data.map(coin => coin.image)[0]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[0]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[0] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[0]}%
+                            ₹{data.map(coin => coin.current_price)[0]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[0] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[0]}%
                             </div>
                             <div className="currencyprice">
 
@@ -137,13 +137,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                            {data.map(coin=>coin.name)[1]}
-                            <img src={data.map(coin=>coin.image)[1]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[1]}
+                            <img src={data.map(coin => coin.image)[1]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                            ₹{data.map(coin=>coin.current_price)[1]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[1] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[1]}%
+                            ₹{data.map(coin => coin.current_price)[1]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[1] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[1]}%
                             </div>
                             <div className="currencyprice">
 
@@ -155,13 +155,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[2]}
-                        <img src={data.map(coin=>coin.image)[2]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[2]}
+                            <img src={data.map(coin => coin.image)[2]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[2]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[2] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[2]}%
+                            ₹{data.map(coin => coin.current_price)[2]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[2] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[2]}%
                             </div>
                             <div className="currencyprice">
 
@@ -173,13 +173,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[3]}
-                        <img src={data.map(coin=>coin.image)[3]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[3]}
+                            <img src={data.map(coin => coin.image)[3]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[3]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[3] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[3]}%
+                            ₹{data.map(coin => coin.current_price)[3]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[3] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[3]}%
                             </div>
                             <div className="currencyprice">
 
@@ -191,13 +191,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[4]}
-                        <img src={data.map(coin=>coin.image)[4]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[4]}
+                            <img src={data.map(coin => coin.image)[4]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[4]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[4] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[4]}%
+                            ₹{data.map(coin => coin.current_price)[4]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[4] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[4]}%
                             </div>
                             <div className="currencyprice">
 
@@ -209,13 +209,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[5]}
-                        <img src={data.map(coin=>coin.image)[5]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[5]}
+                            <img src={data.map(coin => coin.image)[5]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[5]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[5] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[5]}%
+                            ₹{data.map(coin => coin.current_price)[5]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[5] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[5]}%
                             </div>
                             <div className="currencyprice">
 
@@ -227,13 +227,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[6]}
-                        <img src={data.map(coin=>coin.image)[6]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[6]}
+                            <img src={data.map(coin => coin.image)[6]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[6]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[6] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[6]}%
+                            ₹{data.map(coin => coin.current_price)[6]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[6] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[6]}%
                             </div>
                             <div className="currencyprice">
 
@@ -245,13 +245,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[7]}
-                        <img src={data.map(coin=>coin.image)[7]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[7]}
+                            <img src={data.map(coin => coin.image)[7]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[7]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[7] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[7]}%
+                            ₹{data.map(coin => coin.current_price)[7]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[7] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[7]}%
                             </div>
                             <div className="currencyprice">
 
@@ -273,13 +273,13 @@ export default function Homepage() {
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[8]}
-                        <img src={data.map(coin=>coin.image)[8]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[8]}
+                            <img src={data.map(coin => coin.image)[8]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[8]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[8] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[8]}%
+                            ₹{data.map(coin => coin.current_price)[8]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[8] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[8]}%
                             </div>
                             <div className="currencyprice">
 
@@ -291,13 +291,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[9]}
-                        <img src={data.map(coin=>coin.image)[9]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[9]}
+                            <img src={data.map(coin => coin.image)[9]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[9]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[9] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[9]}%
+                            ₹{data.map(coin => coin.current_price)[9]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[9] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[9]}%
                             </div>
                             <div className="currencyprice">
 
@@ -309,13 +309,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[10]}
-                        <img src={data.map(coin=>coin.image)[10]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[10]}
+                            <img src={data.map(coin => coin.image)[10]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[10]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[10] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[10]}%
+                            ₹{data.map(coin => coin.current_price)[10]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[10] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[10]}%
                             </div>
                             <div className="currencyprice">
 
@@ -327,13 +327,13 @@ export default function Homepage() {
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                        {data.map(coin=>coin.name)[11]}
-                        <img src={data.map(coin=>coin.image)[11]} alt="" height={40} width={40}/>
+                            {data.map(coin => coin.name)[11]}
+                            <img src={data.map(coin => coin.image)[11]} alt="" height={40} width={40} />
                         </div>
                         <div className="currencyprice">
-                        ₹{data.map(coin=>coin.current_price)[11]}
-                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[11] > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                            {data.map(coin=>coin.price_change_percentage_24h)[11]}%
+                            ₹{data.map(coin => coin.current_price)[11]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[11] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[11]}%
                             </div>
                             <div className="currencyprice">
 
@@ -343,6 +343,157 @@ export default function Homepage() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <br /><br /><br />
+                <div className="kjdfmdkfm">
+                    Market
+                </div>
+                <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[10]}
+                            <img src={data.map(coin => coin.image)[10]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[10]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[10] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[10]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[11]}
+                            <img src={data.map(coin => coin.image)[11]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[11]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[11] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[11]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[12]}
+                            <img src={data.map(coin => coin.image)[12]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[12]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[12] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[12]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[13]}
+                            <img src={data.map(coin => coin.image)[13]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[13]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[13] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[13]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[14]}
+                            <img src={data.map(coin => coin.image)[14]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[14]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[14] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[14]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[15]}
+                            <img src={data.map(coin => coin.image)[15]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[15]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[15] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[15]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[16]}
+                            <img src={data.map(coin => coin.image)[16]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[16]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[16] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[16]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin => coin.name)[17]}
+                            <img src={data.map(coin => coin.image)[17]} alt="" height={40} width={40} />
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin => coin.current_price)[17]}
+                            <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[17] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                {data.map(coin => coin.price_change_percentage_24h)[17]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </>
