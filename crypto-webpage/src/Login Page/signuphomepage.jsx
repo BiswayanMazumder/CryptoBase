@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 const provider = new GoogleAuthProvider();
@@ -105,6 +105,24 @@ export default function Signuphomepage() {
         setPasswordHidden(!passwordHidden);
         console.log('Password hidden:', passwordHidden);
     };
+    useEffect(() => {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/auth.user
+                const uid = user.uid;
+                console.log('User is signed in:', uid);
+                window.location.replace('/home')
+                // ...
+            } else {
+                // User is signed out
+                console.log('User is not signed')
+                // window.location.replace('/')
+                // ...
+            }
+        });
+    })
     return (
         <>
             <div className="webbody">

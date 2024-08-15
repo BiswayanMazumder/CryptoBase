@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
 const provider = new GoogleAuthProvider();
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -72,6 +72,24 @@ export default function Loginhomepage() {
         setPasswordHidden(!passwordHidden);
         console.log('Password hidden:', passwordHidden);
     };
+    useEffect(() => {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/auth.user
+                const uid = user.uid;
+                console.log('User is signed in:', uid);
+                window.location.replace('/home')
+                // ...
+            } else {
+                // User is signed out
+                console.log('User is not signed')
+                // window.location.replace('/')
+                // ...
+            }
+        });
+    })
     return (
         <>
             <div className="webbody">
