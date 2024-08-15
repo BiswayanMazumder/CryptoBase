@@ -484,6 +484,16 @@ html {
   overflow: scroll;
   height: 100%;
 }
+.jjddndfkdj{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items: center; */
+  width: 100%;
+  gap: 50px;
+  overflow: scroll;
+  height: 100%;
+}
 .categories::-webkit-scrollbar {
   display: none; /* Hides scrollbar for WebKit browsers */
 }
@@ -735,7 +745,7 @@ html {
   top: 20px;
 }
 .woijlf{
-  width: 90%;
+  width: 100%;
   height: 100%;
   /* background-color: blue; */
   padding: 20px;
@@ -828,4 +838,89 @@ html {
 .spaces{
   height: 200px;
   width: 100%;
+}
+.jdhwjdnsj{
+  height: 300px;
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  overflow-x: scroll;
+  /* gap: 0px; */
+}
+.jdhwjdnsj::-webkit-scrollbar{
+  display: none ;
+}
+.hffndjjhjh{
+  height: 150px;
+  width: 400px;
+  background-color:#212C3A;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+.hffndjjhjh:hover{
+  background-color: #3F475A;
+}
+.kjdfmdkfm{
+  position: relative;
+  top: 20px;
+  left: 20px;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color:white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.wodklkf{
+  position: relative;
+  top: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* gap: 10px; */
+  /* padding:10px; */
+  /* gap: 10px; */
+  align-items: start;
+  overflow-x: auto; /* Allow horizontal scrolling */
+  white-space: nowrap; /* Prevent wrapping of child elements */
+}
+.currencyname{
+  position: relative;
+  top: 20%;
+  padding-left: 20px;
+  font-size: 18px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 500;
+}
+.currencyprice{
+  position: relative;
+  top: 40%;
+  padding-left: 20px;
+  font-size: 35px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 300;
+  display: flex;
+  flex-direction: row;
+}
+.values{
+  font-size: 15px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+}
+@media screen and (max-width:740px) {
+  .wodklkf{
+    gap: 10px;
+  }
 }
