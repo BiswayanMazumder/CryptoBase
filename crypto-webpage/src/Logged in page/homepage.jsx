@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Typewriter from 'typewriter-effect';
 export default function Homepage() {
-    const value=[1.1,2.67,-2];
+    const value = [1.1, 2.67, -2];
     useEffect(() => {
         document.title = 'Best Place for Crypto Trading and buying Crypto | CryptoForge'
     })
@@ -24,6 +24,28 @@ export default function Homepage() {
             }
         });
     })
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+                // console.log(result);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
     return (
         <>
             <div className="webbody">
@@ -83,146 +105,224 @@ export default function Homepage() {
                     </div>
                 </div>
                 <div className="kjdfmdkfm">
-                Most Active
-                <br /><br />
-                <div className="kjdef" style={{color:'grey',fontWeight:'300',fontSize:'15px'}}>
-                Based on traded values and price variations
+                    Most Active
+                    <br /><br />
+                    <div className="kjdef" style={{ color: 'grey', fontWeight: '300', fontSize: '15px' }}>
+                        Based on traded values and price variations
+                    </div>
                 </div>
+                <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                        {data.map(coin=>coin.name)[0]}
+                        </div>
+                        <div className="currencyprice">
+                        ₹{data.map(coin=>coin.current_price)[0]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[0] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[0]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            {data.map(coin=>coin.name)[1]}
+                        </div>
+                        <div className="currencyprice">
+                            ₹{data.map(coin=>coin.current_price)[1]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[1] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[1]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                        {data.map(coin=>coin.name)[2]}
+                        </div>
+                        <div className="currencyprice">
+                        ₹{data.map(coin=>coin.current_price)[2]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[2] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[2]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                        {data.map(coin=>coin.name)[3]}
+                        </div>
+                        <div className="currencyprice">
+                        ₹{data.map(coin=>coin.current_price)[3]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[3] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[3]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                        {data.map(coin=>coin.name)[4]}
+                        </div>
+                        <div className="currencyprice">
+                        ₹{data.map(coin=>coin.current_price)[4]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[4] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[4]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                        {data.map(coin=>coin.name)[5]}
+                        </div>
+                        <div className="currencyprice">
+                        ₹{data.map(coin=>coin.current_price)[5]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[5] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[5]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                        {data.map(coin=>coin.name)[6]}
+                        </div>
+                        <div className="currencyprice">
+                        ₹{data.map(coin=>coin.current_price)[6]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[6] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[6]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                        {data.map(coin=>coin.name)[7]}
+                        </div>
+                        <div className="currencyprice">
+                        ₹{data.map(coin=>coin.current_price)[7]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[7] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[7]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="wodklkf" style={{ position: "relative", top: "50px",paddingLeft:'20px',paddingRight:'20px' }}>
+                <br /><br /><br />
+                <div className="kjdfmdkfm">
+                    New Listing
+                    <br /><br />
+                    <div className="kjdef" style={{ color: 'grey', fontWeight: '300', fontSize: '15px' }}>
+                        Market Launches in the last 15 days
+                    </div>
+                </div>
+                <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                            Bitcoin
+                        {data.map(coin=>coin.name)[8]}
                         </div>
                         <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[0]>0?'green':'red',fontWeight:'600'}}>
-                                {value[0]>0?'+'+value[0]:value[0]}%
+                        ₹{data.map(coin=>coin.current_price)[8]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[8] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[8]}%
                             </div>
                             <div className="currencyprice">
 
                             </div>
                             <div className="currencyprice">
-                                
+
                             </div>
                         </div>
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                            Bitcoin
+                        {data.map(coin=>coin.name)[9]}
                         </div>
                         <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[1]>0?'green':'red',fontWeight:'600'}}>
-                                {value[1]>0?'+'+value[1]:value[1]}%
+                        ₹{data.map(coin=>coin.current_price)[9]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[9] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[9]}%
                             </div>
                             <div className="currencyprice">
 
                             </div>
                             <div className="currencyprice">
-                                
+
                             </div>
                         </div>
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                            Bitcoin
+                        {data.map(coin=>coin.name)[10]}
                         </div>
                         <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
-                                {value[2]>0?'+'+value[2]:value[2]}%
+                        ₹{data.map(coin=>coin.current_price)[10]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[10] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[10]}%
                             </div>
                             <div className="currencyprice">
 
                             </div>
                             <div className="currencyprice">
-                                
+
                             </div>
                         </div>
                     </div>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
-                            Bitcoin
+                        {data.map(coin=>coin.name)[11]}
                         </div>
                         <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
-                                {value[2]>0?'+'+value[2]:value[2]}%
+                        ₹{data.map(coin=>coin.current_price)[11]}
+                            <div className="values" style={{ color: data.map(coin=>coin.price_change_percentage_24h)[11] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin=>coin.price_change_percentage_24h)[11]}%
                             </div>
                             <div className="currencyprice">
 
                             </div>
                             <div className="currencyprice">
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div className="hffndjjhjh">
-                        <div className="currencyname">
-                            Bitcoin
-                        </div>
-                        <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
-                                {value[2]>0?'+'+value[2]:value[2]}%
-                            </div>
-                            <div className="currencyprice">
 
-                            </div>
-                            <div className="currencyprice">
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div className="hffndjjhjh">
-                        <div className="currencyname">
-                            Bitcoin
-                        </div>
-                        <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
-                                {value[2]>0?'+'+value[2]:value[2]}%
-                            </div>
-                            <div className="currencyprice">
-
-                            </div>
-                            <div className="currencyprice">
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div className="hffndjjhjh">
-                        <div className="currencyname">
-                            Bitcoin
-                        </div>
-                        <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
-                                {value[2]>0?'+'+value[2]:value[2]}%
-                            </div>
-                            <div className="currencyprice">
-
-                            </div>
-                            <div className="currencyprice">
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div className="hffndjjhjh">
-                        <div className="currencyname">
-                            Bitcoin
-                        </div>
-                        <div className="currencyprice">
-                            ₹50000
-                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
-                                {value[2]>0?'+'+value[2]:value[2]}%
-                            </div>
-                            <div className="currencyprice">
-
-                            </div>
-                            <div className="currencyprice">
-                                
                             </div>
                         </div>
                     </div>
