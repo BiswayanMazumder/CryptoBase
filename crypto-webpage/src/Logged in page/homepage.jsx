@@ -83,17 +83,13 @@ export default function Homepage() {
                     </div>
                 </div>
                 <div className="kjdfmdkfm">
-                <Typewriter
-                                    options={{
-                                        strings: ['Most Active','Based on traded values and price variations'],
-                                        autoStart: true,
-                                        loop: true,
-                                        cursor: '|',
-                                        delay: 75,
-                                    }}
-                                />
+                Most Active
+                <br /><br />
+                <div className="kjdef" style={{color:'grey',fontWeight:'300',fontSize:'15px'}}>
+                Based on traded values and price variations
                 </div>
-                <div className="wodklkf" style={{ position: "relative", top: "50px" }}>
+                </div>
+                <div className="wodklkf" style={{ position: "relative", top: "50px",paddingLeft:'20px',paddingRight:'20px' }}>
                     <div className="hffndjjhjh">
                         <div className="currencyname">
                             Bitcoin
@@ -102,6 +98,12 @@ export default function Homepage() {
                             ₹50000
                             <div className="values" style={{color: value[0]>0?'green':'red',fontWeight:'600'}}>
                                 {value[0]>0?'+'+value[0]:value[0]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+                                
                             </div>
                         </div>
                     </div>
@@ -114,6 +116,12 @@ export default function Homepage() {
                             <div className="values" style={{color: value[1]>0?'green':'red',fontWeight:'600'}}>
                                 {value[1]>0?'+'+value[1]:value[1]}%
                             </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+                                
+                            </div>
                         </div>
                     </div>
                     <div className="hffndjjhjh">
@@ -125,9 +133,99 @@ export default function Homepage() {
                             <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
                                 {value[2]>0?'+'+value[2]:value[2]}%
                             </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+                                
+                            </div>
                         </div>
                     </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            Bitcoin
+                        </div>
+                        <div className="currencyprice">
+                            ₹50000
+                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
+                                {value[2]>0?'+'+value[2]:value[2]}%
+                            </div>
+                            <div className="currencyprice">
 
+                            </div>
+                            <div className="currencyprice">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            Bitcoin
+                        </div>
+                        <div className="currencyprice">
+                            ₹50000
+                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
+                                {value[2]>0?'+'+value[2]:value[2]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            Bitcoin
+                        </div>
+                        <div className="currencyprice">
+                            ₹50000
+                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
+                                {value[2]>0?'+'+value[2]:value[2]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            Bitcoin
+                        </div>
+                        <div className="currencyprice">
+                            ₹50000
+                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
+                                {value[2]>0?'+'+value[2]:value[2]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hffndjjhjh">
+                        <div className="currencyname">
+                            Bitcoin
+                        </div>
+                        <div className="currencyprice">
+                            ₹50000
+                            <div className="values" style={{color: value[2]>0?'green':'red',fontWeight:'600'}}>
+                                {value[2]>0?'+'+value[2]:value[2]}%
+                            </div>
+                            <div className="currencyprice">
+
+                            </div>
+                            <div className="currencyprice">
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

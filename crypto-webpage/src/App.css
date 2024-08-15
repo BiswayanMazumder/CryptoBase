@@ -875,29 +875,36 @@ html {
   font-weight: 500;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color:white;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: start;
+  align-items: start;
+  text-align: start;
+  color: white;
 }
 .wodklkf{
   position: relative;
   top: 50px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  /* flex-wrap: wrap; */
+  justify-content: space-evenly;
   /* gap: 10px; */
   /* padding:10px; */
-  /* gap: 10px; */
+  gap: 50px;
   align-items: start;
-  overflow-x: auto; /* Allow horizontal scrolling */
-  white-space: nowrap; /* Prevent wrapping of child elements */
+  overflow-x: auto;
+  white-space: nowrap;
+  text-decoration: none;
+  color: white;
+}
+.wodklkf::-webkit-scrollbar{
+  display: none;
 }
 .currencyname{
   position: relative;
   top: 20%;
   padding-left: 20px;
   font-size: 18px;
+  padding-right: 20px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: 500;
 }
@@ -922,5 +929,6 @@ html {
 @media screen and (max-width:740px) {
   .wodklkf{
     gap: 10px;
+    flex-wrap: wrap;
   }
 }
