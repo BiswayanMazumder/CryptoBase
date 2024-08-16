@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
-export default function Transactions() {
+export default function Withdrawal() {
     async function logout() {
         const auth = getAuth();
         await auth.signOut();
@@ -40,7 +40,7 @@ export default function Transactions() {
                 return;
             }
 
-            const docRef = doc(db, "Payment Amount", user.uid);
+            const docRef = doc(db, "Payment Refund", user.uid);
 
             try {
                 const docSnap = await getDoc(docRef);
@@ -80,7 +80,7 @@ export default function Transactions() {
                                 Portfolios
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "yellow" }}>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/transactions"}>
                             <div className="hjkv">
                                 Transactions
                             </div>
@@ -90,7 +90,7 @@ export default function Transactions() {
                                 Deposits
                             </div>
                         </Link> */}
-                        <Link style={{ textDecoration: "none", color: "white" }} to={"/withdrawal"}>
+                        <Link style={{ textDecoration: "none", color: "yellow" }}>
                             <div className="hjkv">
                                 Withdrawal
                             </div>

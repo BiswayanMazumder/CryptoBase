@@ -13,6 +13,7 @@ import Download from './Download Page/download';
 import About from './About Us/Updates';
 import Homepage from './Logged in page/homepage';
 import Transactions from './Transactions And Money/transactions';
+import Withdrawal from './Transactions And Money/withdrawal';
 function App() {
   return (
     <BrowserRouter>
@@ -36,6 +37,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/transactions" element={<Transactions />} />
+      </Routes>
+      <Routes>
+        <Route path="/withdrawal" element={<Withdrawal />} />
       </Routes>
       <Analytics />
     </BrowserRouter>
