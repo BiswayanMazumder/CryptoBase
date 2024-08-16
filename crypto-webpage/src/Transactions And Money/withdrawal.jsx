@@ -123,11 +123,11 @@ export default function Withdrawal() {
                 <div className="fgfgfgf">
                     <div className="firstpart">
                         <div className="kjdfmdkfm" style={{ paddingTop: '20px' }}>
-                            Transactions
+                            Withdrawals
                         </div>
                         <div className="kejkfejkfje">
                             <div className="searchbar">
-                                <input type="text" className='jefekfm' placeholder='Search for any transactions' />
+                                <input type="text" className='jefekfm' placeholder='Search for any withdrawals' />
                             </div>
                             <div className="history">
                                 <div className="lfjmrkl">
