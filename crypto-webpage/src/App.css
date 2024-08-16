@@ -951,9 +951,55 @@ html {
   align-items: center;
   padding-left: 10px;
 }
+.searchbar{
+  position: relative;
+  top: 50px;
+  padding-left: 20px;
+}
+.jefekfm{
+  height: 50px;
+  width: 50%;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /* font-weight: 500; */
+  padding-left: 20px;
+  background-color: transparent;
+  border: 0.5px solid white;
+}
+.fgfgfgf{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content:space-between;
+  align-self:flex-start;
+}
+.firstpart{
+  display: flex;
+  flex-direction: column;
+}
+.history{
+  position: relative;
+  display: flex;
+  top: 100px;
+  flex-direction: column;
+  padding-left: 20px;
+  width: 100%;
+  /* background-color: red; */
+}
+.lfjmrkl{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 30px;
+}
 @media screen and (max-width:740px) {
   .wodklkf{
     gap: 10px;
     flex-wrap: wrap;
+  }
+  .jnnvmkjd{
+    width: 105%;
   }
 }

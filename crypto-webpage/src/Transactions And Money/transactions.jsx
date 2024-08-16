@@ -83,10 +83,29 @@ export default function Transactions() {
                         </div>
                     </div>
                 </div>
-                <div className="kjdfmdkfm" style={{paddingTop: '20px'}}>
-                    Transactions
-                </div>
-                <div className="kejkfejkfje">
+                <div className="fgfgfgf">
+                    <div className="firstpart">
+                        <div className="kjdfmdkfm" style={{ paddingTop: '20px' }}>
+                            Transactions
+                        </div>
+                        <div className="kejkfejkfje">
+                            <div className="searchbar">
+                                <input type="text" className='jefekfm' placeholder='Search for any transactions' />
+                            </div>
+                            <div className="history">
+                                <div className="lfjmrkl">
+                                    <div className="dfvd">Status</div>
+                                    <div className="dfvd">Amount</div>
+                                    <div className="dfvd">Payment Merchant</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div className="kjgjffflkfn">
+                        <div className="creditcard">
+                            kelefnlfl
+                        </div>
+                    </div> */}
                 </div>
             </div>
         </>
