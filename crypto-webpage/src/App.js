@@ -12,6 +12,7 @@ import Signuphomepage from './Login Page/signuphomepage';
 import Download from './Download Page/download';
 import About from './About Us/Updates';
 import Homepage from './Logged in page/homepage';
+import Transactions from './Transactions And Money/transactions';
 function App() {
   return (
     <BrowserRouter>
@@ -32,6 +33,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/home" element={<Homepage />} />
+      </Routes>
+      <Routes>
+        <Route path="/transactions" element={<Transactions />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

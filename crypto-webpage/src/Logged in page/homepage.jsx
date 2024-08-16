@@ -86,7 +86,7 @@ export default function Homepage() {
                 if (docSnap.exists()) {
                     // Document found, update state
                     setname(docSnap.data()["Name"]);
-                    //   console.log('Name',docSnap.data()["Name"]);
+                      console.log('Name',docSnap.data()["Name"]);
                 } else {
                     setError('No such document!');
                 }
@@ -118,16 +118,16 @@ export default function Homepage() {
                                 Portfolios
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/transactions"}>
                             <div className="hjkv">
                                 Transactions
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        {/* <Link style={{ textDecoration: "none", color: "white" }}>
                             <div className="hjkv">
                                 Deposits
                             </div>
-                        </Link>
+                        </Link> */}
                         <Link style={{ textDecoration: "none", color: "white" }}>
                             <div className="hjkv">
                                 Withdrawal
