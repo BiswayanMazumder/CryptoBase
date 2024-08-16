@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 const provider = new GoogleAuthProvider();
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,26 +26,49 @@ export default function Signuphomepage() {
         document.title = "Sign up - CryptoForge"
     })
     async function googlelogin() {
+        const provider = new GoogleAuthProvider();
         const auth = getAuth();
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-                // IdP data available using getAdditionalUserInfo(result)
-                // ...
-            }).catch((error) => {
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.customData.email;
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
+        const db = getFirestore();
+        try {
+            const result = await signInWithPopup(auth, provider);
+
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+
+            // The signed-in user info.
+            const user = result.user;
+
+            // User details
+            const uid = user.uid;
+            const name = user.displayName;
+            const email = user.email;
+
+            // Check if the user exists in Firestore
+            const userDocRef = doc(db, 'User Details', uid);
+            const userDoc = await getDoc(userDocRef);
+
+            if (!userDoc.exists()) {
+                // User does not exist, write user details to Firestore
+                await setDoc(userDocRef, {
+                    Name: name,
+                    Email: email
+                });
+            }
+
+            // Redirect to home
+            window.location.replace('/home');
+
+        } catch (error) {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.customData?.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+
+            // Log or handle the error as needed
+            console.error(`Error: ${errorCode}, ${errorMessage}`);
+        }
     }
     async function signup() {
         const auth = getAuth();
@@ -158,7 +181,7 @@ export default function Signuphomepage() {
                         <div className="emailaddress">
                             <div className="input-container">
                                 <input type={passwordHidden ? "password" : "text"} placeholder="Enter your password" className='xjcxxckxc' />
-                                <img src="https://account.coindcx.com/assets/password_hidden.svg" alt="Toggle Password Visibility" className='toggle-icon' onClick={handleClick}/>
+                                <img src="https://account.coindcx.com/assets/password_hidden.svg" alt="Toggle Password Visibility" className='toggle-icon' onClick={handleClick} />
                             </div>
                         </div>
 
