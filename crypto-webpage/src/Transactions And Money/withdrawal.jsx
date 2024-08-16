@@ -62,6 +62,23 @@ export default function Withdrawal() {
 
         fetchData();
     }, []);
+    useEffect(() => {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/auth.user
+                const uid = user.uid;
+                // console.log('User is signed in:', uid);
+                // ...
+            } else {
+                // User is signed out
+                // console.log('User is not signed')
+                window.location.replace('/')
+                // ...
+            }
+        });
+    })
     return (
         <>
             <div className="webbody">
