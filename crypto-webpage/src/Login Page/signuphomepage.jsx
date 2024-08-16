@@ -73,34 +73,37 @@ export default function Signuphomepage() {
     async function signup() {
         const auth = getAuth();
         const db = getFirestore(); // Initialize Firestore
-
+    
         const name = document.getElementById('skdkdwld').value;
         const email = document.getElementById('okslxzdlkdm').value;
         const password = document.getElementById('wioiwodkwl').value;
-
+    
         console.log(email, name, password);
-
+    
         try {
             // Create user with email and password
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
             // Get the newly created user ID
             const userId = userCredential.user.uid;
-
+    
             // Define user data to be stored
             const userData = {
                 Name: name,
                 Email: email
             };
+    
             // Write user data to Firestore in 'User Details' collection with document ID as userId
             await setDoc(doc(db, 'User Details', userId), userData);
-
+            
+            // After successful write, redirect to the home page
+            console.log(userId);
             console.log('User created and details written to Firestore!');
-            window.location.href = '/';
+            window.location.href = '/home';
         } catch (error) {
             console.error('Error creating user or writing to Firestore:', error);
         }
     }
+    
     async function googlelogin() {
         const auth = getAuth();
         signInWithPopup(auth, provider)
@@ -180,7 +183,7 @@ export default function Signuphomepage() {
                         </div>
                         <div className="emailaddress">
                             <div className="input-container">
-                                <input type={passwordHidden ? "password" : "text"} placeholder="Enter your password" className='xjcxxckxc' />
+                                <input type={passwordHidden ? "password" : "text"} placeholder="Enter your password" className='xjcxxckxc' id='wioiwodkwl'/>
                                 <img src="https://account.coindcx.com/assets/password_hidden.svg" alt="Toggle Password Visibility" className='toggle-icon' onClick={handleClick} />
                             </div>
                         </div>

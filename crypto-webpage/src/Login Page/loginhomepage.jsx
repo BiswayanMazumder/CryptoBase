@@ -51,45 +51,43 @@ export default function Loginhomepage() {
         const db = getFirestore();
         try {
             const result = await signInWithPopup(auth, provider);
-
+    
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
-
+    
             // The signed-in user info.
             const user = result.user;
-
+    
             // User details
             const uid = user.uid;
             const name = user.displayName;
             const email = user.email;
-
-            // Check if the user exists in Firestore
+    
+            // Reference to the user's document in Firestore
             const userDocRef = doc(db, 'User Details', uid);
-            const userDoc = await getDoc(userDocRef);
-
-            if (!userDoc.exists()) {
-                // User does not exist, write user details to Firestore
-                await setDoc(userDocRef, {
-                    Name: name,
-                    Email: email
-                });
-            }
-
-            // Redirect to home
+    
+            // Write user details to Firestore
+            await setDoc(userDocRef, {
+                Name: name,
+                Email: email
+            });
+    
+            // Redirect to home after successful Firestore operation
             window.location.replace('/home');
-
+    
         } catch (error) {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
             const email = error.customData?.email;
             const credential = GoogleAuthProvider.credentialFromError(error);
-
+    
             // Log or handle the error as needed
             console.error(`Error: ${errorCode}, ${errorMessage}`);
         }
     }
+    
     const [passwordHidden, setPasswordHidden] = useState(true);
     const handleClick = () => {
         setPasswordHidden(!passwordHidden);
