@@ -2,8 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Typewriter from 'typewriter-effect';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+    apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
+    authDomain: "cryptobase-admin.firebaseapp.com",
+    projectId: "cryptobase-admin",
+    storageBucket: "cryptobase-admin.appspot.com",
+    messagingSenderId: "1090236390686",
+    appId: "1:1090236390686:web:856b22fd209b267b89fd0f",
+    measurementId: "G-LTBWYEEF6E"
+};
+const app = initializeApp(firebaseConfig);
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
 export default function Homepage() {
-    const value = [1.1, 2.67, -2];
+    // const value = [1.1, 2.67, -2];
     async function logout() {
         const auth = getAuth();
         await auth.signOut();
@@ -51,6 +65,41 @@ export default function Homepage() {
 
         fetchData();
     }, []);
+    const [name, setname] = useState('');
+    useEffect(() => {
+        const fetchData = async () => {
+            const auth = getAuth();
+            const db = getFirestore(app);
+            const user = auth.currentUser;
+
+            if (!user) {
+                setError('No user is logged in.');
+                setLoading(false);
+                return;
+            }
+
+            const docRef = doc(db, "User Details", user.uid);
+
+            try {
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    // Document found, update state
+                    setname(docSnap.data()["Name"]);
+                    //   console.log('Name',docSnap.data()["Name"]);
+                } else {
+                    setError('No such document!');
+                }
+            } catch (e) {
+                // Handle errors here
+                setError(`Error getting document: ${e.message}`);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []); // Add dependencies here if needed
     return (
         <>
             <div className="webbody">
@@ -109,7 +158,13 @@ export default function Homepage() {
                         </div>
                     </div>
                 </div>
+
+                <div className="kjdfmdkfm" style={{ paddingTop: '10px' }}>
+                    Glad to see you again {name}
+                </div>
+                <br /><br />
                 <div className="kjdfmdkfm">
+
                     Most Active
                     <br /><br />
                     <div className="kjdef" style={{ color: 'grey', fontWeight: '300', fontSize: '15px' }}>
@@ -493,8 +548,91 @@ export default function Homepage() {
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
+            </div>
+            <br /><br /><br />
+            <div className="kjdfmdkfm" style={{ color: "red" }}>
+                Lowest Growth Today
+                <br /><br />
+                <div className="kjdef" style={{ color: 'grey', fontWeight: '300', fontSize: '15px' }}>
+                    Lowest in market today in last 24 hours
+                </div>
+            </div>
+            <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
+                <div className="hffndjjhjh">
+                    <div className="currencyname">
+                        {data.map(coin => coin.name)[86]}
+                        <img src={data.map(coin => coin.image)[86]} alt="" height={40} width={40} />
+                    </div>
+                    <div className="currencyprice">
+                        ₹{data.map(coin => coin.current_price)[86]}
+                        <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[86] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin => coin.price_change_percentage_24h)[86]}%
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                    </div>
+                </div>
+                <div className="hffndjjhjh">
+                    <div className="currencyname">
+                        {data.map(coin => coin.name)[10]}
+                        <img src={data.map(coin => coin.image)[10]} alt="" height={40} width={40} />
+                    </div>
+                    <div className="currencyprice">
+                        ₹{data.map(coin => coin.current_price)[10]}
+                        <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[10] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin => coin.price_change_percentage_24h)[10]}%
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                    </div>
+                </div>
+                <div className="hffndjjhjh">
+                    <div className="currencyname">
+                        {data.map(coin => coin.name)[97]}
+                        <img src={data.map(coin => coin.image)[97]} alt="" height={40} width={40} />
+                    </div>
+                    <div className="currencyprice">
+                        ₹{data.map(coin => coin.current_price)[97]}
+                        <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[97] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin => coin.price_change_percentage_24h)[97]}%
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                    </div>
+                </div>
+                <div className="hffndjjhjh">
+                    <div className="currencyname">
+                        {data.map(coin => coin.name)[99]}
+                        <img src={data.map(coin => coin.image)[99]} alt="" height={40} width={40} />
+                    </div>
+                    <div className="currencyprice">
+                        ₹{data.map(coin => coin.current_price)[99]}
+                        <div className="values" style={{ color: data.map(coin => coin.price_change_percentage_24h)[99] > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                            {data.map(coin => coin.price_change_percentage_24h)[99]}%
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                        <div className="currencyprice">
+
+                        </div>
+                    </div>
+                </div>
+                <br /><br /><br />
             </div>
         </>
     )
