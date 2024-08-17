@@ -1008,6 +1008,15 @@ html {
   padding: 20px;
   top: 20px;
 }
+.jfnvmwjdikjk{
+  position: relative;
+  padding: 20px;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .jfnef0smdkmkf{
   width: 100%;
   height: 120px;
@@ -1030,4 +1039,32 @@ html {
 }
 .jfnef0smdkmkf:hover{
   background-color: #282c34;
+}
+.showaddress{
+  width: 200px;
+  height: 70px;
+  border-radius: 10px;
+  background-color: rgb(71, 71, 219);
+  color: black;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.hideaddress{
+  width: 200px;
+  height: 70px;
+  border-radius: 10px;
+  border: 2px solid rgb(71, 71, 219);
+  color: white;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
 }

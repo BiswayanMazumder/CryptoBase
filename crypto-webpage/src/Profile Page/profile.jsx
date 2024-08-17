@@ -78,7 +78,7 @@ export default function Profile() {
 
         fetchData();
     }, []); // Add dependencies here if needed
-    const [refcode,setrefcode]=useState('');
+    const [refcode, setrefcode] = useState('');
     useEffect(() => {
         const fetchData = async () => {
             const auth = getAuth();
@@ -113,7 +113,7 @@ export default function Profile() {
 
         fetchData();
     }, []); // Add dependencies here if needed
-    const [walletid,setwalletid]=useState('');
+    const [walletid, setwalletid] = useState('');
     useEffect(() => {
         const fetchData = async () => {
             const auth = getAuth();
@@ -148,7 +148,14 @@ export default function Profile() {
 
         fetchData();
     }, []); // Add dependencies here if needed
-    const [tradbal,settradbal]=useState(0);
+    const [tradbal, settradbal] = useState(0);
+    const [showpws, setshowpw] = useState(false);
+    function showpw(params) {
+        setshowpw(true);
+    }
+    function hide(params) {
+        setshowpw(false);
+    }
     useEffect(() => {
         const fetchData = async () => {
             const auth = getAuth();
@@ -236,49 +243,62 @@ export default function Profile() {
                                 Signout
                             </div>
                         </Link>
-                        
+
                     </div>
                 </div>
-                <div className="dnfndfnn">
-                            <div className="jfnef0smdkmkf">
-                                <div className="title">
-                                    User Name
-                                </div>
-                                <div className="result">
-                                    {name}
-                                </div>
-                            </div>
-                            <br /><br />
-                            <div className="jfnef0smdkmkf" style={{height:"170px"}}>
-                                <div className="title">
-                                    Referral Code
-                                </div>
-                                <div className="result">
-                                    {refcode}
-                                </div>
-                                <div className="title">
-                                    Refer to your friend and get 200 INR bonus
-                                </div>
-                            </div>
-                            <br /><br />
-                            <div className="jfnef0smdkmkf">
-                                <div className="title">
-                                    Trading Balance
-                                </div>
-                                <div className="result">
-                                ₹{tradbal}
-                                </div>
-                            </div>
-                            <br /><br />
-                            <div className="jfnef0smdkmkf">
-                                <div className="title">
-                                    Wallet Address
-                                </div>
-                                <div className="result">
-                                    {walletid}
-                                </div>
-                            </div>
+                <div className="jfnvmwjdikjk">
+                    <div className="jfnef0smdkmkf">
+                        <div className="title">
+                            User Name
                         </div>
+                        <div className="result">
+                            {name}
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div className="jfnef0smdkmkf" style={{ height: "170px" }}>
+                        <div className="title">
+                            Referral Code
+                        </div>
+                        <div className="result">
+                            {refcode}
+                        </div>
+                        <div className="title">
+                            Refer to your friend and get 200 INR bonus
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div className="jfnef0smdkmkf">
+                        <div className="title">
+                            Trading Balance
+                        </div>
+                        <div className="result">
+                            ₹{tradbal}
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div className="jfnef0smdkmkf" style={{ height: "230px" }}>
+                        <div className="title">
+                            Wallet Address
+                        </div>
+                        <div className="result">
+                            {showpws ? walletid : "******"}
+                        </div>
+                        <br />
+                        <div className="title" style={{ display: "flex", flexDirection: "row", gap: "30px", justifyContent: "start" }}>
+                            <Link onClick={() => setshowpw(true)} className="showaddress">
+                                <div>
+                                    SHOW ADDRESS
+                                </div>
+                            </Link>
+                            <Link  onClick={() => setshowpw(false)} className="hideaddress">
+                            <div>
+                                HIDE ADDRESS
+                            </div>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
