@@ -117,8 +117,8 @@ export default function Withdrawal() {
                                 Help and Support
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
-                            <div className="hjkv">
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/market"}>
+                            <div className="hjkv" >
                                 Market
                             </div>
                         </Link>

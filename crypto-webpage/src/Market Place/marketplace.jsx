@@ -110,7 +110,7 @@ export default function Marketplace() {
                         <div className="marketdetails">
                             {
                                 data.map(coin => (
-                                    <div className="fgffgfgf">
+                                    <div className="fgffgfgf" style={{color: coin.price_change_percentage_24h < 0 ? "red" : "green"}}>
                                     <img src={coin.image} alt="" height={40} width={40} />
                                         {coin.name}
                                     </div>
@@ -118,11 +118,11 @@ export default function Marketplace() {
                             }
                         </div>
                     </div>
-                    <div className="kjvkmkfmldf">
+                    <div className="kjvkmkfmldf" >
                         <div className="marketdetails">
                             {
                                 data.map(coin => (
-                                    <div className="fgffgfgf">
+                                    <div className="fgffgfgf" style={{color: coin.price_change_percentage_24h < 0 ? "red" : "green"}}>
                                     ₹{coin.current_price}
                                     </div>
                                 ))
@@ -133,7 +133,7 @@ export default function Marketplace() {
                         <div className="marketdetails">
                             {
                                 data.map(coin => (
-                                    <div className="fgffgfgf">
+                                    <div className="fgffgfgf" style={{color: coin.price_change_percentage_24h < 0 ? "red" : "green"}}>
                                         {coin.price_change_percentage_24h}%
                                     </div>
                                 ))
