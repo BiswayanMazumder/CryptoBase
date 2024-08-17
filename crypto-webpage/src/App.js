@@ -16,6 +16,7 @@ import Transactions from './Transactions And Money/transactions';
 import Withdrawal from './Transactions And Money/withdrawal';
 import Profile from './Profile Page/profile';
 import Portfolio from './Portfolio Page/portfolio';
+import Marketplace from './Market Place/marketplace';
 function App() {
   return (
     <BrowserRouter>
@@ -48,6 +49,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/portfolio" element={<Portfolio />} />
+      </Routes>
+      <Routes>
+        <Route path="/market" element={<Marketplace />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

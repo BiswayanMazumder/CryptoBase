@@ -474,6 +474,19 @@ html {
   gap: 20px;
   font-weight: 500;
 }
+.jnnvmkjdf{
+  width: 100%;
+  height: 60px;
+  color: white;
+  background-color: #3F475A;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  font-weight: 500;
+}
 .categories{
   display: flex;
   flex-direction: row;
@@ -562,6 +575,9 @@ html {
   color: white;
 }
 @media screen and (max-width:740px) {
+  .jnnvmkjdf{
+    width: 200%;
+  }
   .heroimagecont {
     position: relative;
     /* background-color: red; */
@@ -1143,4 +1159,33 @@ html {
   color: white;
   justify-content: center;
   align-items: center;
+}
+.kjvkmkfmldf{
+  width: 70%;
+  height: 100vh;
+  /* background-color: red; */
+  position: relative;
+  top: 50px;
+}
+.marketdetails{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+}
+.fgffgfgf{
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  padding-left: 50px;
+  padding-bottom: 50px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.uykfhrhkd{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
