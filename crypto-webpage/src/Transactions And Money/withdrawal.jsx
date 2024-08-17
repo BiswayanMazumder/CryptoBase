@@ -122,7 +122,7 @@ export default function Withdrawal() {
                                 Market
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/profile"}>
                             <div className="hjkv">
                                 Profile
                             </div>

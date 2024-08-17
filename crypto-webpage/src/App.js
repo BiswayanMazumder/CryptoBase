@@ -14,6 +14,7 @@ import About from './About Us/Updates';
 import Homepage from './Logged in page/homepage';
 import Transactions from './Transactions And Money/transactions';
 import Withdrawal from './Transactions And Money/withdrawal';
+import Profile from './Profile Page/profile';
 function App() {
   return (
     <BrowserRouter>
@@ -40,6 +41,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/withdrawal" element={<Withdrawal />} />
+      </Routes>
+      <Routes>
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Analytics />
     </BrowserRouter>
