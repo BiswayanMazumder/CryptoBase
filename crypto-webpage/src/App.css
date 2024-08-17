@@ -1068,3 +1068,6 @@ html {
   font-weight: 500;
   text-decoration: none;
 }
+.showaddress:hover{
+  background-color: rgb(88, 88, 200);
+}
