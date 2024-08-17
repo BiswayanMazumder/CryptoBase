@@ -203,7 +203,7 @@ export default function Profile() {
                                 Home
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/portfolio"}>
                             <div className="hjkv">
                                 Portfolios
                             </div>
@@ -243,7 +243,8 @@ export default function Profile() {
                                 Signout
                             </div>
                         </Link>
-
+                        <div className="hjkv">
+                        </div>
                     </div>
                 </div>
                 <div className="jfnvmwjdikjk">
