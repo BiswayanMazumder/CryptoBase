@@ -92,7 +92,7 @@ export default function Withdrawal() {
                                 Home
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/portfolio"}>
                             <div className="hjkv">
                                 Portfolios
                             </div>

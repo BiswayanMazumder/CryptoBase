@@ -204,7 +204,7 @@ export default function Portfolio() {
                                 Deposits
                             </div>
                         </Link> */}
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/withdrawal"}>
                             <div className="hjkv">
                                 Withdrawal
                             </div>
