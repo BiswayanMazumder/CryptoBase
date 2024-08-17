@@ -1010,7 +1010,24 @@ html {
 }
 .jfnef0smdkmkf{
   width: 100%;
-  height: 100px;
-  /* background-color: red; */
+  height: 120px;
+  background-color: #212C3A;
   border-radius: 10px;
+}
+.title{
+  padding: 20px;
+  color: grey;
+  font-weight: 400;
+  font-size: 18px;
+  /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+}
+.result{
+  padding-left: 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 20px;
+  /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+}
+.jfnef0smdkmkf:hover{
+  background-color: #282c34;
 }
