@@ -574,6 +574,49 @@ html {
   border-radius: 5px;
   color: white;
 }
+.djgirfkgfmk{
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+  margin-top: 20px;
+}
+.market-table {
+  width: 100vw;
+  border-collapse: collapse;
+  margin-top: 20px;
+  color: white;
+  /* margin-right: 20px; */
+}
+
+.market-table th,
+.market-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 0.5px solid #282c34;
+}
+
+.market-table th {
+  background-color: #333;
+  color: white;
+}
+
+.market-table tbody tr:hover {
+  background-color: #282c34
+}
+
+.coin-cell {
+  display: flex;
+  align-items: center;
+}
+
+.coin-cell img {
+  margin-right: 10px;
+}
+
+.price-cell, .change-cell {
+  font-weight: bold;
+}
+
 @media screen and (max-width:740px) {
   .jnnvmkjdf{
     width: 200%;

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Typewriter from 'typewriter-effect';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { getFirestore } from 'firebase/firestore';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
     authDomain: "cryptobase-admin.firebaseapp.com",
@@ -14,20 +14,24 @@ const firebaseConfig = {
     measurementId: "G-LTBWYEEF6E"
 };
 const app = initializeApp(firebaseConfig);
-// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
+
 export default function Marketplace() {
     async function logout() {
         const auth = getAuth();
         await auth.signOut();
         window.location.replace('/')
     }
+
     useEffect(() => {
-        document.title = 'Best Place for Crypto Trading and buying Crypto | CryptoForge'
-    })
+        document.title = 'Best Place for Crypto Trading and Buying Crypto | CryptoForge';
+    });
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -37,7 +41,6 @@ export default function Marketplace() {
                 }
                 const result = await response.json();
                 setData(result);
-                // console.log(result);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -47,6 +50,18 @@ export default function Marketplace() {
 
         fetchData();
     }, []);
+
+    const formatPrice = (price) => {
+        return price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+    }
+
+    const filteredData = data.filter(coin =>
+        coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
     return (
         <>
             <div className="webbody">
@@ -70,11 +85,6 @@ export default function Marketplace() {
                                 Transactions
                             </div>
                         </Link>
-                        {/* <Link style={{ textDecoration: "none", color: "white" }}>
-                            <div className="hjkv">
-                                Deposits
-                            </div>
-                        </Link> */}
                         <Link style={{ textDecoration: "none", color: "white" }} to={"/withdrawal"}>
                             <div className="hjkv">
                                 Withdrawal
@@ -100,48 +110,51 @@ export default function Marketplace() {
                                 Signout
                             </div>
                         </Link>
-                        <div className="hjkv">
-
-                        </div>
                     </div>
                 </div>
+                <div className="emailaddress" style={{marginTop: "20px",marginLeft: "10px",marginRight: "50px"}}>
+                            <input type="text" placeholder=" Search any cryptocurrency" className='xjcxxckxc' id='whdujjfkem' value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)} style={{paddingLeft: "10px"}}/>
+                        </div>
                 <div className="uykfhrhkd">
-                    <div className="kjvkmkfmldf">
-                        <div className="marketdetails">
-                            {
-                                data.map(coin => (
-                                    <div className="fgffgfgf" style={{color: coin.price_change_percentage_24h < 0 ? "red" : "green"}}>
-                                    <img src={coin.image} alt="" height={40} width={40} />
-                                        {coin.name}
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                    <div className="kjvkmkfmldf" >
-                        <div className="marketdetails">
-                            {
-                                data.map(coin => (
-                                    <div className="fgffgfgf" style={{color: coin.price_change_percentage_24h < 0 ? "red" : "green"}}>
-                                    ₹{coin.current_price}
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                    <div className="kjvkmkfmldf">
-                        <div className="marketdetails">
-                            {
-                                data.map(coin => (
-                                    <div className="fgffgfgf" style={{color: coin.price_change_percentage_24h < 0 ? "red" : "green"}}>
-                                        {coin.price_change_percentage_24h}%
-                                    </div>
-                                ))
-                            }
-                        </div>
+                    {/* <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search Cryptocurrency"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="search-input"
+                        />
+                    </div> */}
+                    <div className="djgirfkgfmk">
+                        <table className="market-table">
+                            <thead>
+                                <tr>
+                                    <th>Coin</th>
+                                    <th>Price</th>
+                                    <th>24h Change</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredData.map(coin => (
+                                    <tr key={coin.id}>
+                                        <td className="coin-cell">
+                                            <img src={coin.image} alt={coin.name} height={40} width={40} />
+                                            <span className="coin-name">{coin.name}</span>
+                                        </td>
+                                        <td className="price-cell" style={{ color: coin.price_change_percentage_24h < 0 ? "red" : "green" }}>
+                                            {formatPrice(coin.current_price)}
+                                        </td>
+                                        <td className="change-cell" style={{ color: coin.price_change_percentage_24h < 0 ? "red" : "green" }}>
+                                            {coin.price_change_percentage_24h >= 0 ? `+${coin.price_change_percentage_24h.toFixed(2)}` : coin.price_change_percentage_24h.toFixed(2)}%
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </>
-    )
+    );
 }
