@@ -35,7 +35,7 @@ export default function CarrersHome() {
                     // Document found, update state
                     setcategory(docSnap.data()["Req Titles"]);
                     setlocation(docSnap.data()["Locations"]);
-                    console.log('Name', docSnap.data()["Locations"]);
+                    // console.log('Name', docSnap.data()["Locations"]);
                 } else {
                     setError('No such document!');
                 }
