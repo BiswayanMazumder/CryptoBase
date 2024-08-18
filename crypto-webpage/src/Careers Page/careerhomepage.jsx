@@ -77,6 +77,31 @@ export default function CarrersHome() {
                         </div>
                     ))}
                 </div>
+                <div className="jjjfnkvnfkv" style={{position:"relative",top:"200px"}}>
+                    <div className="jnfn">
+                        Discover Our
+                    </div>
+                    <div className="jnfnj">
+                        Spaces
+                    </div>
+                </div>
+                <div className="locations">
+                    <div className="jhdjfndn">
+                    <Link style={{textDecoration:"none",color:"white"}} >
+                    Bengaluru
+                    </Link>
+                    </div>
+                    <div className="jhdjfndn">
+                        <Link style={{textDecoration:"none",color:"white"}}>
+                            Mumbai
+                        </Link>
+                    </div>
+                    <div className="jhdjfndn">
+                        <Link style={{textDecoration:"none",color:"white"}}>
+                            Delhi
+                        </Link>
+                    </div>
+                </div>
             </div>
         </>
     )
