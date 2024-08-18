@@ -17,6 +17,7 @@ import Withdrawal from './Transactions And Money/withdrawal';
 import Profile from './Profile Page/profile';
 import Portfolio from './Portfolio Page/portfolio';
 import Marketplace from './Market Place/marketplace';
+import CarrersHome from './Careers Page/careerhomepage';
 function App() {
   return (
     <BrowserRouter>
@@ -52,6 +53,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/market" element={<Marketplace />} />
+      </Routes>
+      <Routes>
+        <Route path="/oppurtunity" element={<CarrersHome />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

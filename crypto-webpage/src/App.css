@@ -1235,3 +1235,71 @@ html {
   flex-direction: row;
   justify-content: space-evenly;
 }
+.jjjfnkvnfkv{
+  width: 100%;
+  position: relative;
+  top: 50px;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-weight: 600;
+  font-size: 28px;
+  /* background-color: red; */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.jnfnj{
+  color: orangered;
+  padding-left: 5px;
+}
+.openingcategories{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 150px;
+}
+.krjkrgmr{
+  height: 150px;
+  width: 350px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: start;
+  padding-left: 30px;
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+}
+.jobcat{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.krjkrgmr:hover{
+  background-color:#252D54;
+  color: white;
+  /* border: 2px solid deeppink; */
+}
+.kkdkdmv{
+  width: 100vw;
+  height: 400px;
+  position: relative;
+  top: 100px;
+  display: flex;
+  /* background-color: red; */
+  justify-content: center;
+  align-items: center;
+}
+

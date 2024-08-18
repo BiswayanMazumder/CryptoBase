@@ -284,7 +284,7 @@ export default function Landingpage() {
                                 About Us
                             </div>
                         </Link>
-                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }} to={'/oppurtunity'}>
                             <div style={{ marginTop: "10px" }}>
                                 Careers
                             </div>
