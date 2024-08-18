@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Typewriter from 'typewriter-effect';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { initializeApp } from "firebase/app";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
     authDomain: "cryptobase-admin.firebaseapp.com",
@@ -14,24 +14,27 @@ const firebaseConfig = {
     measurementId: "G-LTBWYEEF6E"
 };
 const app = initializeApp(firebaseConfig);
-// Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
+
 export default function Withdrawal() {
+    const [amount, setAmount] = useState([]);
+    const [searchQuery, setSearchQuery] = useState(''); // State for search query
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
     async function logout() {
         const auth = getAuth();
         await auth.signOut();
-        window.location.replace('/')
+        window.location.replace('/');
     }
+
     useEffect(() => {
-        document.title = 'Best Place for Crypto Trading and buying Crypto | CryptoForge'
-    })
-    const [amount, setamount] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+        document.title = 'Best Place for Crypto Trading and buying Crypto | CryptoForge';
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
             const auth = getAuth();
-            const db = getFirestore(app);
             const user = auth.currentUser;
 
             if (!user) {
@@ -40,20 +43,17 @@ export default function Withdrawal() {
                 return;
             }
 
-            const docRef = doc(db, "Payment Refund", user.uid);
+            const docRef = doc(db, 'Payment Refund', user.uid);
 
             try {
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
-                    // Document found, update state
-                    setamount(docSnap.data()["Amount"]);
-                    // console.log('Name', docSnap.data()["Amount"]);
+                    setAmount(docSnap.data()['Amount']);
                 } else {
                     setError('No such document!');
                 }
             } catch (e) {
-                // Handle errors here
                 setError(`Error getting document: ${e.message}`);
             } finally {
                 setLoading(false);
@@ -62,23 +62,21 @@ export default function Withdrawal() {
 
         fetchData();
     }, []);
+
     useEffect(() => {
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/auth.user
-                const uid = user.uid;
-                // console.log('User is signed in:', uid);
-                // ...
-            } else {
-                // User is signed out
-                // console.log('User is not signed')
-                window.location.replace('/')
-                // ...
+            if (!user) {
+                window.location.replace('/');
             }
         });
-    })
+    }, []);
+
+    // Filter amounts based on search query
+    const filteredAmounts = amount.filter((amt) =>
+        amt.toString().includes(searchQuery)
+    );
+
     return (
         <>
             <div className="webbody">
@@ -88,93 +86,71 @@ export default function Withdrawal() {
                     </Link>
                     <div className="categories">
                         <Link style={{ textDecoration: "none", color: "white" }} to={"/home"}>
-                            <div className="hjkv">
-                                Home
-                            </div>
+                            <div className="hjkv">Home</div>
                         </Link>
                         <Link style={{ textDecoration: "none", color: "white" }} to={"/portfolio"}>
-                            <div className="hjkv">
-                                Portfolios
-                            </div>
+                            <div className="hjkv">Portfolios</div>
                         </Link>
                         <Link style={{ textDecoration: "none", color: "white" }} to={"/transactions"}>
-                            <div className="hjkv">
-                                Transactions
-                            </div>
+                            <div className="hjkv">Transactions</div>
                         </Link>
-                        {/* <Link style={{ textDecoration: "none", color: "white" }}>
-                            <div className="hjkv">
-                                Deposits
-                            </div>
-                        </Link> */}
                         <Link style={{ textDecoration: "none", color: "yellow" }}>
-                            <div className="hjkv">
-                                Withdrawal
-                            </div>
+                            <div className="hjkv">Withdrawal</div>
                         </Link>
                         <Link style={{ textDecoration: "none", color: "white" }}>
-                            <div className="hjkv">
-                                Help and Support
-                            </div>
+                            <div className="hjkv">Help and Support</div>
                         </Link>
                         <Link style={{ textDecoration: "none", color: "white" }} to={"/market"}>
-                            <div className="hjkv" >
-                                Market
-                            </div>
+                            <div className="hjkv">Market</div>
                         </Link>
                         <Link style={{ textDecoration: "none", color: "white" }} to={"/profile"}>
-                            <div className="hjkv">
-                                Profile
-                            </div>
+                            <div className="hjkv">Profile</div>
                         </Link>
                         <Link style={{ textDecoration: "none", color: "red" }} onClick={logout}>
-                            <div className="hjkv">
-                                Signout
-                            </div>
+                            <div className="hjkv">Signout</div>
                         </Link>
-                        <div className="hjkv">
-
-                        </div>
                     </div>
                 </div>
                 <div className="fgfgfgf">
                     <div className="firstpart">
-                        <div className="kjdfmdkfm" style={{ paddingTop: '20px' }}>
-                            Withdrawals
-                        </div>
+                        <div className="kjdfmdkfm" style={{ paddingTop: '20px' }}>Withdrawals</div>
                         <div className="kejkfejkfje">
                             <div className="searchbar">
-                                <input type="text" className='jefekfm' placeholder='Search for any withdrawals' />
+                                <input
+                                    type="text"
+                                    className='jefekfm'
+                                    placeholder='Search for any withdrawals'
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
                             </div>
                             <div className="history">
                                 <div className="lfjmrkl">
                                     <div className="dfvd">Status</div>
-                                    <div className="dfvd" style={{marginleft: "20px"}}>Amount</div>
+                                    <div className="dfvd" style={{ marginLeft: "20px" }}>Amount</div>
                                     <div className="dfvd">Payment Merchant</div>
                                 </div>
                                 <div className="rjggkmk" style={{ gap: "10px" }}>
                                     <br />
-                                    {amount.map((amt, index) =>
-                                    (
+                                    {filteredAmounts.length > 0 ? (
+                                        filteredAmounts.map((amt, index) => (
+                                            <div className="lfjmrkl" style={{ paddingBottom: "20px" }} key={index}>
+                                                <div className="dfvd" style={{ color: "green" }}>Success</div>
+                                                <div className="dfvd">₹{amt}</div>
+                                                <div className="dfvd">Razorpay</div>
+                                            </div>
+                                        ))
+                                    ) : (
                                         <div className="lfjmrkl" style={{ paddingBottom: "20px" }}>
-                                            <div className="dfvd" style={{ color: "green" }}>Success</div>
-                                            <div className="dfvd" key={index}>₹{amt}</div>
-                                            <div className="dfvd">Razorpay</div>
+                                            <div className="dfvd">No withdrawals found</div>
                                         </div>
-                                    )
                                     )}
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/* <div className="kjgjffflkfn">
-                        <div className="creditcard">
-                            kelefnlfl
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </>
-    )
+    );
 }
