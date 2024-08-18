@@ -580,6 +580,9 @@ html {
   /* background-color: red; */
   margin-top: 20px;
 }
+.subtextfeature:hover{
+  color: white;
+}
 .market-table {
   width: 100vw;
   border-collapse: collapse;

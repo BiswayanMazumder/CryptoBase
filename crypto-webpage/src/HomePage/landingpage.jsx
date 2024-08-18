@@ -120,12 +120,12 @@ export default function Landingpage() {
                                 </div>
                                 <div className="downloadbtn">
                                     <div className="externalbtns">
-                                        <Link to={'https://play.google.com/store/apps/details?id=com.wrx.wazirx&referrer=utm_source%3DWazirX%2520Desktop%26utm_medium%Hero%2520Image%26utm_term%3DDownload%2520App'} target='blank'>
+                                        <Link to={'https://emkldzxxityxmjkxiggw.supabase.co/storage/v1/object/public/Netfly%20Storage/CryptoBase.apk?t=2024-08-18T07%3A27%3A41.893Z'}>
                                             <div className="playstorebtn">
                                                 <img src="https://media.wazirx.com/web_assets/download_from_playstore_btn/dark/1x.svg" alt="" className='playstoreimg' />
                                             </div>
                                         </Link>
-                                        <Link to={'https://apps.apple.com/in/app/wazirx-buy-btc-trade-crypto/id1349082789'} target='blank'>
+                                        <Link to={'https://emkldzxxityxmjkxiggw.supabase.co/storage/v1/object/public/Netfly%20Storage/CryptoBase.apk?t=2024-08-18T07%3A27%3A41.893Z'}>
                                             <div className="playstorebtn">
                                                 <img src="https://media.wazirx.com/web_assets/download_from_appstore_btn/dark/1x.svg" alt="" className='playstoreimg' />
                                             </div>
@@ -275,6 +275,55 @@ export default function Landingpage() {
                         </div>
                     </section>
                 </center>
+                <br /><br /><br />
+                <section className='thirdsection'>
+                    <div className="company">
+                        Company
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                About Us
+                            </div>
+                        </Link>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                Careers
+                            </div>
+                        </Link>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                Blogs
+                            </div>
+                        </Link>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                Community
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="company">
+                        Contact Us
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                Instagram
+                            </div>
+                        </Link>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                Twitter
+                            </div>
+                        </Link>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                Call
+                            </div>
+                        </Link>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                            <div style={{ marginTop: "10px" }}>
+                                Email
+                            </div>
+                        </Link>
+                    </div>
+                </section>
                 <center>
                 </center>
             </div>

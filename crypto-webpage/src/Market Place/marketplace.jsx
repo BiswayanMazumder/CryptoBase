@@ -113,7 +113,7 @@ export default function Marketplace() {
                     </div>
                 </div>
                 <div className="emailaddress" style={{marginTop: "20px",marginLeft: "10px",marginRight: "50px"}}>
-                            <input type="text" placeholder=" Search any cryptocurrency" className='xjcxxckxc' id='whdujjfkem' value={searchTerm}
+                            <input type="text" placeholder=" Search any coins" className='xjcxxckxc' id='whdujjfkem' value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)} style={{paddingLeft: "10px"}}/>
                         </div>
                 <div className="uykfhrhkd">
