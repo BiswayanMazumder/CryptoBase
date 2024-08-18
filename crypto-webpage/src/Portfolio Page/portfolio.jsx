@@ -214,7 +214,7 @@ export default function Portfolio() {
                                 Help and Support
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={"/market"}>
                             <div className="hjkv">
                                 Market
                             </div>
