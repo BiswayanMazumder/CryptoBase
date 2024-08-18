@@ -302,26 +302,29 @@ export default function Landingpage() {
                     </div>
                     <div className="company">
                         Contact Us
-                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }} to
+                            ='https://www.instagram.com/itz_biswayan_for_you/' target='_blank'>
                             <div style={{ marginTop: "10px" }}>
                                 Instagram
                             </div>
                         </Link>
-                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }} to
+                            ='https://x.com/wazirxcares?lang=en' target='_blank'>
                             <div style={{ marginTop: "10px" }}>
                                 Twitter
                             </div>
                         </Link>
-                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                        <a className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }} href="tel:+911234567890">
                             <div style={{ marginTop: "10px" }}>
                                 Call
                             </div>
-                        </Link>
-                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                        </a>
+                        <a className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }} href="mailto:abc@abc.com">
                             <div style={{ marginTop: "10px" }}>
                                 Email
                             </div>
-                        </Link>
+                        </a>
+
                     </div>
                 </section>
                 <center>
