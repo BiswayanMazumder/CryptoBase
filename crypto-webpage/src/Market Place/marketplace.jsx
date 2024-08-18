@@ -58,10 +58,6 @@ export default function Marketplace() {
     const filteredData = data.filter(coin =>
         coin.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-
     return (
         <>
             <div className="webbody">
