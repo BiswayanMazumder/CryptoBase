@@ -71,6 +71,7 @@ export default function CarrersHome() {
                             </div>
                             <br /><br />
                             <div className="jobcat" style={{ fontWeight: "400" }}>
+                            <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-16asun5" focusable="false" aria-hidden="true" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M12.1542 6.15375C12.1542 8.45216 8.00043 13.9997 8.00043 13.9997C8.00043 13.9997 3.84668 8.45216 3.84668 6.15375C3.84668 5.05211 4.28431 3.99558 5.06328 3.2166C5.84226 2.43763 6.89879 2 8.00043 2C9.10207 2 10.1586 2.43763 10.9376 3.2166C11.7166 3.99558 12.1542 5.05211 12.1542 6.15375Z" stroke="#FA4A29" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.00079 7.53845C8.76548 7.53845 9.38538 6.91855 9.38538 6.15387C9.38538 5.38919 8.76548 4.76929 8.00079 4.76929C7.23611 4.76929 6.61621 5.38919 6.61621 6.15387C6.61621 6.91855 7.23611 7.53845 8.00079 7.53845Z" stroke="#FA4A29" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                                 {location[index]}
                             </div>
                         </div>
