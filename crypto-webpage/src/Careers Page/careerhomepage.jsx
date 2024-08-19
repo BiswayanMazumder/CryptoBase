@@ -144,14 +144,20 @@ export default function CarrersHome() {
                             autoplay
                             loop
                             muted
+                            controls
                             style={{ borderRadius: "20px" }}
-                        >
-                            Your browser does not support the video tag.
-                        </video>
+                        />
 
                     </div>
                 </div>
-
+                {/* <div className="jjjfnkvnfkv">
+                    <div className="jnfn">
+                        Change Starts
+                    </div>
+                    <div className="jnfnj">
+                        Together!
+                    </div>
+                </div> */}
             </div>
         </>
     )
