@@ -127,10 +127,12 @@ export default function CarrersHome() {
                 </div>
                 <div className="locationinfos">
                     <div className="jdjdkdf">
-                        Bengaluru
+                    {
+                            blr?' Bengaluru':mum?'Mumbai':'Delhi'
+                           }
                         <div className="jfdkvd">
                            {
-                            blr?' Located at the heart of Namma Bengaluru, it is fully equipped with a large cafeteria, gym as well as a lounge area to help you recharge post work. With beautiful views and a pantry full of delicious snacks, enjoy BUIDLing in this workplace.':mum?'Our Mumbai office is located in a socially active area - Andheri which gives you a variety of places to explore. With large windows to thoroughly enjoy the beautiful views and the convenience of being situated near the metro station, it is surrounded by numerous food outlets to satiate all your cravings from delicious buffets, to burgers.':'This cozy workspace is sure to make you feel like you’re home. Surrounded by many spots you can hangout post work, including malls, theatres and delicious street delights.'
+                            blr?' Located at the heart of Namma Bengaluru, it is fully equipped with a large cafeteria, gym as well as a lounge area to help you recharge post work. With beautiful views and a pantry full of delicious snacks, enjoy BUILDing in this workplace.':mum?'Our Mumbai office is located in a socially active area - Andheri which gives you a variety of places to explore. With large windows to thoroughly enjoy the beautiful views and the convenience of being situated near the metro station, it is surrounded by numerous food outlets to satiate all your cravings from delicious buffets, to burgers.':'This cozy workspace is sure to make you feel like you’re home. Surrounded by many spots you can hangout post work, including malls, theatres and delicious street delights.'
                            }
                            <br /><br /><br />
                         </div>
