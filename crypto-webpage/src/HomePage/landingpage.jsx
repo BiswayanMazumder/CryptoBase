@@ -279,7 +279,7 @@ export default function Landingpage() {
                 <section className='thirdsection'>
                     <div className="company">
                         Company
-                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }}>
+                        <Link className="subtextfeature" style={{ fontSize: "15px", color: "grey", textDecoration: "none" }} to={'/about-us'}>
                             <div style={{ marginTop: "10px" }}>
                                 About Us
                             </div>

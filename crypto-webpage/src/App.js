@@ -18,6 +18,7 @@ import Profile from './Profile Page/profile';
 import Portfolio from './Portfolio Page/portfolio';
 import Marketplace from './Market Place/marketplace';
 import CarrersHome from './Careers Page/careerhomepage';
+import Aboutus from './About Us/about-us';
 function App() {
   return (
     <BrowserRouter>
@@ -56,6 +57,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/oppurtunity" element={<CarrersHome />} />
+      </Routes>
+      <Routes>
+        <Route path="/about-us" element={<Aboutus />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

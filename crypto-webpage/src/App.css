@@ -1564,3 +1564,19 @@ html {
     width: 80%;
   }
 }
+.ejfjkj{
+  position: relative;
+  top: 80px;
+  color: grey;
+  justify-content: center;
+  text-align: center;
+}
+.aboutusvideo{
+  position: relative;
+  top: 150px;
+  width: 100%;
+  color: grey;
+  justify-content: center;
+  text-align: center;
+  /* height: 150px; */
+}
