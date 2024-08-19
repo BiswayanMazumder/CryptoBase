@@ -110,7 +110,8 @@ html {
   font-size: 32px;
   font-weight: 500;
 }
-.subtextfeaturechanging{
+
+.subtextfeaturechanging {
   position: relative;
   top: 20px;
   gap: 40px;
@@ -121,6 +122,7 @@ html {
   font-weight: 400;
   text-decoration: none;
 }
+
 .firstpart {
   width: 100%;
   height: 100%;
@@ -136,9 +138,11 @@ html {
   height: 469px;
   padding-left: 5px;
 }
-.featureimagechanging{
+
+.featureimagechanging {
   height: 500px;
 }
+
 .heroimagemobo {
   position: relative;
   top: 50px;
@@ -243,7 +247,8 @@ html {
   flex-wrap: wrap;
   /* background-color: red; */
 }
-.gfgfdfg{
+
+.gfgfdfg {
   position: relative;
   display: grid;
   /* flex-direction: column; */
@@ -260,21 +265,24 @@ html {
   /* flex-wrap: wrap; */
   flex-wrap: wrap;
 }
-.dksldsl{
+
+.dksldsl {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
 }
-.firstfeature{
+
+.firstfeature {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   gap: 20px;
 }
-.featurebox{
+
+.featurebox {
   position: relative;
   display: flex;
   height: 60px;
@@ -283,16 +291,19 @@ html {
   background-color: #3BA072;
   border-radius: 10px;
 }
-.featureimage{
+
+.featureimage {
   justify-content: center;
   position: relative;
   top: 20%;
 }
-.subtextfeature{
-  color:grey;
+
+.subtextfeature {
+  color: grey;
   font-weight: 400;
   font-size: 18px;
 }
+
 @media screen and (min-width:741px) {
   .downloadbtnmobo {
     display: none;
@@ -360,7 +371,8 @@ html {
     left: 80%;
     /* background-color: red; */
   }
-  .thirdsectext{
+
+  .thirdsectext {
     position: absolute;
     display: none;
     top: 20000px;
@@ -377,7 +389,8 @@ html {
     align-self: center;
     /* background-color: red; */
   }
-  .thirdsection{
+
+  .thirdsection {
     position: relative;
     top: 1400px;
     justify-content: center;
@@ -393,6 +406,7 @@ html {
   }
 
 }
+
 .Cryptovalues {
   position: relative;
   top: 100px;
@@ -406,13 +420,15 @@ html {
   font-weight: bold;
   font-size: 25px;
 }
-.cryptotexts{
+
+.cryptotexts {
   position: relative;
   display: flex;
   text-align: center;
   top: 20%;
   padding-left: 15%;
 }
+
 .cryptocontainers {
   position: relative;
   top: 80px;
@@ -424,24 +440,28 @@ html {
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center; /* This centers the text vertically */
+  align-items: center;
+  /* This centers the text vertically */
   background-color: #293F9B;
   border-radius: 20px;
 }
 
-.dfknf{
+.dfknf {
   display: flex;
   flex-direction: row;
   gap: 50px;
 }
-.cryptocontainers:hover{
+
+.cryptocontainers:hover {
   background-color: #1437AE;
 }
-.dcdjksj{
+
+.dcdjksj {
   color: black;
   font-weight: 600;
 }
-.thirdsectext{
+
+.thirdsectext {
   position: relative;
   top: 80px;
   justify-content: center;
@@ -452,7 +472,8 @@ html {
   width: 100%;
   height: fit-content;
 }
-.heading{
+
+.heading {
   width: 100%;
   height: 60px;
   background-color: #3F475A;
@@ -461,7 +482,8 @@ html {
   flex-direction: row;
   justify-content: space-between;
 }
-.jnnvmkjd{
+
+.jnnvmkjd {
   width: 100%;
   height: 60px;
   color: white;
@@ -474,7 +496,8 @@ html {
   gap: 20px;
   font-weight: 500;
 }
-.jnnvmkjdf{
+
+.jnnvmkjdf {
   width: 100%;
   height: 60px;
   color: white;
@@ -487,7 +510,8 @@ html {
   gap: 20px;
   font-weight: 500;
 }
-.categories{
+
+.categories {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -497,7 +521,8 @@ html {
   overflow: scroll;
   height: 100%;
 }
-.jjddndfkdj{
+
+.jjddndfkdj {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -507,15 +532,19 @@ html {
   overflow: scroll;
   height: 100%;
 }
+
 .categories::-webkit-scrollbar {
-  display: none; /* Hides scrollbar for WebKit browsers */
+  display: none;
+  /* Hides scrollbar for WebKit browsers */
 }
-.homelogo{
+
+.homelogo {
   height: 50px;
   width: 100px;
   margin-left: 20px;
 }
-.loginoptions{
+
+.loginoptions {
   height: 90%;
   margin-top: 20px;
   width: 30%;
@@ -533,9 +562,10 @@ html {
   padding-right: 20px;
   gap: 20px;
 }
-.loginsignup{
+
+.loginsignup {
   width: 100%;
-  height:50px;
+  height: 50px;
   font-size: 15px;
   background-color: #101623;
   position: relative;
@@ -547,7 +577,8 @@ html {
   align-items: center;
   /* margin-bottom: 20px; */
 }
-.loginbutton{
+
+.loginbutton {
   position: relative;
   width: 49%;
   height: 40px;
@@ -561,7 +592,8 @@ html {
   color: white;
   text-decoration: none;
 }
-.signup{
+
+.signup {
   position: relative;
   width: 49%;
   height: 40px;
@@ -574,15 +606,18 @@ html {
   border-radius: 5px;
   color: white;
 }
-.djgirfkgfmk{
+
+.djgirfkgfmk {
   width: 100%;
   height: 100%;
   /* background-color: red; */
   margin-top: 20px;
 }
-.subtextfeature:hover{
+
+.subtextfeature:hover {
   color: white;
 }
+
 .market-table {
   width: 100vw;
   border-collapse: collapse;
@@ -616,14 +651,16 @@ html {
   margin-right: 10px;
 }
 
-.price-cell, .change-cell {
+.price-cell,
+.change-cell {
   font-weight: bold;
 }
 
 @media screen and (max-width:740px) {
-  .jnnvmkjdf{
+  .jnnvmkjdf {
     width: 200%;
   }
+
   .heroimagecont {
     position: relative;
     /* background-color: red; */
@@ -633,10 +670,12 @@ html {
     justify-content: center;
     align-items: center;
   }
-  .Cryptovalues{
+
+  .Cryptovalues {
     display: none;
   }
-  .loginoptions{
+
+  .loginoptions {
     height: 90%;
     margin-top: 20px;
     width: 110vw;
@@ -654,13 +693,15 @@ html {
     /* padding-right: 20px; */
     gap: 20px;
   }
-  .heading{
+
+  .heading {
     width: 120%;
     display: flex;
     flex-direction: row;
-    
+
   }
 }
+
 .emailaddress {
   position: relative;
   width: 100%;
@@ -681,28 +722,37 @@ html {
   border: 2px solid white;
   border-radius: 5px;
   color: white;
-  padding-right: 40px; /* Extra space for the image */
-  box-sizing: border-box; /* Ensures padding is included in width */
-}
-.hjkv:hover{
-  color: yellow;
-}
-.toggle-icon {
-  position: absolute;
-  right: 10px; /* Position from the right edge of the container */
-  top: 50%;
-  transform: translateY(-50%); /* Center vertically */
-  cursor: pointer;
-  width: 20px; /* Adjust size as needed */
-  height: auto; /* Maintain aspect ratio */
+  padding-right: 40px;
+  /* Extra space for the image */
+  box-sizing: border-box;
+  /* Ensures padding is included in width */
 }
 
-.dnjdkssq{
+.hjkv:hover {
+  color: yellow;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 10px;
+  /* Position from the right edge of the container */
+  top: 50%;
+  transform: translateY(-50%);
+  /* Center vertically */
+  cursor: pointer;
+  width: 20px;
+  /* Adjust size as needed */
+  height: auto;
+  /* Maintain aspect ratio */
+}
+
+.dnjdkssq {
   font-size: 15px;
   text-decoration: none;
-  color:white;
+  color: white;
 }
-.idsksld{
+
+.idsksld {
   width: 50px;
   height: 60px;
   /* background-color: red; */
@@ -711,10 +761,12 @@ html {
   align-items: center;
   flex-direction: column;
 }
-.idsksld:hover{
+
+.idsksld:hover {
   background-color: #101723;
 }
-.sdssww{
+
+.sdssww {
   width: 100%;
   height: 500px;
   /* background-color: blue; */
@@ -726,21 +778,25 @@ html {
   font-size: 36px;
   /* padding-top: 20px; */
 }
-.sshgsbcjs{
+
+.sshgsbcjs {
   height: 500px;
   width: 100%;
 }
-.wjdsjcldkmc{
+
+.wjdsjcldkmc {
   font-size: 15px;
   position: relative;
-  width:"100%";
+  width: "100%";
   padding-top: 20px;
 }
-.jkhjkshk{
+
+.jkhjkshk {
   width: 80%;
   padding-top: 50px;
 }
-.ewkfwj{
+
+.ewkfwj {
   width: 100%;
   height: 500px;
   /* background-color: red; */
@@ -755,7 +811,8 @@ html {
   color: grey;
   /* padding-right: 200px; */
 }
-.iieoioek{
+
+.iieoioek {
   width: 100%;
   height: 500px;
   /* background-color: red; */
@@ -770,6 +827,7 @@ html {
   color: grey;
   /* padding-right: 200px; */
 }
+
 .jhfjgj {
   display: none;
   flex-direction: column;
@@ -780,7 +838,8 @@ html {
   align-items: center;
   padding-left: 20%;
 }
-.downloadcryptoforge{
+
+.downloadcryptoforge {
   width: 100%;
   height: 150px;
   /* background-color: red; */
@@ -793,7 +852,8 @@ html {
   color: white;
   gap: 20px;
 }
-.maincontent{
+
+.maincontent {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -806,7 +866,8 @@ html {
   height: 100vh;
   top: 20px;
 }
-.woijlf{
+
+.woijlf {
   width: 100%;
   height: 100%;
   /* background-color: blue; */
@@ -815,7 +876,8 @@ html {
   font-size: 20px;
   font-weight: 500;
 }
-.news-item{
+
+.news-item {
   color: white;
   position: relative;
   top: 50px;
@@ -830,17 +892,20 @@ html {
   padding-bottom: 30px;
   /* padding: 10px; */
 }
-.jfefj{
+
+.jfefj {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.kejfkejfk{
+
+.kejfkejfk {
   height: 100px;
   width: 300px;
   background-color: red;
 }
-.newsbody{
+
+.newsbody {
   /* background-color: red; */
   position: relative;
   width: 100%;
@@ -848,15 +913,17 @@ html {
   top: 50px;
   font-weight: 400;
   font-size: 25px;
-  color:white;
+  color: white;
   text-decoration: none;
   flex-wrap: wrap;
 }
+
 @media screen and (max-width:740px) {
-  .jhfjgj{
+  .jhfjgj {
     display: flex;
   }
-  .ewkfwj{
+
+  .ewkfwj {
     gap: 80px;
     top: 50px;
     padding-left: 20px;
@@ -864,44 +931,51 @@ html {
     justify-content: center;
     align-items: center;
   }
-  .djdfkd{
+
+  .djdfkd {
     display: none;
   }
 }
 
 @media screen and (min-width:2000px) {
-  .ewkfwj{
+  .ewkfwj {
     top: 700px;
   }
-  .downloadcryptoforge{
+
+  .downloadcryptoforge {
     /* position: absolute; */
     top: 1000px;
   }
 }
+
 @media screen and (min-width:741px) {
-  .djdfkd{
+  .djdfkd {
     display: flex;
     gap: 20px;
   }
 }
-.oijff{
+
+.oijff {
   width: 500px;
 }
+
 .wowkdoko {
   width: 500px;
   height: 450px;
   /* background-color: red; */
-  border: 2px solid white; /* Corrected syntax */
+  border: 2px solid white;
+  /* Corrected syntax */
   justify-content: center;
   display: flex;
   align-items: center;
 }
 
-.spaces{
+.spaces {
   height: 200px;
   width: 100%;
 }
-.jdhwjdnsj{
+
+.jdhwjdnsj {
   height: 300px;
   width: 100%;
   /* background-color: red; */
@@ -912,13 +986,15 @@ html {
   overflow-x: scroll;
   /* gap: 0px; */
 }
-.jdhwjdnsj::-webkit-scrollbar{
-  display: none ;
+
+.jdhwjdnsj::-webkit-scrollbar {
+  display: none;
 }
-.hffndjjhjh{
+
+.hffndjjhjh {
   height: 150px;
   width: 400px;
-  background-color:#212C3A;
+  background-color: #212C3A;
   border-radius: 10px;
   color: white;
   display: flex;
@@ -926,23 +1002,26 @@ html {
   /* justify-content: center; */
   /* align-items: center; */
 }
-.hffndjjhjh:hover{
+
+.hffndjjhjh:hover {
   background-color: #3F475A;
 }
-.kjdfmdkfm{
+
+.kjdfmdkfm {
   position: relative;
   top: 20px;
   left: 20px;
   font-size: 25px;
   font-weight: 500;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color:white;
+  color: white;
   justify-content: start;
   align-items: start;
   text-align: start;
   color: white;
 }
-.djkdmmm{
+
+.djkdmmm {
   position: relative;
   top: 50px;
   display: flex;
@@ -960,7 +1039,8 @@ html {
   /* flex-wrap: wrap; */
   /* justify-content: center; */
 }
-.wodklkf{
+
+.wodklkf {
   position: relative;
   top: 50px;
   display: flex;
@@ -976,13 +1056,16 @@ html {
   text-decoration: none;
   color: white;
 }
-.djkdmmm::-webkit-scrollbar{
+
+.djkdmmm::-webkit-scrollbar {
   display: none;
 }
-.wodklkf::-webkit-scrollbar{
+
+.wodklkf::-webkit-scrollbar {
   display: none;
 }
-.currencyname{
+
+.currencyname {
   position: relative;
   top: 20%;
   padding-left: 20px;
@@ -995,7 +1078,8 @@ html {
   justify-content: space-between;
   align-items: center;
 }
-.currencyprice{
+
+.currencyprice {
   position: relative;
   top: 40%;
   padding-left: 20px;
@@ -1005,7 +1089,8 @@ html {
   display: flex;
   flex-direction: row;
 }
-.values{
+
+.values {
   font-size: 15px;
   display: flex;
   position: relative;
@@ -1013,12 +1098,14 @@ html {
   align-items: center;
   padding-left: 10px;
 }
-.searchbar{
+
+.searchbar {
   position: relative;
   top: 50px;
   padding-left: 20px;
 }
-.jefekfm{
+
+.jefekfm {
   height: 50px;
   width: 50%;
   border-radius: 10px;
@@ -1030,18 +1117,21 @@ html {
   background-color: transparent;
   border: 0.5px solid white;
 }
-.fgfgfgf{
+
+.fgfgfgf {
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content:space-between;
-  align-self:flex-start;
+  justify-content: space-between;
+  align-self: flex-start;
 }
-.firstpart{
+
+.firstpart {
   display: flex;
   flex-direction: column;
 }
-.history{
+
+.history {
   position: relative;
   display: flex;
   top: 100px;
@@ -1050,27 +1140,32 @@ html {
   width: 100%;
   /* background-color: red; */
 }
-.lfjmrkl{
+
+.lfjmrkl {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-right: 30px;
 }
+
 @media screen and (max-width:740px) {
-  .wodklkf{
+  .wodklkf {
     gap: 10px;
     flex-wrap: wrap;
   }
-  .jnnvmkjd{
+
+  .jnnvmkjd {
     width: 105%;
   }
 }
-.dnfndfnn{
+
+.dnfndfnn {
   position: relative;
   padding: 20px;
   top: 20px;
 }
-.jfnvmwjdikjk{
+
+.jfnvmwjdikjk {
   position: relative;
   padding: 20px;
   top: 20px;
@@ -1079,30 +1174,35 @@ html {
   align-items: center;
   flex-direction: column;
 }
-.jfnef0smdkmkf{
+
+.jfnef0smdkmkf {
   width: 100%;
   height: 120px;
   background-color: #212C3A;
   border-radius: 10px;
 }
-.title{
+
+.title {
   padding: 20px;
   color: grey;
   font-weight: 400;
   font-size: 18px;
   /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
 }
-.result{
+
+.result {
   padding-left: 20px;
   color: white;
   font-weight: 500;
   font-size: 20px;
   /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
 }
-.jfnef0smdkmkf:hover{
+
+.jfnef0smdkmkf:hover {
   background-color: #282c34;
 }
-.showaddress{
+
+.showaddress {
   width: 200px;
   height: 70px;
   border-radius: 10px;
@@ -1116,7 +1216,8 @@ html {
   font-weight: 500;
   text-decoration: none;
 }
-.hideaddress{
+
+.hideaddress {
   width: 200px;
   height: 70px;
   border-radius: 10px;
@@ -1130,10 +1231,12 @@ html {
   font-weight: 500;
   text-decoration: none;
 }
-.showaddress:hover{
+
+.showaddress:hover {
   background-color: rgb(88, 88, 200);
 }
-.iuhkhjjv{
+
+.iuhkhjjv {
   display: flex;
   position: relative;
   top: 20px;
@@ -1145,7 +1248,8 @@ html {
   text-align: center;
   flex-direction: column;
 }
-.creditcard{
+
+.creditcard {
   height: 150px;
   width: 350px;
   background-color: #282c34;
@@ -1154,18 +1258,20 @@ html {
   text-align: start;
   align-items: start;
 }
-.portfoliodetails{
+
+.portfoliodetails {
   position: relative;
   top: 50px;
   border-radius: 10px;
   width: 90%;
-  height:100vh;
+  height: 100vh;
   background-color: #282c34;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.ejjhjknjm{
+
+.ejjhjknjm {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -1180,7 +1286,8 @@ html {
   font-size: 15px;
   /* left: 50px; */
 }
-.portfoliocurrency{
+
+.portfoliocurrency {
   position: relative;
   top: 20px;
   left: 20px;
@@ -1194,7 +1301,8 @@ html {
   justify-content: center;
   align-items: center;
 }
-.portfoliovalue{
+
+.portfoliovalue {
   position: relative;
   top: 20px;
   right: 20px;
@@ -1206,20 +1314,23 @@ html {
   justify-content: center;
   align-items: center;
 }
-.kjvkmkfmldf{
+
+.kjvkmkfmldf {
   width: 70%;
   height: 100vh;
   /* background-color: red; */
   position: relative;
   top: 50px;
 }
-.marketdetails{
+
+.marketdetails {
   position: relative;
   display: flex;
   flex-direction: column;
   /* justify-content: space-around; */
 }
-.fgffgfgf{
+
+.fgffgfgf {
   color: white;
   font-weight: 500;
   font-size: 20px;
@@ -1230,12 +1341,14 @@ html {
   align-items: center;
   gap: 50px;
 }
-.uykfhrhkd{
+
+.uykfhrhkd {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.jjjfnkvnfkv{
+
+.jjjfnkvnfkv {
   width: 100%;
   position: relative;
   top: 50px;
@@ -1250,11 +1363,13 @@ html {
   align-items: center;
   text-align: center;
 }
-.jnfnj{
+
+.jnfnj {
   color: orangered;
   padding-left: 5px;
 }
-.openingcategories{
+
+.openingcategories {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1264,7 +1379,8 @@ html {
   position: relative;
   top: 150px;
 }
-.krjkrgmr{
+
+.krjkrgmr {
   height: 150px;
   width: 350px;
   background-color: white;
@@ -1281,18 +1397,21 @@ html {
   text-decoration: none;
   color: black;
 }
-.jobcat{
+
+.jobcat {
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
 }
-.krjkrgmr:hover{
-  background-color:#252D54;
+
+.krjkrgmr:hover {
+  background-color: #252D54;
   color: white;
   /* border: 2px solid deeppink; */
 }
-.kkdkdmv{
+
+.kkdkdmv {
   width: 100vw;
   height: 400px;
   position: relative;
@@ -1302,7 +1421,8 @@ html {
   justify-content: center;
   align-items: center;
 }
-.locations{
+
+.locations {
   width: 100%;
   height: 100px;
   /* background-color: red; */
@@ -1314,7 +1434,8 @@ html {
   flex-direction: row;
   gap: 10px;
 }
-.jhdjfndn{
+
+.jhdjfndn {
   background-color: orangered;
   height: 40px;
   width: 150px;
@@ -1327,10 +1448,12 @@ html {
   text-align: center;
   align-items: center;
 }
-.jhdjfndn:hover{
+
+.jhdjfndn:hover {
   background-color: orangered;
 }
-.locationinfos{
+
+.locationinfos {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1340,9 +1463,10 @@ html {
   gap: 20px;
   /* background-color: orangered; */
   position: relative;
-  top:230px ;
+  top: 230px;
 }
-.jdjdkdf{
+
+.jdjdkdf {
   display: flex;
   flex-direction: column;
   color: white;
@@ -1351,20 +1475,92 @@ html {
   width: 30%;
   gap: 20px;
 }
-.jfdkvd{
+
+.jfdkvd {
   color: grey;
   font-weight: 400;
   font-size: 18px;
 }
-@media screen and (max-width:741px){
-  .jdjdkdf{
+
+@media screen and (max-width:741px) {
+  .jdjdkdf {
     width: 92%;
   }
-  .locationinfos{
+
+  .locationinfos {
     flex-direction: column;
     gap: 50px;
   }
+
   /* .jhjfdkd{
     display: none;
   } */
+}
+
+.jvkfklkflklf {
+  position: relative;
+  top: 200px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* left: 40%; */
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  gap: 20px;
+  /* background-color: red; */
+  margin-bottom: 50px;
+}
+
+.jigjfkkgldk {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 50px;
+  background-color: blue;
+  height: 50%;
+  width: 80%;
+  border-radius: 10px;
+}
+
+.njfnkf {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.fjfkbvbmfbm {
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  padding-left: 20px;
+  padding-right: 30px;
+}
+.jdfndvn{
+  color: grey;
+  font-size: 15px;
+}
+.djfkdkfmd{
+  /* height: 30px; */
+  width: 15%;
+  background-color: orangered;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  padding: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+}
+@media screen and (max-width:741px) {
+  .djfkdkfmd{
+    position: relative;
+    width: 80%;
+  }
 }

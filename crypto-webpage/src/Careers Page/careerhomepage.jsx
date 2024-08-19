@@ -127,14 +127,14 @@ export default function CarrersHome() {
                 </div>
                 <div className="locationinfos">
                     <div className="jdjdkdf">
-                    {
-                            blr?' Bengaluru':mum?'Mumbai':'Delhi'
-                           }
+                        {
+                            blr ? ' Bengaluru' : mum ? 'Mumbai' : 'Delhi'
+                        }
                         <div className="jfdkvd">
-                           {
-                            blr?' Located at the heart of Namma Bengaluru, it is fully equipped with a large cafeteria, gym as well as a lounge area to help you recharge post work. With beautiful views and a pantry full of delicious snacks, enjoy BUILDing in this workplace.':mum?'Our Mumbai office is located in a socially active area - Andheri which gives you a variety of places to explore. With large windows to thoroughly enjoy the beautiful views and the convenience of being situated near the metro station, it is surrounded by numerous food outlets to satiate all your cravings from delicious buffets, to burgers.':'This cozy workspace is sure to make you feel like you’re home. Surrounded by many spots you can hangout post work, including malls, theatres and delicious street delights.'
-                           }
-                           <br /><br /><br />
+                            {
+                                blr ? ' Located at the heart of Namma Bengaluru, it is fully equipped with a large cafeteria, gym as well as a lounge area to help you recharge post work. With beautiful views and a pantry full of delicious snacks, enjoy BUILDing in this workplace.' : mum ? 'Our Mumbai office is located in a socially active area - Andheri which gives you a variety of places to explore. With large windows to thoroughly enjoy the beautiful views and the convenience of being situated near the metro station, it is surrounded by numerous food outlets to satiate all your cravings from delicious buffets, to burgers.' : 'This cozy workspace is sure to make you feel like you’re home. Surrounded by many spots you can hangout post work, including malls, theatres and delicious street delights.'
+                            }
+                            <br /><br /><br />
                         </div>
                     </div>
                     <div className="jhjfdkd">
@@ -150,14 +150,23 @@ export default function CarrersHome() {
 
                     </div>
                 </div>
-                {/* <div className="jjjfnkvnfkv">
-                    <div className="jnfn">
-                        Change Starts
+                <div className="jvkfklkflklf">
+                    <div className="jigjfkkgldk">
+                        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRR3qpnbkv573m6cEpjB3h1wsxj9CV5IiHpY1Xc5I-i8KzdNF89" alt="" className='njfnkf' />
+                        <div className="fjfkbvbmfbm">
+                            Didn’t find the position you are looking for?
+                            <div className="jdfndvn">
+                                We will find one for you! Drop in your CV at apply@cryptoforge.com
+                            </div>
+                            <br /><br />
+                            <a className="djfkdkfmd" href="mailto:apply@cryptoforge.com">
+                            <div>
+                                Apply Now
+                            </div>
+                            </a>
+                        </div>
                     </div>
-                    <div className="jnfnj">
-                        Together!
-                    </div>
-                </div> */}
+                </div>
             </div>
         </>
     )
