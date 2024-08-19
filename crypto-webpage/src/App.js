@@ -19,6 +19,7 @@ import Portfolio from './Portfolio Page/portfolio';
 import Marketplace from './Market Place/marketplace';
 import CarrersHome from './Careers Page/careerhomepage';
 import Aboutus from './About Us/about-us';
+import Careeropenings from './Careers Page/careeropenings';
 function App() {
   return (
     <BrowserRouter>
@@ -60,6 +61,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/about-us" element={<Aboutus />} />
+      </Routes>
+      <Routes>
+        <Route path="/openings" element={<Careeropenings />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

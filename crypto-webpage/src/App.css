@@ -1379,7 +1379,48 @@ html {
   position: relative;
   top: 150px;
 }
+.openingdetails{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+  align-items: start;
+  position: relative;
+  top: 10px;
+  height: 500px;
+  width: 100%;
+  /* background-color: white; */
+}
+.openingtable{
+  width: 90%;
+  background-color: #182954;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  display: flex;
+  position: relative;
+  top: 20px;
+  border-radius: 10px;
+  border: 1px solid white;
+}
 
+.jhfjkfnjvfnv{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: start;
+  align-items: center;
+  position: relative;
+  top: 150px;
+  height: 500px;
+  width: 80%;
+  background-color: #333843;
+  border-radius: 20px;
+}
 .krjkrgmr {
   height: 150px;
   width: 350px;
