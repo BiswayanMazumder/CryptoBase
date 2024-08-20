@@ -46,9 +46,10 @@ export default function Careeropenings() {
     const [positions, setpositions] = useState([]);
     const jobids = ["834", "835", "836"];
     const [jobDetails, setJobDetails] = useState([]);
+    var clickedLocation=localStorage.getItem("clickedLocation");
     useEffect(() => {
         const fetchData = async () => {
-            var clickedLocation=localStorage.getItem("clickedLocation");
+            
             const auth = getAuth();
             const db = getFirestore(app);
             const user = auth.currentUser;
@@ -127,7 +128,7 @@ export default function Careeropenings() {
                                         return (
                                             <tr key={index}>
                                                 <td>{job.title}</td>
-                                                <td>Growth</td>
+                                                <td>{clickedLocation}</td>
                                                 <td>{job.location}</td>
                                                 <td>{job.positions}</td>
                                             </tr>
