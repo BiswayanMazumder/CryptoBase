@@ -97,7 +97,7 @@ export default function Careeropenings() {
             <div className="webbody">
                 <br />
                 <div className="nfkfmvfmv">
-                    <Link to={'/'}>
+                    <Link to={'/oppurtunity'}>
                         <img src="https://firebasestorage.googleapis.com/v0/b/cryptobase-admin.appspot.com/o/CryptoBase%20Admin%20photos%2Fcryptobaselogo.png?alt=media&token=ad490f3d-9ecd-451d-bab9-e7d3974093a0" alt="" className='homelogo' />
                     </Link>
                 </div>
