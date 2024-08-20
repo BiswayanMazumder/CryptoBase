@@ -40,7 +40,7 @@ export default function Sidebar() {
                     Users Messages
                 </div>
                 </Link>
-                <Link className="linktexts">
+                <Link className="linktexts" to={'/balance'}>
                 <div className="otheroptions">
                     <img src="https://app.litebite.rdiff.ridiv.in/static/media/Production.684e800f95b1e1dc163d39825a1eb01a.svg" alt="" className='sidebarimage' />
                     Users Portfolios

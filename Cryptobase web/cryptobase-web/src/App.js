@@ -10,6 +10,7 @@ import {
 import Sidebar from './Side Bar/sidebar';
 import Userpage from './User Page/userpage';
 import Userpanverifications from './Home Page/userpanverifications';
+import Userportfolio from './Portfolio/userportfolio';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/verifications" element={<Userpanverifications />} />
+        </Routes>
+        <Routes>
+          <Route path="/balance" element={<Userportfolio />} />
         </Routes>
     </BrowserRouter>
   );
