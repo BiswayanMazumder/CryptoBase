@@ -1,7 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Typewriter from 'typewriter-effect';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+    apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
+    authDomain: "cryptobase-admin.firebaseapp.com",
+    projectId: "cryptobase-admin",
+    storageBucket: "cryptobase-admin.appspot.com",
+    messagingSenderId: "1090236390686",
+    appId: "1:1090236390686:web:856b22fd209b267b89fd0f",
+    measurementId: "G-LTBWYEEF6E"
+};
+const app = initializeApp(firebaseConfig);
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
 export default function Careeropenings() {
+    const [growthData, setGrowthData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [blr, setblr] = useState(true);
     const [del, setdel] = useState(false);
     const [mum, setmum] = useState(false);
@@ -22,10 +40,62 @@ export default function Careeropenings() {
         setdel(true);
         setmum(false);
     }
-  return (
-    <>
-        <div className="webbody">
-        <br />
+    const [reqtitle, settitle] = useState([]);
+    const [units, setunits] = useState([]);
+    const [location, setlocation] = useState([]);
+    const [positions, setpositions] = useState([]);
+    const jobids = ["834", "835", "836"];
+    const [jobDetails, setJobDetails] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const auth = getAuth();
+            const db = getFirestore(app);
+            const user = auth.currentUser;
+            let details = []; // Array to store job details
+
+            for (let i = 0; i < jobids.length; i++) {
+                const docRef = doc(db, "Growth", jobids[i]);
+
+                try {
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        // Document found, push data to details array
+                        details.push({
+                            jobId: jobids[i],
+                            title: docSnap.data()["Job Title"],
+                            location: docSnap.data()["Location"],
+                            positions: docSnap.data()["Opening"]
+                        });
+
+                    } else {
+                        // Document not found, push error message
+                        details.push({
+                            jobId: jobids[i],
+                            error: 'No such document!'
+                        });
+                    }
+                } catch (e) {
+                    // Handle errors and push error message
+                    details.push({
+                        jobId: jobids[i],
+                        error: `Error getting document: ${e.message}`
+                    });
+                }
+            }
+
+            // Update state with all job details
+            setJobDetails(details);
+            setLoading(false);
+            // console.log(jobDetails);
+        };
+
+        fetchData();
+    }, []); // Add dependencies here if needed
+    return (
+        <>
+            <div className="webbody">
+                <br />
                 <div className="nfkfmvfmv">
                     <Link to={'/'}>
                         <img src="https://firebasestorage.googleapis.com/v0/b/cryptobase-admin.appspot.com/o/CryptoBase%20Admin%20photos%2Fcryptobaselogo.png?alt=media&token=ad490f3d-9ecd-451d-bab9-e7d3974093a0" alt="" className='homelogo' />
@@ -42,13 +112,34 @@ export default function Careeropenings() {
                 <div className="openingdetails">
                     <div className="jhfjkfnjvfnv">
                         <table className='openingtable'>
-                            <th>Req Title</th>
-                            <th>Unit</th>
-                            <th>Location</th>
-                            <th>Positions</th>
+                            <thead>
+                                <tr>
+                                    <th>Req Title</th>
+                                    <th>Unit</th>
+                                    <th>Location</th>
+                                    <th>Positions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    jobDetails.map((job, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{job.title}</td>
+                                                <td>Growth</td>
+                                                <td>{job.location}</td>
+                                                <td>{job.positions}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+
                         </table>
+
+
                     </div>
-                    
+
                 </div>
                 <div className="jjjfnkvnfkv" style={{ position: "relative", top: "200px" }}>
                     <div className="jnfn">
@@ -117,7 +208,7 @@ export default function Careeropenings() {
                         </div>
                     </div>
                 </div>
-        </div>
-    </>
-  )
+            </div>
+        </>
+    )
 }

@@ -1392,20 +1392,39 @@ html {
   width: 100%;
   /* background-color: white; */
 }
-.openingtable{
+.openingtable {
   width: 90%;
-  background-color: #182954;
-  height: 50px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: white;
-  display: flex;
-  position: relative;
-  top: 20px;
+  margin: 20px auto; /* Center the table and add margin */
+  border-collapse: collapse; /* Collapse borders between cells */
   border-radius: 10px;
   border: 1px solid white;
+  background-color: #182954;
+  color: white;
+  border-radius: 20px;
 }
+.openingtable th{
+  border-radius: 20px;
+}
+.openingtable th, .openingtable td {
+  
+  padding: 10px; /* Add padding to table cells */
+  text-align: center; /* Center-align text in table cells */
+  border: 1px solid transparent; /* Add border to each cell */
+}
+
+.openingtable thead th {
+  background-color: #182954; 
+  font-weight: bold; 
+}
+
+.openingtable tbody tr:nth-child(even) {
+  background-color: #1e3a6d; 
+}
+
+.openingtable tbody tr:hover {
+  background-color: #153b6c; /* Change background color on hover for better interaction */
+}
+
 
 .jhfjkfnjvfnv{
   display: flex;
@@ -1416,8 +1435,8 @@ html {
   align-items: center;
   position: relative;
   top: 150px;
-  height: 500px;
-  width: 80%;
+  height:fit-content;
+  width: fit-content;
   background-color: #333843;
   border-radius: 20px;
 }
