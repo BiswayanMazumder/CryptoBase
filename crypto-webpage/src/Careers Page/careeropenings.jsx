@@ -141,7 +141,7 @@ export default function Careeropenings() {
                     </div>
 
                 </div>
-                <div className="jjjfnkvnfkv" style={{ position: "relative", top: "200px" }}>
+                <div className="jjjfnkvnfkv" style={{ position: "relative", top: "10px" }}>
                     <div className="jnfn">
                         Discover Our
                     </div>
@@ -149,7 +149,7 @@ export default function Careeropenings() {
                         Spaces
                     </div>
                 </div>
-                <div className="locations">
+                <div className="locations" style={{ position: "relative", top: "10px" }}>
                     <div className="jhdjfndn" style={{ backgroundColor: blr ? 'orangered' : "transparent" }}>
                         <Link style={{ textDecoration: "none", color: "white", }} onClick={BangaloreLocset}>
                             Bengaluru
@@ -166,7 +166,7 @@ export default function Careeropenings() {
                         </Link>
                     </div>
                 </div>
-                <div className="locationinfos">
+                <div className="locationinfos" style={{ position: "relative", top: "10px" }}>
                     <div className="jdjdkdf">
                         {
                             blr ? ' Bengaluru' : mum ? 'Mumbai' : 'Delhi'
@@ -178,7 +178,7 @@ export default function Careeropenings() {
                             <br /><br /><br />
                         </div>
                     </div>
-                    <div className="jhjfdkd">
+                    <div className="jhjfdkd" >
                         <video
                             src="https://coindcx.s3.amazonaws.com/static/images/life_at_coindcx_page_video.mp4"
                             width="300"
@@ -191,7 +191,7 @@ export default function Careeropenings() {
 
                     </div>
                 </div>
-                <div className="jvkfklkflklf">
+                <div className="jvkfklkflklf" style={{ position: "relative", top: "10px" }}>
                     <div className="jigjfkkgldk">
                         <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRR3qpnbkv573m6cEpjB3h1wsxj9CV5IiHpY1Xc5I-i8KzdNF89" alt="" className='njfnkf' />
                         <div className="fjfkbvbmfbm">
