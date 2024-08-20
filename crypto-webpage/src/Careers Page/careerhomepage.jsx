@@ -72,6 +72,10 @@ export default function CarrersHome() {
         setdel(true);
         setmum(false);
     }
+    const handleClick = (value) => {
+        localStorage.setItem('clickedLocation', value);
+        // console.log('Saved to localStorage:', value); // For debugging purposes
+    };
     return (
         <>
             <div className="webbody">
@@ -94,8 +98,9 @@ export default function CarrersHome() {
                 </div> */}
                 <Link style={{ textDecoration: 'none' }} to={'/openings'}>
                     <div className="openingcategories">
-                        {location.map((item, index) => (
-                            <div className="krjkrgmr" key={item}>
+                        {
+                            category.map((item, index) => (
+                            <div className="krjkrgmr" key={item} onClick={() => handleClick(item)}>
                                 <div className="jobcat" >
                                     {category[index]}
                                 </div>
@@ -105,7 +110,8 @@ export default function CarrersHome() {
                                     {location[index]}
                                 </div>
                             </div>
-                        ))}
+                        ))
+                        }
                     </div>
                 </Link>
                 <div className="jjjfnkvnfkv" style={{ position: "relative", top: "200px" }}>

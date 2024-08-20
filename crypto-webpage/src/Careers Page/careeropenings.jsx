@@ -48,13 +48,14 @@ export default function Careeropenings() {
     const [jobDetails, setJobDetails] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
+            var clickedLocation=localStorage.getItem("clickedLocation");
             const auth = getAuth();
             const db = getFirestore(app);
             const user = auth.currentUser;
             let details = []; // Array to store job details
 
             for (let i = 0; i < jobids.length; i++) {
-                const docRef = doc(db, "Growth", jobids[i]);
+                const docRef = doc(db, clickedLocation, jobids[i]);
 
                 try {
                     const docSnap = await getDoc(docRef);
