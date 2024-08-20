@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
@@ -26,7 +26,20 @@ export default function Homepage() {
   useEffect(() => {
     document.title = 'Welcome To CryptoBase Admin Panel';
   }, []);
-
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+        window.location.replace('/home');
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  })
   const LoginUser = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);

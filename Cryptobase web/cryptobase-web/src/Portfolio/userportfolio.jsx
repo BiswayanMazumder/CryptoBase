@@ -76,7 +76,7 @@ export default function Userportfolio() {
     const combineAndPrintData = (userDetailsData) => {
         userDetailsData.forEach(user => {
             const userBalance = balance.find(b => b.id === user.id)?.balance || 0;
-            console.log(`Name: ${user.name}, Email: ${user.email}, Balance: ${userBalance}`);
+            // console.log(`Name: ${user.name}, Email: ${user.email}, Balance: ${userBalance}`);
         });
     };
 
@@ -99,8 +99,8 @@ export default function Userportfolio() {
 
     // Function to download CSV
     const downloadCSV = () => {
-        const headers = ["User ID", "User Name", "User Email", "User Profile Pic", "Date of Registration"];
-        const rows = filteredUsers.map(user => [user.id, user.name, user.email, user.profilePic, user.dateOfRegistration]);
+        const headers = ["User ID", "User Name", "User Email", "User Wallet Balance"];
+        const rows = filteredUsers.map(user => [user.id, user.name, user.email, balance.find(b => b.id === user.id)?.balance || 0]);
         const csvContent = [
             headers.join(","),
             ...rows.map(row => row.join(","))
@@ -111,7 +111,7 @@ export default function Userportfolio() {
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.setAttribute("href", url);
-        link.setAttribute("download", "Registered Users.csv");
+        link.setAttribute("download", "User Wallet Balance.csv");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -149,7 +149,7 @@ export default function Userportfolio() {
                                         <td style={{ fontSize: '13px' }}>{user.id}</td>
                                         <td style={{ fontSize: '13px' }}>{user.name}</td>
                                         <td style={{ fontSize: '13px' }}>{user.email}</td>
-                                        <td style={{ fontSize: '13px' }}>{balance.find(b => b.id === user.id)?.balance || 0}</td>
+                                        <td style={{ fontSize: '13px' }}>₹{balance.find(b => b.id === user.id)?.balance || 0}</td>
                                     </tr>
                                 ))
                             ) : (
