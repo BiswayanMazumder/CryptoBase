@@ -20,6 +20,7 @@ import Marketplace from './Market Place/marketplace';
 import CarrersHome from './Careers Page/careerhomepage';
 import Aboutus from './About Us/about-us';
 import Careeropenings from './Careers Page/careeropenings';
+import Currencycap from './Currency Details/currencycap';
 function App() {
   return (
     <BrowserRouter>
@@ -64,6 +65,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/openings" element={<Careeropenings />} />
+      </Routes>
+      <Routes>
+        <Route path="/currencydetails" element={<Currencycap />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

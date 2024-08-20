@@ -100,6 +100,18 @@ export default function Homepage() {
 
         fetchData();
     }, []); // Add dependencies here if needed
+    function savedata(name,value,volume,low,high,sparkline,fullname,perc_24h) {
+        localStorage.setItem("Name",name);
+        localStorage.setItem("Value",value);
+        localStorage.setItem("Volume",volume);
+        localStorage.setItem("Low",low);
+        localStorage.setItem("High",high);
+        localStorage.setItem("Fullname",fullname);
+        localStorage.setItem("Perc_24h",perc_24h);
+        if (sparkline && sparkline.price) {
+            localStorage.setItem('Price', JSON.stringify(sparkline.price));
+        }
+    }
     return (
         <>
             <div className="webbody">
@@ -174,7 +186,8 @@ export default function Homepage() {
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     {
                         data.slice(0,8).map(coin => (
-                            <div className="hffndjjhjh">
+                            <Link className="hffndjjhjh" style={{textDecoration:'none'}} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(),coin.current_price,coin.total_volume,coin.high_24h,coin.low_24h,coin.sparkline_in_7d,coin.name,coin.price_change_percentage_24h)}>
+                            <div>
                                 <div className="currencyname">
                                     {coin.name}
                                     <img src={coin.image} alt="" height={40} width={40} />
@@ -193,6 +206,7 @@ export default function Homepage() {
                                 </div>
 
                             </div>
+                            </Link>
                         ))
                     }
                 </div>
