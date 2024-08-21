@@ -97,7 +97,7 @@ export default function Currencycap() {
                         </thead>
                         <tbody>
                             {price.map((item, index) => (
-                                <tr key={index} style={{ backgroundColor: price[index+1] > price[index] ? 'rgba(0, 255, 0, 0.5)' : 'rgba(255, 0, 0, 0.5)' }}>
+                                <tr key={index} style={{ backgroundColor: price[index+1] > price[index] ? 'rgba(255, 0, 0, 0.5)' : 'rgba(0, 255, 0, 0.5)' }}>
                                     <td>{index}</td>
                                     <td>{price[index]}</td>
                                     <td>{volume}</td>
