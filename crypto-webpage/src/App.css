@@ -1728,6 +1728,19 @@ html {
     font-size: 15px;
   }
 }
+.chatbox{
+  position: fixed;
+  height: 250px;
+  width: 300px;
+  border-radius: 20px;
+  right: 20px;
+  bottom:20px;
+  transform: translateY(-50%);
+  /* Optional: Add styles for appearance */
+  background-color: white; /* Background color */
+  padding: 10px; /* Space inside the div */
+  z-index: 1000; /* Ensure it appears above other content */
+}
 .helpandsupport {
   position: fixed;
   height: 50px;

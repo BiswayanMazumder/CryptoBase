@@ -86,7 +86,7 @@ export default function Homepage() {
                 if (docSnap.exists()) {
                     // Document found, update state
                     setname(docSnap.data()["Name"]);
-                      console.log('Name',docSnap.data()["Name"]);
+                    console.log('Name', docSnap.data()["Name"]);
                 } else {
                     setError('No such document!');
                 }
@@ -100,26 +100,35 @@ export default function Homepage() {
 
         fetchData();
     }, []); // Add dependencies here if needed
-    function savedata(name,value,volume,low,high,sparkline,fullname,perc_24h) {
-        localStorage.setItem("Name",name);
-        localStorage.setItem("Value",value);
-        localStorage.setItem("Volume",volume);
-        localStorage.setItem("Low",low);
-        localStorage.setItem("High",high);
-        localStorage.setItem("Fullname",fullname);
-        localStorage.setItem("Perc_24h",perc_24h);
+    function savedata(name, value, volume, low, high, sparkline, fullname, perc_24h) {
+        localStorage.setItem("Name", name);
+        localStorage.setItem("Value", value);
+        localStorage.setItem("Volume", volume);
+        localStorage.setItem("Low", low);
+        localStorage.setItem("High", high);
+        localStorage.setItem("Fullname", fullname);
+        localStorage.setItem("Perc_24h", perc_24h);
         if (sparkline && sparkline.price) {
             localStorage.setItem('Price', JSON.stringify(sparkline.price));
         }
     }
+    const [chatboxVisible, setChatboxVisible] = useState(false);
+    function handleHelpAndSupportClick() {
+        setChatboxVisible(!chatboxVisible);
+    }
     return (
         <>
             <div className="webbody">
-            <div className="helpandsupport">
-  <svg className="sc-1k07fow-1 cbnSms" width="50px" height="50px" viewBox="0 0 24 24" version="1.1">
-    <path d="M10,18 L6,22 L6,18 L10,18 Z M17,6 C19.7614237,6 22,8.23857625 22,11 C22,13.7614237 19.7614237,16 17,16 L17,16 L7,16 C4.23857625,16 2,13.7614237 2,11 C2,8.23857625 4.23857625,6 7,6 L7,6 Z" transform="translate(12.000000, 14.000000) scale(-1, 1) translate(-12.000000, -14.000000)" fill='white'></path>
-  </svg>
-</div>
+                <div className="kefkefk">
+                {chatboxVisible && <div className="chatbox"></div>}
+                </div>
+                <Link >
+                    <div className="helpandsupport" onClick={handleHelpAndSupportClick} >
+                        <svg className="sc-1k07fow-1 cbnSms" width="50px" height="50px" viewBox="0 0 24 24" version="1.1">
+                            <path d="M10,18 L6,22 L6,18 L10,18 Z M17,6 C19.7614237,6 22,8.23857625 22,11 C22,13.7614237 19.7614237,16 17,16 L17,16 L7,16 C4.23857625,16 2,13.7614237 2,11 C2,8.23857625 4.23857625,6 7,6 L7,6 Z" transform="translate(12.000000, 14.000000) scale(-1, 1) translate(-12.000000, -14.000000)" fill='white'></path>
+                        </svg>
+                    </div>
+                </Link>
 
                 <div className="jnnvmkjd">
                     <Link>
@@ -191,27 +200,27 @@ export default function Homepage() {
                 </div>
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     {
-                        data.slice(0,8).map(coin => (
-                            <Link className="hffndjjhjh" style={{textDecoration:'none'}} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(),coin.current_price,coin.total_volume,coin.high_24h,coin.low_24h,coin.sparkline_in_7d,coin.name,coin.price_change_percentage_24h)}>
-                            <div>
-                                <div className="currencyname">
-                                    {coin.name}
-                                    <img src={coin.image} alt="" height={40} width={40} />
-                                </div>
-                                <div className="currencyprice">
-                                    ₹{coin.current_price}
-                                    <div className="values" style={{ color: coin.price_change_percentage_24h > 0 ? 'green' : 'red', fontWeight: '600' }}>
-                                        {coin.price_change_percentage_24h}%
+                        data.slice(0, 8).map(coin => (
+                            <Link className="hffndjjhjh" style={{ textDecoration: 'none' }} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(), coin.current_price, coin.total_volume, coin.high_24h, coin.low_24h, coin.sparkline_in_7d, coin.name, coin.price_change_percentage_24h)}>
+                                <div>
+                                    <div className="currencyname">
+                                        {coin.name}
+                                        <img src={coin.image} alt="" height={40} width={40} />
                                     </div>
                                     <div className="currencyprice">
+                                        ₹{coin.current_price}
+                                        <div className="values" style={{ color: coin.price_change_percentage_24h > 0 ? 'green' : 'red', fontWeight: '600' }}>
+                                            {coin.price_change_percentage_24h}%
+                                        </div>
+                                        <div className="currencyprice">
 
-                                    </div>
-                                    <div className="currencyprice">
+                                        </div>
+                                        <div className="currencyprice">
 
+                                        </div>
                                     </div>
+
                                 </div>
-
-                            </div>
                             </Link>
                         ))
                     }
@@ -226,8 +235,8 @@ export default function Homepage() {
                 </div>
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     {
-                        data.slice(8,12).map(coin => (
-                            <Link className="hffndjjhjh" style={{textDecoration:'none'}} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(),coin.current_price,coin.total_volume,coin.high_24h,coin.low_24h,coin.sparkline_in_7d,coin.name,coin.price_change_percentage_24h)}>
+                        data.slice(8, 12).map(coin => (
+                            <Link className="hffndjjhjh" style={{ textDecoration: 'none' }} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(), coin.current_price, coin.total_volume, coin.high_24h, coin.low_24h, coin.sparkline_in_7d, coin.name, coin.price_change_percentage_24h)}>
                                 <div className="currencyname">
                                     {coin.name}
                                     <img src={coin.image} alt="" height={40} width={40} />
@@ -255,8 +264,8 @@ export default function Homepage() {
                 </div>
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     {
-                        data.slice(10,17).map(coin => (
-                            <Link className="hffndjjhjh" style={{textDecoration:'none'}} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(),coin.current_price,coin.total_volume,coin.high_24h,coin.low_24h,coin.sparkline_in_7d,coin.name,coin.price_change_percentage_24h)}>
+                        data.slice(10, 17).map(coin => (
+                            <Link className="hffndjjhjh" style={{ textDecoration: 'none' }} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(), coin.current_price, coin.total_volume, coin.high_24h, coin.low_24h, coin.sparkline_in_7d, coin.name, coin.price_change_percentage_24h)}>
                                 <div className="currencyname">
                                     {coin.name}
                                     <img src={coin.image} alt="" height={40} width={40} />
@@ -362,7 +371,7 @@ export default function Homepage() {
                 </div>
             </div>
             <br /><br /><br />
-            
+
         </>
     )
 }
