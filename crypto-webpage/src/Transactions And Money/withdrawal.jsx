@@ -124,28 +124,27 @@ export default function Withdrawal() {
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
                             </div>
-                            <div className="history">
-                                <div className="lfjmrkl">
-                                    <div className="dfvd">Status</div>
-                                    <div className="dfvd" style={{ marginLeft: "20px" }}>Amount</div>
-                                    <div className="dfvd">Payment Merchant</div>
-                                </div>
-                                <div className="rjggkmk" style={{ gap: "10px" }}>
-                                    <br />
-                                    {filteredAmounts.length > 0 ? (
-                                        filteredAmounts.map((amt, index) => (
-                                            <div className="lfjmrkl" style={{ paddingBottom: "20px" }} key={index}>
-                                                <div className="dfvd" style={{ color: "green" }}>Success</div>
-                                                <div className="dfvd">₹{amt}</div>
-                                                <div className="dfvd">Razorpay</div>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <div className="lfjmrkl" style={{ paddingBottom: "20px" }}>
-                                            <div className="dfvd">No withdrawals found</div>
-                                        </div>
-                                    )}
-                                </div>
+                            <div className="tables">
+                                <table className='userTable'>
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Amount</th>
+                                            <th>Merchant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            filteredAmounts.map((amt, index) => (
+                                                <tr key={index}>
+                                                    <td style={{color: 'green'}}>Success</td>
+                                                    <td>₹{amt}</td>
+                                                    <td>Razorpay</td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
