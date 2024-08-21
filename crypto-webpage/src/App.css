@@ -1728,3 +1728,16 @@ html {
     font-size: 15px;
   }
 }
+.helpandsupport {
+  position: fixed;
+  height: 50px;
+  width: 50px;
+  border-radius: 20px;
+  right: 20px;
+  bottom: 10px;
+  transform: translateY(-50%);
+  /* Optional: Add styles for appearance */
+  background-color: #3067F0; /* Background color */
+  padding: 10px; /* Space inside the div */
+  z-index: 1000; /* Ensure it appears above other content */
+}

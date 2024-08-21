@@ -115,6 +115,12 @@ export default function Homepage() {
     return (
         <>
             <div className="webbody">
+            <div className="helpandsupport">
+  <svg className="sc-1k07fow-1 cbnSms" width="50px" height="50px" viewBox="0 0 24 24" version="1.1">
+    <path d="M10,18 L6,22 L6,18 L10,18 Z M17,6 C19.7614237,6 22,8.23857625 22,11 C22,13.7614237 19.7614237,16 17,16 L17,16 L7,16 C4.23857625,16 2,13.7614237 2,11 C2,8.23857625 4.23857625,6 7,6 L7,6 Z" transform="translate(12.000000, 14.000000) scale(-1, 1) translate(-12.000000, -14.000000)" fill='white'></path>
+  </svg>
+</div>
+
                 <div className="jnnvmkjd">
                     <Link>
                         <img src="https://firebasestorage.googleapis.com/v0/b/cryptobase-admin.appspot.com/o/CryptoBase%20Admin%20photos%2Fcryptobaselogo.png?alt=media&token=ad490f3d-9ecd-451d-bab9-e7d3974093a0" alt="" className='homelogo' />
