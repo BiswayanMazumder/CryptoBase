@@ -100,7 +100,7 @@ export default function Currencycap() {
                                 <tr key={index} style={{ backgroundColor: price[index+1] > price[index] ? 'rgba(255, 0, 0, 0.5)' : 'rgba(0, 255, 0, 0.5)' }}>
                                     <td>{index}</td>
                                     <td>{price[index]}</td>
-                                    <td>{volume}</td>
+                                    <td>{(volume / 1000000000).toFixed(2)}B</td>
                                     
                                 </tr>
                             ))}

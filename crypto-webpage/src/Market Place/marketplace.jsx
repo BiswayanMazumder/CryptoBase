@@ -58,6 +58,18 @@ export default function Marketplace() {
     const filteredData = data.filter(coin =>
         coin.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    function savedata(name,value,volume,low,high,sparkline,fullname,perc_24h) {
+        localStorage.setItem("Name",name);
+        localStorage.setItem("Value",value);
+        localStorage.setItem("Volume",volume);
+        localStorage.setItem("Low",low);
+        localStorage.setItem("High",high);
+        localStorage.setItem("Fullname",fullname);
+        localStorage.setItem("Perc_24h",perc_24h);
+        if (sparkline && sparkline.price) {
+            localStorage.setItem('Price', JSON.stringify(sparkline.price));
+        }
+    }
     return (
         <>
             <div className="webbody">
