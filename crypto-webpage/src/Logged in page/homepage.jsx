@@ -221,7 +221,7 @@ export default function Homepage() {
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     {
                         data.slice(8,12).map(coin => (
-                            <div className="hffndjjhjh">
+                            <Link className="hffndjjhjh" style={{textDecoration:'none'}} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(),coin.current_price,coin.total_volume,coin.high_24h,coin.low_24h,coin.sparkline_in_7d,coin.name,coin.price_change_percentage_24h)}>
                                 <div className="currencyname">
                                     {coin.name}
                                     <img src={coin.image} alt="" height={40} width={40} />
@@ -239,7 +239,7 @@ export default function Homepage() {
                                     </div>
                                 </div>
 
-                            </div>
+                            </Link>
                         ))
                     }
                 </div>
@@ -250,7 +250,7 @@ export default function Homepage() {
                 <div className="wodklkf" style={{ position: "relative", top: "50px", paddingLeft: '20px', paddingRight: '20px' }}>
                     {
                         data.slice(10,17).map(coin => (
-                            <div className="hffndjjhjh">
+                            <Link className="hffndjjhjh" style={{textDecoration:'none'}} to={'/currencydetails'} onClick={() => savedata(coin.symbol.toUpperCase(),coin.current_price,coin.total_volume,coin.high_24h,coin.low_24h,coin.sparkline_in_7d,coin.name,coin.price_change_percentage_24h)}>
                                 <div className="currencyname">
                                     {coin.name}
                                     <img src={coin.image} alt="" height={40} width={40} />
@@ -268,7 +268,7 @@ export default function Homepage() {
                                     </div>
                                 </div>
 
-                            </div>
+                            </Link>
                         ))
                     }
                 </div>
