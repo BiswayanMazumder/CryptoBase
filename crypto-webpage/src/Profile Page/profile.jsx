@@ -223,11 +223,11 @@ export default function Profile() {
                                 Withdrawal
                             </div>
                         </Link>
-                        <Link style={{ textDecoration: "none", color: "white" }}>
+                        {/* <Link style={{ textDecoration: "none", color: "white" }}>
                             <div className="hjkv">
                                 Help and Support
                             </div>
-                        </Link>
+                        </Link> */}
                         <Link style={{ textDecoration: "none", color: "white" }} to={"/market"}>
                             <div className="hjkv">
                                 Market
