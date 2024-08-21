@@ -1671,8 +1671,8 @@ html {
   font-size: 20px;
   font-weight: 500;
   flex-direction: row;
-  align-items: start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .dkhdn{
   width: fit-content;
@@ -1684,6 +1684,44 @@ html {
   
   padding: 10px;
   font-size: 12px;
+}
+.tables{
+  display: flex;
+  position: relative;
+  top: 10px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.userTable {
+  width: 100%;
+  position: relative;
+  top: 10vh;
+  border-collapse: collapse;
+}
+
+.userTable th,
+.userTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  justify-content: center;
+  text-align: center;
+}
+
+.userTable th {
+  background-color: #282c34;
+  text-align: left;
+  justify-content: center;
+  text-align: center;
+}
+
+.userTable tr:nth-child(even) {
+  background-color: transparent;
+}
+
+.userTable tr:hover {
+  background-color: orangered;
 }
 @media screen and (max-width:741px) {
   .jdnjmndmvf{
