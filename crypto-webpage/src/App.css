@@ -1821,7 +1821,43 @@ html {
 .send-button:hover {
   background-color: #0056b3;
 }
-
+.jfdndfk{
+  position: absolute;
+  right: 20px;
+  bottom: 130px;
+  height: 50px;
+  width: 200px;
+  border-radius: 20px;
+  background-color: #e5e5ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px;
+  z-index: 999;
+}
+.jfdndf{
+  position: absolute;
+  right: 20px;
+  bottom: 220px;
+  padding: 10px;
+  height: 50px;
+  width: 200px;
+  border-radius: 20px;
+  background-color: #e5e5ea;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+.jfdndf:hover,.jfdndfk:hover{
+  background-color: wheat;
+}
 .helpandsupport {
   position: fixed;
   height: 50px;
