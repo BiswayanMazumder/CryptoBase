@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Typewriter from 'typewriter-effect';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 const firebaseConfig = {
     apiKey: "AIzaSyCxkw9hq-LpWwGwZQ0APU0ifJ5JQU2T8Vk",
     authDomain: "cryptobase-admin.firebaseapp.com",
@@ -46,25 +47,25 @@ export default function Homepage() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en');
-    //             if (!response.ok) {
-    //                 throw new Error('Network response was not ok');
-    //             }
-    //             const result = await response.json();
-    //             setData(result);
-    //             // console.log(result);
-    //         } catch (error) {
-    //             setError(error.message);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setData(result);
+                // console.log(result);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    //     fetchData();
-    // }, []);
+        fetchData();
+    }, []);
     const [name, setname] = useState('');
     useEffect(() => {
         const fetchData = async () => {
@@ -117,12 +118,14 @@ export default function Homepage() {
         setChatboxVisible(!chatboxVisible);
     }
     function sendchat() {
-        const chats=document.querySelector('.chats');
-        const userprompt=document.querySelector('.promptinput').value;
-        chats.innerHTML+=`<div class="userchat">
+        const chats = document.querySelector('.chats');
+        const userprompt = document.querySelector('.promptinput').value;
+        if (userprompt !== '') {
+            chats.innerHTML += `<div class="userchat">
                             ${userprompt}
                             </div>`
         }
+    }
     return (
         <>
             <div className="webbody">
@@ -130,12 +133,12 @@ export default function Homepage() {
                     {chatboxVisible && <div className="chatbox">
                         <div className="chats">
                             <div className="agentchat">
-                            Hello and welcome to CryptoForge Support
+                                Hello and welcome to CryptoForge Support
                             </div>
                             <div className="agentchat">
-                            How can I help you today?
+                                How can I help you today?
                             </div>
-                            
+
                         </div>
                         <div className="prompt">
                             <input type="text" className='promptinput' placeholder='Ask a question' />
