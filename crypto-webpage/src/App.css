@@ -1822,7 +1822,7 @@ html {
   background-color: #0056b3;
 }
 .jfdndfk{
-  position: absolute;
+  position: fixed;
   right: 20px;
   bottom: 130px;
   height: 50px;
@@ -1839,7 +1839,7 @@ html {
   z-index: 999;
 }
 .jfdndf{
-  position: absolute;
+  position: fixed;
   right: 20px;
   bottom: 220px;
   padding: 10px;
