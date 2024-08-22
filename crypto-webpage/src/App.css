@@ -1728,39 +1728,98 @@ html {
     font-size: 15px;
   }
 }
-.chatbox{
+.chatbox {
   position: fixed;
   height: 300px;
   width: 300px;
   border-radius: 20px;
   right: 20px;
-  bottom:20px;
-  transform: translateY(-50%);
-  /* Optional: Add styles for appearance */
-  background-color: white; /* Background color */
-  padding: 10px; /* Space inside the div */
-  z-index: 1000; /* Ensure it appears above other content */
-}
-.prompt{
-  position: relative;
-  top: 90%;
-  height: 10px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
+  bottom: 150px;
   background-color: white;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(0); /* Adjusted transform to be centered */
 }
-.promptinput{
-  height: 30px;
-  width: 90%;
-  position: relative;
+
+.chats {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  scrollbar-width: thin;
+  scrollbar-color: #cccccc #f9f9f9;
+  border-radius: 10px;
+}
+
+.chats::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chats::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 4px;
+}
+
+.userchat, .agentchat {
+  max-width: 70%;
+  padding: 10px 15px;
+  margin: 8px 0;
   border-radius: 20px;
-  border: 2px solid #3067F0;
-  padding-left: 20px;
-  font-size: 15px;
+  word-wrap: break-word;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.userchat {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: white;
+  border-top-right-radius: 0;
+}
+
+.agentchat {
+  align-self: flex-start;
+  background-color: #e5e5ea;
+  color: black;
+  border-top-left-radius: 0;
+}
+
+.prompt {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.promptinput {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.send-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}
+
 .helpandsupport {
   position: fixed;
   height: 50px;

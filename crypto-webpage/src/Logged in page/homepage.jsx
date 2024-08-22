@@ -120,11 +120,58 @@ export default function Homepage() {
         <>
             <div className="webbody">
                 <div className="kefkefk">
-                {chatboxVisible && <div className="chatbox">
-                    <div className="prompt">
-                        <input type="text" className='promptinput'placeholder='Ask a question'/>
+                    {chatboxVisible && <div className="chatbox">
+                        <div className="chats">
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="agentchat">
+                                nmnmn
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                            <div className="userchat">
+                                dnmfnv
+                            </div>
+                        </div>
+                        <div className="prompt">
+                            <input type="text" className='promptinput' placeholder='Ask a question' />
+                            <button className='send-button'>Send</button>
+                        </div>
                     </div>
-                </div>}
+
+                    }
                 </div>
                 <Link >
                     <div className="helpandsupport" onClick={handleHelpAndSupportClick} >
