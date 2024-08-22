@@ -1825,6 +1825,9 @@ html {
 .helpandsupport {
   position: fixed;
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50px;
   border-radius: 20px;
   right: 20px;

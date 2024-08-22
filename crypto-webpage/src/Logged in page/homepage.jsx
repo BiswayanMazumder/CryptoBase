@@ -165,9 +165,9 @@ export default function Homepage() {
                 </div>
                 <Link >
                     <div className="helpandsupport" onClick={handleHelpAndSupportClick} >
-                        <svg className="sc-1k07fow-1 cbnSms" width="50px" height="50px" viewBox="0 0 24 24" version="1.1">
+                        { chatboxVisible?<svg class="sc-1k07fow-0 fVXBLf" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 21 13" focusable="false" role="presentation"><path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M20.1005 2.7169L10.9931 11.8244C10.4724 12.3451 9.62815 12.3451 9.10745 11.8244L-8.00829e-06 2.7169L1.88561 0.831278L10.0503 8.99593L18.2149 0.831278L20.1005 2.7169Z" fill="white"></path></svg>:<svg className="sc-1k07fow-1 cbnSms" width="50px" height="50px" viewBox="0 0 24 24" version="1.1">
                             <path d="M10,18 L6,22 L6,18 L10,18 Z M17,6 C19.7614237,6 22,8.23857625 22,11 C22,13.7614237 19.7614237,16 17,16 L17,16 L7,16 C4.23857625,16 2,13.7614237 2,11 C2,8.23857625 4.23857625,6 7,6 L7,6 Z" transform="translate(12.000000, 14.000000) scale(-1, 1) translate(-12.000000, -14.000000)" fill='white'></path>
-                        </svg>
+                        </svg>}
                     </div>
                 </Link>
 
