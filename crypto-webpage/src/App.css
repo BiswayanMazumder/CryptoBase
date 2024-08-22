@@ -1730,7 +1730,7 @@ html {
 }
 .chatbox{
   position: fixed;
-  height: 250px;
+  height: 300px;
   width: 300px;
   border-radius: 20px;
   right: 20px;
@@ -1740,6 +1740,26 @@ html {
   background-color: white; /* Background color */
   padding: 10px; /* Space inside the div */
   z-index: 1000; /* Ensure it appears above other content */
+}
+.prompt{
+  position: relative;
+  top: 90%;
+  height: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: white;
+}
+.promptinput{
+  height: 30px;
+  width: 90%;
+  position: relative;
+  border-radius: 20px;
+  border: 2px solid #3067F0;
+  padding-left: 20px;
+  font-size: 15px;
 }
 .helpandsupport {
   position: fixed;

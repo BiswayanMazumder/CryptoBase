@@ -120,7 +120,11 @@ export default function Homepage() {
         <>
             <div className="webbody">
                 <div className="kefkefk">
-                {chatboxVisible && <div className="chatbox"></div>}
+                {chatboxVisible && <div className="chatbox">
+                    <div className="prompt">
+                        <input type="text" className='promptinput'placeholder='Ask a question'/>
+                    </div>
+                </div>}
                 </div>
                 <Link >
                     <div className="helpandsupport" onClick={handleHelpAndSupportClick} >
