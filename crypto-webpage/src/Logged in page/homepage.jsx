@@ -47,25 +47,25 @@ export default function Homepage() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const result = await response.json();
-                setData(result);
-                // console.log(result);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en');
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             const result = await response.json();
+    //             setData(result);
+    //             // console.log(result);
+    //         } catch (error) {
+    //             setError(error.message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
     const [name, setname] = useState('');
     useEffect(() => {
         const fetchData = async () => {
@@ -117,7 +117,7 @@ export default function Homepage() {
     function handleHelpAndSupportClick() {
         setChatboxVisible(!chatboxVisible);
     }
-    function sendchat() {
+    async function sendchat() {
         const chats = document.querySelector('.chats');
         const userprompt = document.querySelector('.promptinput').value;
         if (userprompt !== '') {
@@ -125,6 +125,21 @@ export default function Homepage() {
                             ${userprompt}
                             </div>`
         }
+        const API_KEY = 'AIzaSyC0kDunLTQWxNPZCVLTAKMa6ce9mvR0hd0';
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        async function run() {
+            const prompt = "Write a story about an AI and magic"
+            const result = await model.generateContent(userprompt);
+            const response = await result.response;
+            const text = response.text();
+            // console.log(text);
+            chats.innerHTML += `<div class="agentchat">
+                            ${text}
+                            </div>`
+        }
+
+        run();
     }
     return (
         <>
