@@ -1766,7 +1766,7 @@ html {
 }
 
 .userchat, .agentchat {
-  max-width: 70%;
+  max-width: fit-content;
   padding: 10px 15px;
   margin: 8px 0;
   border-radius: 20px;
@@ -1775,6 +1775,7 @@ html {
 }
 
 .userchat {
+  display: flex;
   align-self: flex-end;
   background-color: #007bff;
   color: white;
